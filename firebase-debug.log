@@ -1,0 +1,23 @@
+[debug] [2021-08-24T22:20:57.495Z] ----------------------------------------------------------------------
+[debug] [2021-08-24T22:20:57.503Z] Command:       /home/laismune/.nvm/versions/node/v16.5.0/bin/node /home/laismune/.nvm/versions/node/v16.5.0/bin/firebase serve --only hosting
+[debug] [2021-08-24T22:20:57.504Z] CLI Version:   9.16.5
+[debug] [2021-08-24T22:20:57.504Z] Platform:      linux
+[debug] [2021-08-24T22:20:57.504Z] Node Version:  v16.5.0
+[debug] [2021-08-24T22:20:57.618Z] Time:          Tue Aug 24 2021 19:20:57 GMT-0300 (Brasilia Standard Time)
+[debug] [2021-08-24T22:20:57.619Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-08-24T22:20:57.802Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-08-24T22:20:57.803Z] > authorizing via signed-in user (lais.mune@alumni.usp.br)
+[debug] [2021-08-24T22:20:57.803Z] [iam] checking project fir-day-ago-2021 for permissions ["firebase.projects.get"]
+[debug] [2021-08-24T22:20:57.805Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-08-24T22:20:57.805Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-08-24T22:20:58.246Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Tue, 24 Aug 2021 22:20:58 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-08-24T22:20:58.579Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/fir-day-ago-2021:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2021-08-24T22:20:59.498Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 24 Aug 2021 22:20:59 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=725","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-08-24T22:20:59.501Z] > refreshing access token with scopes: []
+[debug] [2021-08-24T22:20:59.501Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-08-24T22:20:59.918Z] <<< HTTP RESPONSE 200 {"date":"Tue, 24 Aug 2021 22:20:59 GMT","pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-08-24T22:21:00.142Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fir-day-ago-2021 [none]
