@@ -43,6 +43,8 @@ export const Feed = () => {
       <span class='feed-post-owner-name'>
       <p class="user-post"> ${post.data().user_id} <br>${post.data().data} </p>
       <div class="data-post-id" data-postid="${post.id}" data-postOwner="${post.data().user_id}">
+      <p class="txt"> ${post.data().text} </p>
+      <textarea class='edit-text-area' data-edit-text-area='${post.id}' hidden>${post.data().text}</textarea>
       <span class='feed-post-data'>
     </section>
     <section class='feed-post-content-section'>
