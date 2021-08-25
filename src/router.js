@@ -12,7 +12,7 @@ const routRender = () => {
     '/register': Register,
     '/feed': Feed,
     '/profile': PersonalFeed,
-    '/seetings': SettingsProfile,
+    '/settings': SettingsProfile,
   };
   elemento.innerHTML = '';
 
