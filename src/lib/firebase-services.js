@@ -71,6 +71,12 @@ export const likePost = (postID, currentUserEmail) => {
   return promiseResult;
 };
 
+export const editPost = (newText, postID) => {
+  firebase.firestore().collection('posts').doc(postID).update({
+    text: newText,
+  });
+};
+
 export const commentPost = (postID, newCommentText, currentUserEmail) => {
   const commentPostId = firebase.firestore().collection('posts').doc(postID);
   const promiseResult = commentPostId.get().then((post) => {

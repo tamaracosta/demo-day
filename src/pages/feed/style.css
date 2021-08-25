@@ -128,6 +128,7 @@ nav ul{
   text-align: justify;
   text-justify: inter-word;
   line-height: 1.5;
+  word-break: break-all; 
 }
 
 .feed-post-actions-section{
@@ -157,6 +158,28 @@ nav ul{
 
 .edit-btn{
   background-image: url('../../images/feed-edit-icon.png');
+}
+
+.feed-edit-text-area{
+  font-family: 'Roboto', sans-serif;
+  width: 80%;
+  display: none;
+  padding: 2%;
+  outline: none;
+  border: --blue solid 1pt;
+  text-align: justify;
+  text-justify: inter-word;
+  border-radius: 10px;
+}
+
+.save-edit-btn{
+  background-image: url('../../images/feed-check-edit-icon.png');
+  display: none;
+}
+
+.cancel-edit-btn{
+  background-image: url('../../images/feed-cancel-edit-icon.png');
+  display: none;
 }
 
 .delete-btn{
@@ -201,7 +224,23 @@ nav ul{
   list-style-type: none;
 }
 
+.feed-comment-delete-section{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .feed-comment-content{
   text-align: justify;
   text-justify: inter-word;
+  margin: -10% 0% 4% 0%;
+}
+
+.feed-comments-actions-section{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.btn-from-comment{
+  height: 3vh;
+  width: 3vh;
 }

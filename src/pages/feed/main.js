@@ -1,5 +1,5 @@
 import {
-  getPosts, deletePost,
+  getPosts, editPost, deletePost,
 } from '../../lib/firebase-services.js';
 
 import {
@@ -7,6 +7,7 @@ import {
   getCurrentCommentLikes,
 } from './index.js';
 
+// Template Feed:
 export const Feed = () => {
   const rootElement = document.createElement('div');
   rootElement.className = 'feed-container';
@@ -41,6 +42,7 @@ export const Feed = () => {
   const postsCollection = firebase.firestore().collection('posts');
   const currentUserEmail = firebase.auth().currentUser.email;
 
+  // Template Post:
   function createPostTemplate(post) {
     const postTemplate = `
     <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
@@ -51,6 +53,7 @@ export const Feed = () => {
       </section>
       <section class='feed-post-content-section'>
         <p class='feed-post-content'> ${post.data().text} </p>
+        <textarea class='feed-edit-text-area' data-editTextArea='${post.id}'>${post.data().text}</textarea>
         <img class='feed-post-image'> </img>
       </section>
       <section class='feed-post-actions-section'>
@@ -69,6 +72,8 @@ export const Feed = () => {
       ${((user) => {
     if (user === currentUserEmail) {
       return `<button class='btn edit-btn' data-editPostButton='${post.id}'></button>
+              <button class='btn save-edit-btn' data-saveEditPostButton='${post.id}'></button>
+              <button class='btn cancel-edit-btn' data-cancelEditPostButton='${post.id}'></button>
               <button class='btn delete-btn' data-deletePostButton='${post.id}'></button>`;
     } return `<button class='not-allowed-to-see'></button>
               <button class='not-allowed-to-see'></button>`;
@@ -154,24 +159,26 @@ export const Feed = () => {
           <span class='feed-post-owner-name'> ${comment.owner} em: </span>
           <span class='feed-post-data'> ${comment.date} </span>
         </section>
+        <section class='feed-comment-delete-section'>
+      ${((user) => {
+    if (user === currentUserEmail) {
+      return `<button class='btn btn-from-comment delete-btn' data-deleteCommentButton='${comment.id}'></button>`;
+    } return `<button class='not-allowed-to-see'></button>
+      `;
+  })(comment.owner)}
+        </section>
         <section class='feed-comment-content-section'>
           <p class='feed-comment-content'> ${comment.content} </p>
         </section>
-        <section class='feed-post-actions-section'>
+        <section class='feed-comments-actions-section'>
       ${((likes) => {
     if (likes.length > 0) {
       if (likes.includes(currentUserEmail)) {
-        return `<button class='btn full-like-btn' data-likeCommentButton='${comment.id}'></button> `;
-      } return `<button class='btn empty-like-btn' data-likeCommentButton='${comment.id}'></button> `;
-    } return `<button class='btn empty-like-btn' data-likeCommentButton='${comment.id}'></button> `;
+        return `<button class='btn btn-from-comment full-like-btn' data-likeCommentButton='${comment.id}'></button> `;
+      } return `<button class='btn btn-from-comment empty-like-btn' data-likeCommentButton='${comment.id}'></button> `;
+    } return `<button class='btn btn-from-comment empty-like-btn' data-likeCommentButton='${comment.id}'></button> `;
   })(comment.likes.length)}
         <span data-likeValueToChange='${comment.id}'> ${comment.likes.length} </span>
-      ${((user) => {
-    if (user === currentUserEmail) {
-      return `<button class='btn delete-btn' data-deleteCommentButton='${comment.id}'></button>`;
-    } return `<button class='not-allowed-to-see'></button>
-             `;
-  })(comment.owner)}
       </li>
       `;
       commentArea.innerHTML += newItem;
@@ -199,6 +206,34 @@ export const Feed = () => {
       const amountOfLikes = parseInt(valueToBeChanged.textContent, 10);
       const likeStatus = rootElement.querySelector(`[data-likePostButton="${postID}"]`);
       updateLikes(postID, currentUserEmail, valueToBeChanged, amountOfLikes, likeStatus);
+    }
+
+    // Edit Post:
+    const editPostBtn = target.dataset.editpostbutton;
+    if (editPostBtn) {
+      const editTextArea = rootElement.querySelector(`[data-editTextArea='${postID}']`);
+      editTextArea.style.display = 'inline';
+      const saveEditBtn = rootElement.querySelector(`[data-saveEditPostButton='${postID}']`);
+      saveEditBtn.style.display = 'inline';
+      const cancelEditBtn = rootElement.querySelector(`[data-cancelEditPostButton='${postID}']`);
+      cancelEditBtn.style.display = 'inline';
+    }
+
+    const saveEditBtn = target.dataset.saveeditpostbutton;
+    if (saveEditBtn) {
+      const newText = rootElement.querySelector(`[data-editTextArea='${postID}']`).value;
+      editPost(newText, postID);
+      loadPosts();
+    }
+
+    const cancelEditBtn = target.dataset.canceleditpostbutton;
+    if (cancelEditBtn) {
+      const editTextArea = rootElement.querySelector(`[data-editTextArea='${postID}']`);
+      editTextArea.style.display = 'none';
+      const hideSaveEditBtn = rootElement.querySelector(`[data-saveEditPostButton='${postID}']`);
+      hideSaveEditBtn.style.display = 'none';
+      const hideCancelEditBtn = rootElement.querySelector(`[data-cancelEditPostButton='${postID}']`);
+      hideCancelEditBtn.style.display = 'none';
     }
 
     // Show Comments Section:
