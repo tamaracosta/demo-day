@@ -4,7 +4,11 @@ export const Register = () => {
   rootElement.innerHTML = `
     <main>
       <div class='img-login'>
+<<<<<<< HEAD
         <img class="img-logo" src="./logo-login.png">
+=======
+        <img class="img-logo" src="../images/logo-login.png">
+>>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86
       </div>
       <form>
           <section class="content">
@@ -16,6 +20,7 @@ export const Register = () => {
           <input required type="email" class="input-email" id="input-email" placeholder=" " autocomplete="off">
           <label for="input-email" class="login-input-label" id="label-input-email">Email</label>
         </div>
+<<<<<<< HEAD
 
         <div class="div-password" class='div-password'>
           <input required type="password" class='input-password'id="input-password" placeholder=" " autocomplete="off">
@@ -30,6 +35,19 @@ export const Register = () => {
           </div>
           </section>
 
+=======
+        <div class="div-password" class='div-password'>
+          <input required type="password" class='input-password'id="input-password" placeholder=" " autocomplete="off">
+          <img class="icon-eye" id="icon-eye" src="../images/eye-off.png"/>
+          <label class="login-input-label">Senha</label> 
+        </div>
+        <div class="div-confirm-password">
+            <input required type="password" class='input-confirm-password' id="input-confirm-password" placeholder=" " autocomplete="off">
+            <img class="icon-eye" id="icon-eye" src="../images/eye-off.png"/>
+            <label class="login-input-label">Confirme a senha</label> 
+          </div>
+          </section>
+>>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86
           <div class="checkbox-div">
         <input type="checkbox" class="checkbox-keep-logged-in" id="checkbox-keep-logged-in">
         <label for="checkbox-keep-logged-in" class="checkbox-keep"> Mantenha-me logada </label>
@@ -44,4 +62,8 @@ export const Register = () => {
     </main>
     <footer class="register-footer"> Not Alone ©</footer>
     `;
+<<<<<<< HEAD
+=======
+  return rootElement;
+>>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86
 };

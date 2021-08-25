@@ -1,4 +1,5 @@
 body {
+<<<<<<< HEAD
     margin: 0%;
     text-align: center;
     font-family: 'Roboto', sans-serif;
@@ -40,17 +41,67 @@ position: absolute;
   color:#444B59;
   font-weight: 400;
   letter-spacing: 2px;
+=======
+  margin: 0%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+  width: 100vw;
+}
+.img-login{
+  height: 25vh;
+}
+
+.img-login img{
+  height: 80%;
+  margin:5%;
+}
+
+.div-name, .div-email, .div-password, .div-confirm-password{
+  width: 100%;
+}
+
+.content input{
+  font-family: 'Roboto', sans-serif;
+  color: #2A9D8F;
+  outline: none;
+  cursor: pointer;
+  border-radius: 25px;
+  width: 85%;
+  height: 6.8vh;
+  margin:2%;
+  border: solid 1pt #2A9D8F;
+  font-size: 110%;
+  font-weight: 600;
+ 
+}
+.content label{
+position: absolute;
+left: 10%;
+margin-top: 6%;
+color:#444B59;
+font-weight: 400;
+letter-spacing: 2px;
+>>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86
 }
 
 .input-name:focus ~ .login-input-label,
 .input-name:not(:placeholder-shown).input-name:not(:focus) ~ .login-input-label{
+<<<<<<< HEAD
     margin-top: 1.8%;
     font-size: 13px;
     color: grey;
+=======
+  margin-top: 1.8%;
+  font-size: 13px;
+  color: grey;
+>>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86
 }
 
 .input-email:focus ~ .login-input-label,
 .input-email:not(:placeholder-shown).input-email:not(:focus) ~ .login-input-label{
+<<<<<<< HEAD
     margin-top: 1.8%;
     font-size: 13px;
     color: grey;
@@ -60,10 +111,22 @@ position: absolute;
     margin-top: 1.8%;
     font-size: 13px;
     color: grey;
+=======
+  margin-top: 1.8%;
+  font-size: 13px;
+  color: grey;
+}
+.input-password:focus ~ .login-input-label,
+.input-password:not(:placeholder-shown).input-password:not(:focus) ~ .login-input-label{
+  margin-top: 1.8%;
+  font-size: 13px;
+  color: grey;
+>>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86
 }
 
 .input-confirm-password:focus ~ .login-input-label,
 .input-confirm-password:not(:placeholder-shown).input-confirm-password:not(:focus) ~ .login-input-label{
+<<<<<<< HEAD
     margin-top: 1.8%;
     font-size: 13px;
     color: grey;
@@ -112,3 +175,53 @@ main{
   height: 90vh;
   margin-bottom: 7vh;
 }
+=======
+  margin-top: 1.8%;
+  font-size: 13px;
+  color: grey;
+}
+.checkbox-div {
+width: 100%;
+margin-top: 4%;
+color:#444B59;
+font-weight: 500;
+text-align: left;
+margin-left: 10%;
+}
+
+.div-password img, .div-confirm-password img {
+  width: 18px;
+  position: absolute;
+  margin-left: -40px;
+  margin-top: 25px;
+}
+
+.register-btn-register button {
+  font-family: 'Roboto', sans-serif;
+background-color: #2A9D8F;
+outline: none;
+cursor: pointer;
+border-radius: 25px;
+height: 35px;
+width: 92%;
+height: 7.5vh;
+margin:2%;
+margin-bottom: 4%;
+border: solid 1pt white;
+color: white;
+font-size: 110%;
+font-weight: 600;
+letter-spacing: 2px;
+}
+
+.footer {
+position:absolute;
+bottom:0;
+width:100%;
+}
+
+main{
+height: 90vh;
+margin-bottom: 7vh;
+}
+>>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86

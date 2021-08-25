@@ -1,0 +1,57 @@
+
+*{
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 640px){
+
+  .logo {
+      text-align: center;
+      font-size: 8vw;
+  }
+
+  #name-id, #name-user{
+      border-radius: 30px ;
+      border: #2A9D8F solid 1pt;
+      width: 323px;
+      height: 52.83px;
+      margin-top: 1rem;
+      font-size: 4vw;
+  }
+
+  #name-id::placeholder, #name-user::placeholder {
+      color: #444B59;
+
+  }
+  #btn-save{
+      background: #2A9D8F;
+      border-radius: 30px ;
+      width: 323px;
+      height: 52.83px;
+      margin-top: 2rem;
+      color: white;
+      font-size: 5vw;
+      border: none;
+  }
+
+  .inputs-class{
+      text-align: center;
+  }
+
+  .icon-class {
+      width: 30px;
+      height: 24.62px;
+  }
+
+  .icon-img {
+      text-align: center;
+  }
+
+  .upload {
+      display: none;
+  }
+
+
+
+
+}
