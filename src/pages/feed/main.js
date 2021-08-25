@@ -3,7 +3,8 @@ import {
 } from '../../lib/firebase-services.js';
 
 import {
-  updateLikes, getComments, getCurrentCommentsToPrint,
+  updateLikes, getComments, getCurrentCommentsToPrint, getCurrentCommentsToDelete,
+  getCurrentCommentLikes,
 } from './index.js';
 
 export const Feed = () => {
@@ -21,7 +22,7 @@ export const Feed = () => {
       </ul>
     </nav>
   </header>
-  <main class='feed-main>
+  <main class='feed-main'>
     <form class='feed-publication-form'>
       <textarea class='feed-publication-text-area' id='publication-text-area' placeholder='O que você quer publicar hoje?'></textarea> 
       <section class='feed-publication-buttons-area'>
@@ -147,7 +148,31 @@ export const Feed = () => {
     commentArea.innerHTML = '';
     commentsToPrint.forEach((comment) => {
       const newItem = `
-      <li class="comment-f-20" id="${comment.id}"> </li>
+      <li class="comment-f-20" id="${comment.id}">
+        <section class='feed-comment-owner-data'>
+          <img class='feed-post-owner-picture'>
+          <span class='feed-post-owner-name'> ${comment.owner} em: </span>
+          <span class='feed-post-data'> ${comment.date} </span>
+        </section>
+        <section class='feed-comment-content-section'>
+          <p class='feed-comment-content'> ${comment.content} </p>
+        </section>
+        <section class='feed-post-actions-section'>
+      ${((likes) => {
+    if (likes.length > 0) {
+      if (likes.includes(currentUserEmail)) {
+        return `<button class='btn full-like-btn' data-likeCommentButton='${comment.id}'></button> `;
+      } return `<button class='btn empty-like-btn' data-likeCommentButton='${comment.id}'></button> `;
+    } return `<button class='btn empty-like-btn' data-likeCommentButton='${comment.id}'></button> `;
+  })(comment.likes.length)}
+        <span data-likeValueToChange='${comment.id}'> ${comment.likes.length} </span>
+      ${((user) => {
+    if (user === currentUserEmail) {
+      return `<button class='btn delete-btn' data-deleteCommentButton='${comment.id}'></button>`;
+    } return `<button class='not-allowed-to-see'></button>
+             `;
+  })(comment.owner)}
+      </li>
       `;
       commentArea.innerHTML += newItem;
     });
@@ -158,6 +183,8 @@ export const Feed = () => {
   postsSection.addEventListener('click', (e) => {
     const { target } = e;
     const postID = target.parentNode.parentNode.parentNode.parentNode.id;
+    const postIDForComments = target.parentNode.parentNode.parentNode.parentNode.parentNode
+      .parentNode.parentNode.id;
 
     // Delete Post:
     const deletePostBtn = target.dataset.deletepostbutton;
@@ -178,6 +205,7 @@ export const Feed = () => {
     const showCommentPostBtn = target.dataset.showcommentpostbutton;
     if (showCommentPostBtn) {
       const commentsSection = rootElement.querySelector(`[data-commentsSection="${postID}"]`);
+      getComments(postID, printComments);
       commentsSection.style.display = 'flex';
     }
 
@@ -186,6 +214,24 @@ export const Feed = () => {
     if (commentPostBtn) {
       const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
       getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, printComments);
+    }
+
+    // Delete Comment:
+    const deleteCommentBtn = target.dataset.deletecommentbutton;
+    if (deleteCommentBtn) {
+      const commentID = target.dataset.deletecommentbutton;
+      getCurrentCommentsToDelete(postIDForComments, commentID, printComments);
+    }
+
+    // Like Comment:
+    const likeCommentBtn = target.dataset.likecommentbutton;
+    if (likeCommentBtn) {
+      const commentID = target.dataset.likecommentbutton;
+      const valueToBeChanged = rootElement.querySelector(`[data-likeValueToChange="${commentID}"]`);
+      const amountOfLikes = parseInt(valueToBeChanged.textContent, 10);
+      const likeStatus = rootElement.querySelector(`[data-likeCommentButton="${commentID}"]`);
+      getCurrentCommentLikes(postIDForComments, currentUserEmail, commentID, valueToBeChanged,
+        amountOfLikes, likeStatus);
     }
   });
 

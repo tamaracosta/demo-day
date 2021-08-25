@@ -80,7 +80,7 @@ export const commentPost = (postID, newCommentText, currentUserEmail) => {
         owner: currentUserEmail,
         content: newCommentText,
         postOfOrigin: postID,
-        commentLikes: [],
+        likes: [],
         id: postID + new Date().toLocaleString('pt-BR'),
         date: new Date().toLocaleString('pt-BR'),
       };
@@ -98,6 +98,47 @@ export const showComments = (postID) => {
   const promiseResult = commentPostId.get().then(((post) => {
     const comments = (post.data().comments);
     return comments;
+  }));
+  return promiseResult;
+};
+
+export const deletePostComment = (postID, commentID) => {
+  const commentPostId = firebase.firestore().collection('posts').doc(postID);
+  const promiseResult = commentPostId.get().then(((post) => {
+    const comments = (post.data().comments);
+    const commentsToKeep = comments.filter((comment) => comment.id !== commentID);
+    commentPostId.update({ comments: commentsToKeep });
+    return commentsToKeep;
+  }));
+  return promiseResult;
+};
+
+export const likePostComment = (postID, commentID, currentUserEmail) => {
+  const commentPostId = firebase.firestore().collection('posts').doc(postID);
+  const promiseResult = commentPostId.get().then(((post) => {
+    const comments = (post.data().comments);
+    const commentToLikeOrDislike = comments.filter((comment) => comment.id === commentID);
+    const commentsNotChanged = comments.filter((comment) => comment.id !== commentID);
+    let action = '';
+
+    if (commentToLikeOrDislike[0].likes.length >= 1) {
+      if (commentToLikeOrDislike[0].likes.includes(currentUserEmail)) {
+        const index = commentToLikeOrDislike[0].likes.indexOf(currentUserEmail);
+        if (index > -1) {
+          commentToLikeOrDislike[0].likes.splice(index, 1);
+        }
+        action = 'deslike';
+      } else {
+        commentToLikeOrDislike[0].likes.push(currentUserEmail);
+        action = 'like';
+      }
+    } else {
+      commentToLikeOrDislike[0].likes.push(currentUserEmail);
+      action = 'like';
+    }
+    const newContent = commentToLikeOrDislike.concat(commentsNotChanged);
+    commentPostId.update({ comments: newContent });
+    return action;
   }));
   return promiseResult;
 };
