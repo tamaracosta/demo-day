@@ -15,12 +15,13 @@ export const Feed = () => {
   </header>
   <main>
     <form class='feed-publication-form'>
-      <textarea class='feed-publication-text-area' id='publication-text-area' rows='15' placeholder='O que você quer publicar hoje?'></textarea> 
+      <textarea class='feed-publication-text-area' id='publication-text-area' placeholder='O que você quer publicar hoje?'></textarea> 
       <section class='feed-publication-buttons-area'>
+        <button class='btn feed-publication-image-btn'></button>
         <form method="post">
-          <input type="file" accept=".jpg, .jpeg, .png">
+          <input class='feed-choose-an-image-btn' type="file" accept=".jpg, .jpeg, .png">
         </form>
-        <button class='feed-publication-publish-btn' id='publication-btn'> Publicar </button>
+        <button class='feed-publication-publish-btn' id='publication-btn'> PUBLICAR </button>
       </section>
     </form>  
     <section class='feed-posts-section' id='posts-section'></section>
