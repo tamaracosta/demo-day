@@ -101,3 +101,43 @@ export const showComments = (postID) => {
   }));
   return promiseResult;
 };
+export const loginWithEmailAndPassword = (email, pass) => {
+  firebase.auth().signInWithEmailAndPassword(email, pass).then(() => {
+    getTheRoad('/feed');
+  }).catch((error) => {
+    getError(error);
+  });
+};
+
+export const updateProfileName = (name) => {
+  firebase.auth().currentUser.updateProfile({ displayName: name });
+};
+
+export const registerAccount = (email, password, name, checkbox) => {
+  if (checkbox.checked === true) {
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        updateProfileName(name);
+        getTheRoad('/feed');
+      }).catch((error) => {
+        getError(error);
+      });
+    });
+  } else {
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE).then(() => {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        updateProfileName(name);
+        getTheRoad('/feed');
+      }).catch((error) => {
+        getError(error);
+      });
+    });
+  }
+};
+
+export const resetPassword = (email) => {
+  firebase.auth().sendPasswordResetEmail(email).then(() => {
+  }).catch((error) => {
+    getError(error);
+  });
+};

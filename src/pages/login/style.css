@@ -21,7 +21,7 @@ color: #2A9D8F;
 outline: none;
 cursor: pointer;
 border-radius: 25px;
-width: 90%;
+width: 85%;
 height: 6.8vh;
 margin:2%;
 border: solid 1pt #2A9D8F;
@@ -39,7 +39,7 @@ letter-spacing: 2px;
 }
 .div-email, .div-password{
 width: 100%;
-text-align: center;
+justify-content: center;
 }
 
 .div-password img {
@@ -69,6 +69,7 @@ margin-top: 4%;
 color:#444B59;
 font-weight: 500;
 }
+
 .checkbox-forgot-password button {
 background-color: transparent;
 border: none;
@@ -99,6 +100,7 @@ height: 6.5vh;
 .register-new-user {
 letter-spacing: 2px;
 width: 100%;
+margin-bottom: 2%;
 }
 .register-new-user button{
 color:#2A9D8F;
@@ -108,11 +110,11 @@ letter-spacing: 2px;
 font-size: 100%;
 cursor: pointer;
 }
-.enter-icons img{
-width: 40px;
-height: 40px;
-border-radius: 15px;
+
+.connect{
+  margin-bottom: 2%;
 }
+
 .enter-icons{
 display: flex;
 justify-content: space-between;
@@ -120,6 +122,12 @@ width: 80%;
 margin-left: 10%;
 margin-right: 10%;
 }
+.enter-icons img{
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
+  }
+
 .enter-icons button{
 border-radius: 10px;
 width: 73px;
@@ -127,14 +135,11 @@ height: 49px;
 border: 1px solid #2A9D8F;
 background-color: transparent;
 justify-content: space-between;
+margin-bottom: 10vh;
 
 }
 .footer {
 position:absolute;
 bottom:0;
 width:100%;
-}
-main{
-height: 90vh;
-margin-bottom: 7vh;
 }

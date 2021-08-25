@@ -1,14 +1,14 @@
+import {
+  registerAccount,
+} from '../../lib/firebase-services.js';
+
 export const Register = () => {
   const rootElement = document.createElement('div');
   rootElement.classList.add('register-container');
   rootElement.innerHTML = `
     <main>
       <div class='img-login'>
-<<<<<<< HEAD
-        <img class="img-logo" src="./logo-login.png">
-=======
         <img class="img-logo" src="../images/logo-login.png">
->>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86
       </div>
       <form>
           <section class="content">
@@ -20,34 +20,17 @@ export const Register = () => {
           <input required type="email" class="input-email" id="input-email" placeholder=" " autocomplete="off">
           <label for="input-email" class="login-input-label" id="label-input-email">Email</label>
         </div>
-<<<<<<< HEAD
-
-        <div class="div-password" class='div-password'>
-          <input required type="password" class='input-password'id="input-password" placeholder=" " autocomplete="off">
-          <img class="icon-eye" id="icon-eye" src="./eye-off.png"/>
-          <label class="login-input-label">Senha</label> 
-        </div>
-
-        <div class="div-confirm-password">
-            <input required type="password" class='input-confirm-password' id="input-confirm-password" placeholder=" " autocomplete="off">
-            <img class="icon-eye" id="icon-eye" src="./eye-off.png"/>
-            <label class="login-input-label">Confirme a senha</label> 
-          </div>
-          </section>
-
-=======
-        <div class="div-password" class='div-password'>
+        <div class="div-password">
           <input required type="password" class='input-password'id="input-password" placeholder=" " autocomplete="off">
           <img class="icon-eye" id="icon-eye" src="../images/eye-off.png"/>
           <label class="login-input-label">Senha</label> 
         </div>
         <div class="div-confirm-password">
             <input required type="password" class='input-confirm-password' id="input-confirm-password" placeholder=" " autocomplete="off">
-            <img class="icon-eye" id="icon-eye" src="../images/eye-off.png"/>
+            <img class="icon-eye" id="icon-eye-confirm" src="../images/eye-off.png"/>
             <label class="login-input-label">Confirme a senha</label> 
           </div>
           </section>
->>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86
           <div class="checkbox-div">
         <input type="checkbox" class="checkbox-keep-logged-in" id="checkbox-keep-logged-in">
         <label for="checkbox-keep-logged-in" class="checkbox-keep"> Mantenha-me logada </label>
@@ -62,8 +45,56 @@ export const Register = () => {
     </main>
     <footer class="register-footer"> Not Alone ©</footer>
     `;
-<<<<<<< HEAD
-=======
+
+  const getUserEmail = rootElement.querySelector('#input-email');
+  const getUserPassword = rootElement.querySelector('#input-password');
+  const getUserConfirmPassword = rootElement.querySelector('.input-confirm-password');
+
+  getUserEmail.addEventListener('keyup', (event) => {
+    const labelEmail = rootElement.querySelector('#label-input-email');
+    const inputValue = event.target.value;
+    if (inputValue.length > 1) {
+      labelEmail.classList.add('login-input-label-up');
+    }
+  });
+
+  const registerAccountBtn = rootElement.querySelector('#btn-register-account');
+  registerAccountBtn.addEventListener('click', () => {
+    const userName = rootElement.querySelector('#input-name').value;
+    const userEmail = getUserEmail.value;
+    const userPassword = getUserPassword.value;
+    if (getUserPassword.value !== getUserConfirmPassword.value) {
+      alert('as senhas não conferem');
+    } else {
+      const checkboxKeepLoggedIn = rootElement.querySelector('#checkbox-keep-logged-in');
+      registerAccount(userEmail, userPassword, userName, checkboxKeepLoggedIn);
+    }
+  });
+
+  const passwordContainer = rootElement.querySelector('.div-password');
+  const eyeIcon = rootElement.querySelector('#icon-eye');
+  eyeIcon.addEventListener('click', () => {
+    passwordContainer.classList.toggle('visible');
+    if (passwordContainer.classList.contains('visible')) {
+      eyeIcon.src = './/images/eye.png';
+      getUserPassword.type = 'text';
+    } else {
+      eyeIcon.src = './/images/eye-off.png';
+      getUserPassword.type = 'password';
+    }
+  });
+
+  const passwordConfirmContainer = rootElement.querySelector('.div-confirm-password');
+  const eyeIconConfirm = rootElement.querySelector('#icon-eye');
+  eyeIconConfirm.addEventListener('click', () => {
+    passwordConfirmContainer.classList.toggle('visible');
+    if (passwordConfirmContainer.classList.contains('visible')) {
+      eyeIconConfirm.src = './/images/eye.png';
+      getUserConfirmPassword.type = 'text';
+    } else {
+      eyeIconConfirm.src = './/images/eye-off.png';
+      getUserConfirmPassword.type = 'password';
+    }
+  });
   return rootElement;
->>>>>>> c2676ede9e36c10d6140be858aa3b32afd8daa86
 };
