@@ -1,5 +1,9 @@
 :root {
   --green: #2A9D8F;
+  --orange: #f4a261;
+  --red: #e76f51;
+  --yellow: #e9c46a;
+  --blue: #264653;
 }
 
 body{
@@ -29,6 +33,10 @@ ul{
   outline: none;
   border: solid 0pt;
   cursor: pointer;
+}
+
+.not-allowed-to-see{
+  display: none;
 }
 
 .home-btn{
@@ -75,6 +83,12 @@ main{
   padding: 2%;
   outline: none;
   border: solid 0pt;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.feed-hide-url-in-text-area{
+  display: none;
 }
 
 .feed-publication-buttons-area{
@@ -100,4 +114,84 @@ main{
   border-radius: 10px;
   color: #ffffff;
   padding: 2% 4%;
+}
+
+.feed-all-the-post{
+  margin-top: 4%;
+}
+
+.feed-post-content{
+  padding: 2% 12%;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.5;
+}
+
+.feed-post-actions-section{
+  display: flex;
+}
+
+.feed-post-actions-left-section,
+.feed-post-actions-right-section{
+  width: 30%;
+}
+
+.feed-post-actions-left-section{
+  margin-right: 40%;
+}
+
+.empty-like-btn{
+  background-image: url('../../images/feed-empty-like-icon.png');
+}
+
+.full-like-btn{
+  background-image: url('../../images/feed-full-like-icon.png');
+}
+
+.comment-btn{
+  background-image: url('../../images/feed-comment-icon.png');
+}
+
+.edit-btn{
+  background-image: url('../../images/feed-edit-icon.png');
+}
+
+.delete-btn{
+  background-image: url('../../images/feed-delete-icon.png');
+}
+
+.feed-comments-section{
+  display: none;
+  flex-direction: column;
+  margin: 2% 4%;
+  align-items: center;
+}
+
+.feed-comment-input{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+}
+
+.feed-comment-text-area{
+  margin: 1% 3% 2% 3%;
+  width: 80%;
+  height: 2.5vh;
+  padding: 2% 3%;
+  border-radius: 10px;
+  border: var(--red) solid 1pt;
+  outline: none;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.feed-comment-btn{
+  height: 4vh;
+  background-image: url('../../images/feed-send-comment-icon.png');
+}
+
+
+.feed-printed-comments{
+  background-color: #f4a261;
 }
