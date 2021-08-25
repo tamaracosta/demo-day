@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    text-decoration: none;
+}
+
+:root {
+    --verde-claro: #2A9D8F;
+    --verde-escuro: #264653;
+    --laranja-claro: #F4A261;
+    --laranja-escuro: #E76F51;
+    --amarelo: #E9C46A;
+    --branco: #fff;
+    --preto: #000;
+} 
+
+.container-header {
+    display: flex;
+    align-items: center;
+    margin: 2em;
+}
+
+.foto-personal-feed {
+    width: 80px;
+    height: 70px;
+    background-color: var(--verde-claro);
+    border-radius: 50%;
+}
+
+.titulo {
+    margin-left: 0.5em;
+}
+
+.minhas-publicacoes {
+    
+    text-align: center;
+    margin: auto;
+}
+
+.texto {
+    max-width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 100vw;
+}
+
+.icones {
+    color: var(--laranja-escuro);
+    margin: 0.5em;
+}
+
+
+/* --------------pop up */
+.popup-wrapper {
+    display: none;
+}
+
+.popup-wrapper {
+    background: rgba(0,0,0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.popup {
+    text-align: center;
+    width: 100%;
+    margin: 10% auto;
+    padding: 20px;
+    background: white;
+    position: relative;
+}
+
+.fechar-popup {
+    color: var(--verde-escuro);
+    position: absolute;
+    top: 5px;
+    right: 30px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    padding: 0.5em;
+    width: 200px;
+    height: 40px;
+    margin-top: 0.5em;
+    border-radius: 20px;
+    background-color: var(--verde-claro);
+    color: var(--branco);
+    font-weight: bold;
+    font-size: 1em;
+    border: none;
+    
+}
+
+.msg-deletar {
+    color: var(--verde-escuro);
+}
+
