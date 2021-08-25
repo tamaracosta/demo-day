@@ -59,7 +59,7 @@ ul{
   background-image: url('../../images/menu-signout-icon.png');
 }
 
-main{
+.feed-main{
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -21,7 +21,7 @@ export const Feed = () => {
       </ul>
     </nav>
   </header>
-  <main>
+  <main class='feed-main>
     <form class='feed-publication-form'>
       <textarea class='feed-publication-text-area' id='publication-text-area' placeholder='O que você quer publicar hoje?'></textarea> 
       <section class='feed-publication-buttons-area'>
