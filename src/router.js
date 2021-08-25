@@ -1,8 +1,7 @@
 import { getTheRoad } from './lib/firebase-services.js';
 import { Register } from './pages/register/main.js';
-// import { Login } from './pages/login/main.js';
-import { Feed } from './pages/feed/main.js';
 import { Login } from './pages/login/main.js';
+import { Feed } from './pages/feed/main.js';
 import { PersonalFeed } from './pages/personal-feed/main.js';
 import { SettingsProfile } from './pages/profile-settings/main.js';
 
@@ -13,7 +12,7 @@ const routRender = () => {
     '/register': Register,
     '/feed': Feed,
     '/profile': PersonalFeed,
-    '/seetings': SettingsProfile,
+    '/settings': SettingsProfile,
   };
   elemento.innerHTML = '';
 
