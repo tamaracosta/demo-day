@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import {
   getPosts, editPost, deletePost,
 } from '../../lib/firebase-services.js';
@@ -34,6 +35,9 @@ export const Feed = () => {
         <button class='feed-publication-publish-btn' id='publication-of-all-content-btn'> PUBLICAR </button>
       </section>
     </form>  
+    <section class='feed-search-section'> 
+      <input class='feed-search-input' id='feed-post-search' placeholder='Pesquise aqui'> </input>
+    </section>
     <section class='feed-posts-section' id='posts-section'></section>
   </main>
   <footer><footer>
@@ -283,6 +287,27 @@ export const Feed = () => {
         amountOfLikes, likeStatus);
     }
   });
+
+  // Post Search:
+  function filterWord() {
+    const filterValue = rootElement.querySelector('#feed-post-search').value.toUpperCase();
+    const printedPosts = rootElement.querySelector('#posts-section');
+    const postsContents = printedPosts.getElementsByClassName('feed-post-content');
+    const getPost = document.getElementsByClassName('feed-a-post');
+    for (let i = 0; i < postsContents.length; i++) {
+      const filteredPost = postsContents[i];
+      if (filteredPost.innerHTML.toUpperCase().indexOf(filterValue) > -1) {
+        postsContents[i].style.display = '';
+        getPost[i].style.display = '';
+      } else {
+        postsContents[i].style.display = 'none';
+        getPost[i].style.display = 'none';
+      }
+    }
+  }
+
+  const searchInput = rootElement.querySelector('#feed-post-search');
+  searchInput.addEventListener('keyup', filterWord);
 
   loadPosts();
   return rootElement;

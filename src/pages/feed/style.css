@@ -124,6 +124,25 @@ nav ul{
   padding: 2% 4%;
 }
 
+.feed-search-section{
+  width: 100%;
+}
+
+.feed-search-input{
+  margin-top: 3%;
+  width: 80%;
+  font-size: 100%;
+  padding:2%;
+  outline: none;
+  border: 0pt;
+  color: var(--blue);
+  border-bottom:var(--yellow) solid 1pt !important;
+}
+
+.feed-search-input:focus{
+  box-shadow: 0 4px 2px -2px rgba(219, 172, 61, 0.3);
+}
+
 .feed-posts-section{
   width: 100%;
 }
@@ -198,6 +217,7 @@ nav ul{
   color: var(--blue);
   
 }
+
 .comment-btn{
   background-image: url('../../images/feed-comment-icon.png');
   margin-top: 3%;
@@ -334,7 +354,6 @@ nav ul{
 .delete-comment-btn{
   background-image: url('../../images/feed-comment-delete-icon.png');
 }
-
 
 .feed-post-end-line{
   opacity: 25%;
