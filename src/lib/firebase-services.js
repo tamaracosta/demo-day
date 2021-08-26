@@ -71,6 +71,12 @@ export const likePost = (postID, currentUserEmail) => {
   return promiseResult;
 };
 
+export const editPost = (newText, postID) => {
+  firebase.firestore().collection('posts').doc(postID).update({
+    text: newText,
+  });
+};
+
 export const commentPost = (postID, newCommentText, currentUserEmail) => {
   const commentPostId = firebase.firestore().collection('posts').doc(postID);
   const promiseResult = commentPostId.get().then((post) => {
@@ -80,9 +86,9 @@ export const commentPost = (postID, newCommentText, currentUserEmail) => {
         owner: currentUserEmail,
         content: newCommentText,
         postOfOrigin: postID,
-        commentLikes: [],
+        likes: [],
         id: postID + new Date().toLocaleString('pt-BR'),
-        date: new Date().toLocaleString('pt-BR'),
+        creationDate: Math.round(Date.now() / 1000),
       };
       commentPostId.update({ comments: firebase.firestore.FieldValue.arrayUnion(newComment) });
       const currentComments = comments.concat(newComment);
@@ -102,6 +108,47 @@ export const showComments = (postID) => {
   return promiseResult;
 };
 
+export const deletePostComment = (postID, commentID) => {
+  const commentPostId = firebase.firestore().collection('posts').doc(postID);
+  const promiseResult = commentPostId.get().then(((post) => {
+    const comments = (post.data().comments);
+    const commentsToKeep = comments.filter((comment) => comment.id !== commentID);
+    commentPostId.update({ comments: commentsToKeep });
+    return commentsToKeep;
+  }));
+  return promiseResult;
+};
+
+export const likePostComment = (postID, commentID, currentUserEmail) => {
+  const commentPostId = firebase.firestore().collection('posts').doc(postID);
+  const promiseResult = commentPostId.get().then(((post) => {
+    const comments = (post.data().comments);
+    const commentToLikeOrDislike = comments.filter((comment) => comment.id === commentID);
+    const commentsNotChanged = comments.filter((comment) => comment.id !== commentID);
+    let action = '';
+
+    if (commentToLikeOrDislike[0].likes.length >= 1) {
+      if (commentToLikeOrDislike[0].likes.includes(currentUserEmail)) {
+        const index = commentToLikeOrDislike[0].likes.indexOf(currentUserEmail);
+        if (index > -1) {
+          commentToLikeOrDislike[0].likes.splice(index, 1);
+        }
+        action = 'deslike';
+      } else {
+        commentToLikeOrDislike[0].likes.push(currentUserEmail);
+        action = 'like';
+      }
+    } else {
+      commentToLikeOrDislike[0].likes.push(currentUserEmail);
+      action = 'like';
+    }
+    const newContent = commentToLikeOrDislike.concat(commentsNotChanged);
+    commentPostId.update({ comments: newContent });
+    return action;
+  }));
+  return promiseResult;
+};
+
 export const sendImageToDatabase = (file, showUrlOfImagesToPubish) => {
   const ref = firebase.storage().ref('images/');
   ref.child(file.name).put(file).then(() => {
@@ -109,4 +156,56 @@ export const sendImageToDatabase = (file, showUrlOfImagesToPubish) => {
       showUrlOfImagesToPubish(url);
     });
   });
+};
+
+export const loginWithEmailAndPassword = (email, pass) => {
+  firebase.auth().signInWithEmailAndPassword(email, pass).then(() => {
+    getTheRoad('/feed');
+  }).catch((error) => {
+    getError(error);
+  });
+};
+
+export const updateProfileName = (name) => {
+  firebase.auth().currentUser.updateProfile({ displayName: name });
+};
+
+export const registerAccount = (email, password, name, checkbox) => {
+  if (checkbox.checked === true) {
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        updateProfileName(name);
+        getTheRoad('/feed');
+      }).catch((error) => {
+        getError(error);
+      });
+    });
+  } else {
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE).then(() => {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        updateProfileName(name);
+        getTheRoad('/feed');
+      }).catch((error) => {
+        getError(error);
+      });
+    });
+  }
+};
+
+export const resetPassword = (email) => {
+  firebase.auth().sendPasswordResetEmail(email).then(() => {
+  }).catch((error) => {
+    getError(error);
+  });
+};
+export const getMyPosts = (createAndPrintAllPosts) => {
+  firebase.firestore().collection('posts')
+    .orderBy('data', 'desc')
+    .where('user_id', '===', firebase.auth().currentUser.email)
+    .get()
+    .then((snap) => {
+      snap.forEach((post) => {
+        createAndPrintAllPosts(post);
+      });
+    });
 };
