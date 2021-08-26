@@ -1,12 +1,14 @@
-
-import { deletePost, getMyPosts } from "../../lib/firebase-services.js";
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
+import { deletePost, getMyPosts } from '../../lib/firebase-services.js';
 import {
-    updateLikes, getComments, getCurrentCommentsToPrint,
+  updateLikes, getComments, getCurrentCommentsToPrint,
 } from '../feed/index.js';
 
 export const PersonalFeed = () => {
-    const rootElement = document.createElement('div');
-    rootElement.innerHTML = ` 
+  const rootElement = document.createElement('div');
+  rootElement.innerHTML = ` 
   <main class="pagina-personal-feed" id="topo">
       <header class="container-header">
           <div class="foto-personal-feed">
@@ -49,11 +51,11 @@ export const PersonalFeed = () => {
       </div>
   </div>
       
-      `
-    const currentUserEmail = firebase.auth().currentUser.email;
+      `;
+  const currentUserEmail = firebase.auth().currentUser.email;
 
-    function createPostTemplate(post) {
-        const postTemplate = `
+  function createPostTemplate(post) {
+    const postTemplate = `
         <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
           <section class='feed-post-owner-data'>
             <img class='feed-post-owner-picture'>
@@ -67,23 +69,23 @@ export const PersonalFeed = () => {
           <section class='feed-post-actions-section'>
             <div class='feed-post-actions-left-section'>
           ${((likes) => {
-                if (likes.length > 0) {
-                    if (likes.includes(currentUserEmail)) {
-                        return `<button class='btn full-like-btn' data-likePostButton='${post.id}'></button> `;
-                    } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
-                } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
-            })(post.data().likes)}
+    if (likes.length > 0) {
+      if (likes.includes(currentUserEmail)) {
+        return `<button class='btn full-like-btn' data-likePostButton='${post.id}'></button> `;
+      } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
+    } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
+  })(post.data().likes)}
               <span data-likeValueToChange='${post.id}'> ${post.data().likes.length} </span>
               <button class='btn comment-btn' data-showCommentPostButton='${post.id}'></button>
             </div>
             <div class='feed-post-actions-right-section'>
           ${((user) => {
-                if (user === currentUserEmail) {
-                    return `<button class='btn edit-btn' data-editPostButton='${post.id}'></button>
+    if (user === currentUserEmail) {
+      return `<button class='btn edit-btn' data-editPostButton='${post.id}'></button>
                   <button class='btn delete-btn' data-deletePostButton='${post.id}'></button>`;
-                } return `<button class='not-allowed-to-see'></button>
+    } return `<button class='not-allowed-to-see'></button>
                   <button class='not-allowed-to-see'></button>`;
-            })(post.data().user_id)}
+  })(post.data().user_id)}
             </div>
           </section>
           <section class='feed-comments-section' data-commentsSection='${post.id}'>
@@ -97,78 +99,76 @@ export const PersonalFeed = () => {
           </section>
         </div>
         `;
-        return postTemplate;
+    return postTemplate;
+  }
+
+  function createAndPrintAllPosts(post) {
+    const postElement = document.createElement('div');
+    postElement.id = post.id;
+    postElement.classList.add('feed-a-post');
+
+    const postTemplate = createPostTemplate(post);
+    postElement.innerHTML = postTemplate;
+    rootElement.querySelector('#posts-section').appendChild(postElement);
+  }
+
+  // Action Buttons:
+  const postsSection = rootElement.querySelector('#posts-section');
+  postsSection.addEventListener('click', (e) => {
+    const { target } = e;
+    const postID = target.parentNode.parentNode.parentNode.parentNode.id;
+
+    // Editar Post
+    const editPostBtn = target.dataset.editpostbutton;
+    if (editPostBtn) {
+      editPost(postID);
     }
 
-    function createAndPrintAllPosts(post) {
-        const postElement = document.createElement('div');
-        postElement.id = post.id;
-        postElement.classList.add('feed-a-post');
-
-        const postTemplate = createPostTemplate(post);
-        postElement.innerHTML = postTemplate;
-        rootElement.querySelector('#posts-section').appendChild(postElement);
+    // Delete Post:
+    const deletePostBtn = target.dataset.deletepostbutton;
+    if (deletePostBtn) {
+      showPopupToDelete(postID, loadPosts);
     }
 
-    // Action Buttons:
-    const postsSection = rootElement.querySelector('#posts-section');
-    postsSection.addEventListener('click', (e) => {
-        const { target } = e;
-        const postID = target.parentNode.parentNode.parentNode.parentNode.id;
+    // Like Post:
+    const likePostBtn = target.dataset.likepostbutton;
+    if (likePostBtn) {
+      const valueToBeChanged = rootElement.querySelector(`[data-likeValueToChange="${postID}"]`);
+      const amountOfLikes = parseInt(valueToBeChanged.textContent, 10);
+      const likeStatus = rootElement.querySelector(`[data-likePostButton="${postID}"]`);
+      updateLikes(postID, currentUserEmail, valueToBeChanged, amountOfLikes, likeStatus);
+    }
 
-        //Editar Post
-        const editPostBtn = target.dataset.editpostbutton;
-        if (editPostBtn) {
-            editPost(postID)
-        }
+    // Show Comments Section:
+    const showCommentPostBtn = target.dataset.showcommentpostbutton;
+    if (showCommentPostBtn) {
+      const commentsSection = rootElement.querySelector(`[data-commentsSection="${postID}"]`);
+      commentsSection.style.display = 'flex';
+    }
 
-        // Delete Post:
-        const deletePostBtn = target.dataset.deletepostbutton;
-        if (deletePostBtn) {
-            showPopupToDelete(postID, loadPosts)
-        }
+    // Comment Post:
+    const commentPostBtn = target.dataset.commentpostbutton;
+    if (commentPostBtn) {
+      const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
+      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, printComments);
+    }
+  });
 
-        // Like Post:
-        const likePostBtn = target.dataset.likepostbutton;
-        if (likePostBtn) {
-            const valueToBeChanged = rootElement.querySelector(`[data-likeValueToChange="${postID}"]`);
-            const amountOfLikes = parseInt(valueToBeChanged.textContent, 10);
-            const likeStatus = rootElement.querySelector(`[data-likePostButton="${postID}"]`);
-            updateLikes(postID, currentUserEmail, valueToBeChanged, amountOfLikes, likeStatus);
-        }
-
-        // Show Comments Section:
-        const showCommentPostBtn = target.dataset.showcommentpostbutton;
-        if (showCommentPostBtn) {
-            const commentsSection = rootElement.querySelector(`[data-commentsSection="${postID}"]`);
-            commentsSection.style.display = 'flex';
-        }
-
-        // Comment Post:
-        const commentPostBtn = target.dataset.commentpostbutton;
-        if (commentPostBtn) {
-            const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
-            getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, printComments);
-        }
-    });
-
-    const printComments = (commentsToPrint, postID) => {
-        const commentArea = rootElement.querySelector(`[data-ulCommentArea="${postID}"]`);
-        commentArea.innerHTML = '';
-        commentsToPrint.forEach((comment) => {
-            const newItem = `
+  const printComments = (commentsToPrint, postID) => {
+    const commentArea = rootElement.querySelector(`[data-ulCommentArea="${postID}"]`);
+    commentArea.innerHTML = '';
+    commentsToPrint.forEach((comment) => {
+      const newItem = `
       <li class="comment-f-20" id="${comment.id}"> </li>
       `;
-            commentArea.innerHTML += newItem;
-        });
-    };
+      commentArea.innerHTML += newItem;
+    });
+  };
 
-
-    function loadPosts() {
-        rootElement.querySelector('#posts-section').innerHTML = '';
-        getMyPosts(createAndPrintAllPosts);
-
-    }
+  function loadPosts() {
+    rootElement.querySelector('#posts-section').innerHTML = '';
+    getMyPosts(createAndPrintAllPosts);
+  }
 
   function showPopupToDelete(postID, loadPosts) {
     const popup = rootElement.querySelector('.popup-wrapper');
@@ -192,16 +192,16 @@ export const PersonalFeed = () => {
   }
 
   function removePostPage(postID) {
-    const target = document.getElementById(postID)
-    target.addEventListener("transitionend", () => target.remove())
-    target.style.opacity = "0"
+    const target = document.getElementById(postID);
+    target.addEventListener('transitionend', () => target.remove());
+    target.style.opacity = '0';
   }
 
   function editPost(postID) {
     const paragrafoEditar = document.getElementById(postID).querySelector('p');
     paragrafoEditar.contentEditable = true;
     paragrafoEditar.focus();
-}
+  }
 
   loadPosts();
   return rootElement;

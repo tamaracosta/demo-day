@@ -224,4 +224,3 @@ export const resetPassword = (email) => {
     getError(error);
   });
 };
-
