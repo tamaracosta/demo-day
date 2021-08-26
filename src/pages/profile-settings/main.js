@@ -2,10 +2,10 @@ export const SettingsProfile = () => {
   const container = document.createElement('div');
   container.innerHTML = ` 
     <header>
-        <div class="logo-class"><img src="../images/logo-login.png"/></div>
+      <div class="logo-class"><img src="../images/logo-login.png"/></div>
     </header>   
     <main>
-        <div class="upload">
+      <div class="upload">
             <input type="file" id="photo"></input>
             <div class="msg-carregando"></div>  
             <img id="image"/>             
@@ -41,34 +41,7 @@ export const SettingsProfile = () => {
     </div>
           `
 
-  /*        const upload = container.querySelector('#photo');
-          upload.addEventListener('change', () => {
-            const msgImg = container.querySelector('.msg-carregando');
-
-            msgImg.innerHTML = 'Carregando imagem...';
-        
-            const ref = firebase.storage().ref('imagens/perfil');
-            //ref caminho onde ira salvar a imagem
-            const file = container.querySelector('#photo').files[0];
-            //file 
-            const name = `${new Date()}-${file.name}`;
-            const metadata = {
-                contentType: file.type,
-            };
-            const task = ref.child(name).put(file, metadata);
-            //child nomeia a imagem
-            //put comando q faz o upload da imagem
-            task
-                .then((snapshot) => snapshot.ref.getDownloadURL())
-                .then((url) => {
-                    console.log('deu certo')
-                    msgImg.innerHTML = ''
-                    const image = container.querySelector('#image');
-                    image.src = url;                    
-                    
-                });
-          })*/
-          
+  
               
             const currentProfileImage = container.querySelector('#image');
             const inputPhoto = container.querySelector('#photo');
@@ -234,4 +207,4 @@ export const SettingsProfile = () => {
                       
                   });
               }) */
-              
+
