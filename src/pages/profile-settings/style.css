@@ -1,57 +1,142 @@
-
 *{
-  margin: 0;
-  padding: 0;
-}
-@media (max-width: 640px){
-
-  .logo {
-      text-align: center;
-      font-size: 8vw;
+    margin: 0;
+    padding: 0;
   }
+  @media (max-width: 640px){
+  
+    .logo {
+        text-align: center;
+        width: 116px;
+        height: 80px;
+    }
+  
+    #name-id, #name-user{
+        padding: 0% 4%;
+        font-family: 'Roboto', sans-serif;
+        border-radius: 30px ;
+        border: #2A9D8F solid 1pt;
+        width: 323px;
+        height: 52.83px;
+        margin-top: 1rem;
+        font-size: 4vw;
+        cursor: pointer;
+        outline: none;
+    }
+  
+    #name-id::placeholder, #name-user::placeholder {
+        color: #444B59;
+  
+    }
+    #btn-save{
+        font-family: 'Roboto', sans-serif;
+        background: #2A9D8F;
+        border-radius: 30px ;
+        width: 323px;
+        height: 52.83px;
+        margin-top: 2rem;
+        color: white;
+        font-size: 5vw;
+        border: none;
+        cursor: pointer;
+    }
+  
+    .inputs-class{
+        text-align: center;
+    }
+  
+    .btn-foto-class {
+        width: 30px;
+        height: 24.62px;
+        border: none;
+        background: transparent;
+    }
+  
+    .icon-img {
+        text-align: center;
+    }
+  
+   
+    #image {
+        width: 172px;
+        height: 160px;
+        border-radius: 100%;
+    }
+  
+      .name-input-label, .user-input-label{
+          position: absolute;
+          left: 10%;
+          margin-top: 10%;
+          color:#444B59;
+          font-weight: 400;
+          letter-spacing: 2px;
+      }
+  
+      .input-name:focus ~ .name-input-label,
+          .input-name:not(:placeholder-shown).input-name:not(:focus) ~ .name-input-label{
+          margin-top: 0.5%;
+          font-size: 13px;
+          color: grey;
+      }
+  
+      .input-user:focus ~ .user-input-label,
+          .input-user:not(:placeholder-shown).input-user:not(:focus) ~ .user-input-label{
+          margin-top: 0.5%;
+          font-size: 13px;
+          color: grey;
+      }
+  
+      /* --------------pop up */
+      .popup-wrapper {
+          display: none;
+      }
+      
+      .popup-wrapper {
+          background: rgba(0,0,0, .5);
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: none;
+      }
+      
+      .popup {
+          text-align: center;
+          width: 100%;
+          margin: 10% auto;
+          padding: 20px;
+          background: white;
+          position: relative;
+      }
+      
+      .fechar-popup {
+          color: var(--verde-escuro);
+          position: absolute;
+          top: 5px;
+          right: 30px;
+          cursor: pointer;
+      }
+      
+   #feed-id, #profile-id {
+          padding: 0.5em;
+          width: 200px;
+          height: 40px;
+          margin-top: 0.5em;
+          border-radius: 20px;
+          background-color: var(--verde-claro);
+          color: var(--branco);
+          font-weight: bold;
+          font-size: 1em;
+          border: none;
+          
+      }
+  
+      #photo {
+         opacity: 0 ;
+   
+  
+  
+      }
 
-  #name-id, #name-user{
-      border-radius: 30px ;
-      border: #2A9D8F solid 1pt;
-      width: 323px;
-      height: 52.83px;
-      margin-top: 1rem;
-      font-size: 4vw;
+
   }
-
-  #name-id::placeholder, #name-user::placeholder {
-      color: #444B59;
-
-  }
-  #btn-save{
-      background: #2A9D8F;
-      border-radius: 30px ;
-      width: 323px;
-      height: 52.83px;
-      margin-top: 2rem;
-      color: white;
-      font-size: 5vw;
-      border: none;
-  }
-
-  .inputs-class{
-      text-align: center;
-  }
-
-  .icon-class {
-      width: 30px;
-      height: 24.62px;
-  }
-
-  .icon-img {
-      text-align: center;
-  }
-
-  .upload {
-      display: none;
-  }
-
-
-
-
-}
