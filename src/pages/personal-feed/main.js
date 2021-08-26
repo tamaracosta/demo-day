@@ -101,7 +101,6 @@ export const PersonalFeed = () => {
     }
 
     function createAndPrintAllPosts(post) {
-
         const postElement = document.createElement('div');
         postElement.id = post.id;
         postElement.classList.add('feed-a-post');
@@ -109,7 +108,6 @@ export const PersonalFeed = () => {
         const postTemplate = createPostTemplate(post);
         postElement.innerHTML = postTemplate;
         rootElement.querySelector('#posts-section').appendChild(postElement);
-
     }
 
     // Action Buttons:
@@ -168,7 +166,7 @@ export const PersonalFeed = () => {
 
     function loadPosts() {
         rootElement.querySelector('#posts-section').innerHTML = '';
-        getMyPosts(createAndPrintAllPosts)
+        getMyPosts(createAndPrintAllPosts);
 
     }
 

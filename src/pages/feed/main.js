@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import {
-  getPosts, editPost, deletePost, sendImageToDatabase,
+  getPosts, editPost, deletePost, sendImageToDatabase, filterPosts,
 } from '../../lib/firebase-services.js';
 
 import {
@@ -26,6 +26,13 @@ export const Feed = () => {
   </header>
   <main class='feed-main'>
     <form class='feed-publication-form'>
+      <select name='category' id='post-category'>
+        <option selected disable>Categoria</option>
+        <option value="recipes">Receitas</option>
+        <option value="kitchenTips">Dicas de Cozinha</option> 
+        <option value="fixing">Manutenção</option>  
+        <option value="decoration">Decoração</option>      
+      </select>
       <textarea class='feed-publication-text-area' id='publication-text-area' placeholder='O que você quer publicar hoje?'></textarea> 
       <section class='feed-publication-buttons-area'>
         <input class="feed-hide-url" id="hide-url"> </input>
@@ -42,6 +49,15 @@ export const Feed = () => {
     </form>  
     <section class='feed-search-section'> 
       <input class='feed-search-input' id='feed-post-search' placeholder='Pesquise aqui'> </input>
+      <button class='btn filter-btn' id='show-filters'></button>
+      <select name='category' id='filter-post-category'>
+        <option selected disable>Categoria</option>
+        <option value="all">Todas</option>
+        <option value="recipes">Receitas</option>
+        <option value="kitchenTips">Dicas de Cozinha</option> 
+        <option value="fixing">Manutenção</option>  
+        <option value="decoration">Decoração</option>      
+      </select>
     </section>
     <section class='feed-posts-section' id='posts-section'></section>
   </main>
@@ -89,7 +105,7 @@ export const Feed = () => {
       ${((user) => {
     if (user === currentUserEmail) {
       return `<button class='btn edit-btn' data-editPostButton='${post.id}'></button>
-              <button class='btn save-edit-btn' data-saveEditPostButton='${post.id}'></button>
+              <button class='btn save-edit-btn' data-saveEohditPostButton='${post.id}'></button>
               <button class='btn cancel-edit-btn' data-cancelEditPostButton='${post.id}'></button>
               <button class='btn delete-btn' data-deletePostButton='${post.id}'></button>`;
     } return `<button class='not-allowed-to-see'></button>
@@ -162,11 +178,13 @@ export const Feed = () => {
     const textArea = rootElement.querySelector('#publication-text-area');
     const postContent = rootElement.querySelector('#publication-text-area').value;
     const postImageUrl = rootElement.querySelector('#hide-url').value;
+    const postCategory = rootElement.querySelector('#post-category').value;
 
     const post = {
       text: postContent,
       url: postImageUrl,
       user_id: currentUserEmail,
+      category: postCategory,
       data: postData(),
       likes: [],
       comments: [],
@@ -184,6 +202,7 @@ export const Feed = () => {
   });
 
   // Comment creation section:
+  // Comment template:
   const printComments = (commentsToPrint, postID) => {
     const commentArea = rootElement.querySelector(`[data-ulCommentArea="${postID}"]`);
     commentArea.innerHTML = '';
@@ -313,6 +332,14 @@ export const Feed = () => {
       getCurrentCommentLikes(postIDForComments, currentUserEmail, commentID, valueToBeChanged,
         amountOfLikes, likeStatus);
     }
+  });
+
+  // Filter Post Category:
+  const postCategorySelector = rootElement.querySelector('#filter-post-category');
+  postCategorySelector.addEventListener('change', () => {
+    const postCategoryValue = postCategorySelector.value;
+    rootElement.querySelector('#posts-section').innerHTML = '';
+    filterPosts(postCategoryValue, createAndPrintAllPosts);
   });
 
   // Post Search:
