@@ -105,3 +105,11 @@
 .msg-deletar {
   color: var(--verde-escuro);
 }
+
+.feed-user-photo{
+width: 80px;
+height: 80px;
+border-radius: 50%;
+background-image: center;
+          
+}
