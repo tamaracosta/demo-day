@@ -1,6 +1,10 @@
-import {deletePost, getMyPosts} from "../../lib/firebase-services.js";
-import { updateLikes, getComments, getCurrentCommentsToPrint,
-  } from '../feed/index.js';
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
+import { deletePost, getMyPosts } from '../../lib/firebase-services.js';
+import {
+  updateLikes, getComments, getCurrentCommentsToPrint,
+} from '../feed/index.js';
 
 export const PersonalFeed = () => {
   const rootElement = document.createElement('div');
@@ -22,9 +26,7 @@ export const PersonalFeed = () => {
     
       <section class='feed-posts-section' id='posts-section'></section>
       <a onclick="window.scroll(0, 0)"> Ir para o topo <i class="fas fa-arrow-circle-up"></i></a>
-
       
-
       <header>
       <nav>
         <ul class='feed-menu'>
@@ -36,7 +38,6 @@ export const PersonalFeed = () => {
         </ul>
       </nav>
     </header>
-
       
   </main>
 
@@ -53,11 +54,11 @@ export const PersonalFeed = () => {
       </div>
   </div>
       
-      `
-      const currentUserEmail = firebase.auth().currentUser.email;
+      `;
+  const currentUserEmail = firebase.auth().currentUser.email;
 
-      function createPostTemplate(post) {
-        const postTemplate = `
+  function createPostTemplate(post) {
+    const postTemplate = `
         <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
           <section class='feed-post-owner-data'>
             <img class='feed-post-owner-picture'>
@@ -101,62 +102,60 @@ export const PersonalFeed = () => {
           </section>
         </div>
         `;
-        return postTemplate;
-      }
+    return postTemplate;
+  }
 
-      function createAndPrintAllPosts(post) {
-         
-            const postElement = document.createElement('div');
-            postElement.id = post.id;
-            postElement.classList.add('feed-a-post');
-            
-            const postTemplate = createPostTemplate(post);
-            postElement.innerHTML = postTemplate;
-            rootElement.querySelector('#posts-section').appendChild(postElement);
-       
-      }
-            
-        // Action Buttons:
-        const postsSection = rootElement.querySelector('#posts-section');
-        postsSection.addEventListener('click', (e) => {
-            const { target } = e;
-            const postID = target.parentNode.parentNode.parentNode.parentNode.id;
+  function createAndPrintAllPosts(post) {
+    const postElement = document.createElement('div');
+    postElement.id = post.id;
+    postElement.classList.add('feed-a-post');
 
-            //Editar Post
-            const editPostBtn = target.dataset.editpostbutton;
-            if (editPostBtn) {
-                editPost(postID)
-                }
+    const postTemplate = createPostTemplate(post);
+    postElement.innerHTML = postTemplate;
+    rootElement.querySelector('#posts-section').appendChild(postElement);
+  }
 
-        // Delete Post:
-        const deletePostBtn = target.dataset.deletepostbutton;
-        if (deletePostBtn) {
-            showPopupToDelete(postID, loadPosts)
-        }
+  // Action Buttons:
+  const postsSection = rootElement.querySelector('#posts-section');
+  postsSection.addEventListener('click', (e) => {
+    const { target } = e;
+    const postID = target.parentNode.parentNode.parentNode.parentNode.id;
 
-        // Like Post:
-        const likePostBtn = target.dataset.likepostbutton;
-        if (likePostBtn) {
-        const valueToBeChanged = rootElement.querySelector(`[data-likeValueToChange="${postID}"]`);
-        const amountOfLikes = parseInt(valueToBeChanged.textContent, 10);
-        const likeStatus = rootElement.querySelector(`[data-likePostButton="${postID}"]`);
-        updateLikes(postID, currentUserEmail, valueToBeChanged, amountOfLikes, likeStatus);
-        }
+    // Editar Post
+    const editPostBtn = target.dataset.editpostbutton;
+    if (editPostBtn) {
+      editPost(postID);
+    }
 
-        // Show Comments Section:
-        const showCommentPostBtn = target.dataset.showcommentpostbutton;
-        if (showCommentPostBtn) {
-        const commentsSection = rootElement.querySelector(`[data-commentsSection="${postID}"]`);
-        commentsSection.style.display = 'flex';
-        }
+    // Delete Post:
+    const deletePostBtn = target.dataset.deletepostbutton;
+    if (deletePostBtn) {
+      showPopupToDelete(postID, loadPosts);
+    }
 
-        // Comment Post:
-        const commentPostBtn = target.dataset.commentpostbutton;
-        if (commentPostBtn) {
-        const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
-        getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, printComments);
-        }
-    });
+    // Like Post:
+    const likePostBtn = target.dataset.likepostbutton;
+    if (likePostBtn) {
+      const valueToBeChanged = rootElement.querySelector(`[data-likeValueToChange="${postID}"]`);
+      const amountOfLikes = parseInt(valueToBeChanged.textContent, 10);
+      const likeStatus = rootElement.querySelector(`[data-likePostButton="${postID}"]`);
+      updateLikes(postID, currentUserEmail, valueToBeChanged, amountOfLikes, likeStatus);
+    }
+
+    // Show Comments Section:
+    const showCommentPostBtn = target.dataset.showcommentpostbutton;
+    if (showCommentPostBtn) {
+      const commentsSection = rootElement.querySelector(`[data-commentsSection="${postID}"]`);
+      commentsSection.style.display = 'flex';
+    }
+
+    // Comment Post:
+    const commentPostBtn = target.dataset.commentpostbutton;
+    if (commentPostBtn) {
+      const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
+      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, printComments);
+    }
+  });
 
   const printComments = (commentsToPrint, postID) => {
     const commentArea = rootElement.querySelector(`[data-ulCommentArea="${postID}"]`);
@@ -168,15 +167,13 @@ export const PersonalFeed = () => {
       commentArea.innerHTML += newItem;
     });
   };
-  
 
   function loadPosts() {
     rootElement.querySelector('#posts-section').innerHTML = '';
-    getMyPosts(createAndPrintAllPosts)
-    
+    getMyPosts(createAndPrintAllPosts);
   }
 
-function showPopupToDelete(postID, loadPosts) {
+  function showPopupToDelete(postID, loadPosts) {
     const popup = rootElement.querySelector('.popup-wrapper');
     const fecharPopup = rootElement.querySelector('.fechar-popup');
     const conteudoPopup = rootElement.querySelector('.conteudo-popup');
@@ -184,51 +181,31 @@ function showPopupToDelete(postID, loadPosts) {
     conteudoPopup.innerHTML = ` <h2 class="msg-deletar">Tem certeza que deseja deletar sua postagem?</h2> 
  <p> <button type="button" class="btn-delete">Deletar</button> </p>`;
     fecharPopup.style.display = 'block';
-    fecharPopup.addEventListener("click", () => {
-        popup.style.display = 'none';
+    fecharPopup.addEventListener('click', () => {
+      popup.style.display = 'none';
     });
 
-    conteudoPopup.querySelector(".btn-delete").addEventListener("click", () => {
+    conteudoPopup.querySelector('.btn-delete').addEventListener('click', () => {
+      deletePost(postID, () => {
+        removePostPage(postID);
+      });
 
-        deletePost(postID, ()=>{ 
-            removePostPage(postID); 
-        });
-       
-        popup.style.display = 'none';
-
+      popup.style.display = 'none';
     });
+  }
 
-}
+  function removePostPage(postID) {
+    const target = document.getElementById(postID);
+    target.addEventListener('transitionend', () => target.remove());
+    target.style.opacity = '0';
+  }
 
-function removePostPage(postID) {
-    const target = document.getElementById(postID)
-    target.addEventListener("transitionend", () => target.remove())
-    target.style.opacity = "0"    
-}
+  function editPost(postID) {
+    const paragrafoEditar = document.getElementById(postID).querySelector('p');
+    paragrafoEditar.contentEditable = true;
+    paragrafoEditar.focus();
+  }
 
-function editPost(postID) {
-  const paragrafoEditar = document.getElementById(postID).querySelector('p');
-  paragrafoEditar.contentEditable = true;
-  paragrafoEditar.focus()
-       
-
-}
-
-// const photoPerfil = main.querySelector('.feed-user-photo');
-//   const nomeP = main.querySelector('.name-user');
-//   firebase.auth().onAuthStateChanged((user) => {
-//     if (user != null) {
-//       nomeP.innerHTML = user.displayName;
-//       photoPerfil.src = user.photoURL;
-//     } else {
-//       nomeP.innerHTML = user.email;
-//       photoPerfil.src = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png';
-//     }
-//   });
-
-      
   loadPosts();
   return rootElement;
-
 };
-

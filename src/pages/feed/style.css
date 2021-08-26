@@ -4,6 +4,8 @@
   --red: #e76f51;
   --yellow: #e9c46a;
   --blue: #264653;
+  --light-gray:#808080;
+  --dark-gray:#404040;
 }
 
 body{
@@ -28,8 +30,8 @@ nav ul{
   background:no-repeat;
   background-color: transparent;
   background-size: 100%;
-  height: 4vh;
-  width: 4vh;
+  height: 3vh;
+  width: 3vh;
   outline: none;
   border: solid 0pt;
   cursor: pointer;
@@ -60,6 +62,7 @@ nav ul{
 }
 
 .feed-main{
+  padding: 1.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,6 +81,7 @@ nav ul{
 }
 
 .feed-publication-text-area{
+  font-family: 'Roboto', sans-serif;
   width: 90%;
   height: 10vh;
   padding: 2%;
@@ -85,6 +89,9 @@ nav ul{
   border: solid 0pt;
   text-align: justify;
   text-justify: inter-word;
+  color: var(--blue);
+  font-size: 100%;
+  
 }
 
 .feed-hide-url-in-text-area{
@@ -93,10 +100,11 @@ nav ul{
 
 .feed-publication-buttons-area{
   margin-bottom: 3%;
+  align-items: center;
 }
 
 .feed-publication-image-btn{
-  margin-left: -2%;
+  margin-left: 0%;
   height: 5vh !important;
   width: 5vh !important;
   background-image: url('../../images/publication-upload-image.png');
@@ -108,7 +116,7 @@ nav ul{
 }
 
 .feed-publication-publish-btn{
-  margin-left: -16%;
+  margin-left: -18%;
   background-color: var(--green);
   border: solid 0pt;
   border-radius: 10px;
@@ -116,8 +124,68 @@ nav ul{
   padding: 2% 4%;
 }
 
-.feed-all-the-post{
+.feed-search-section{
+  width: 100%;
+}
+
+.feed-search-input{
+  margin-top: 3%;
+  width: 80%;
+  font-size: 100%;
+  padding:2%;
+  outline: none;
+  border: 0pt;
+  color: var(--blue);
+  border-bottom:var(--yellow) solid 1pt !important;
+}
+
+.feed-search-input:focus{
+  box-shadow: 0 4px 2px -2px rgba(219, 172, 61, 0.3);
+}
+
+.filter-btn{
+  background-image: url('../../images/feed-filter-icon.png');
+  width: 4vh !important;
+  height: 4vh !important;
   margin-top: 4%;
+}
+
+.feed-posts-section{
+  width: 100%;
+}
+
+.feed-all-the-post{
+  padding: 0 4%;
+  margin-top: 4%;
+}
+
+.feed-post-owner-data {
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+
+.feed-post-owner-picture,
+.feed-comment-owner-picture{
+  width: 5vh;
+  height: 5vh;
+  margin-right: 3%;
+  border: var(--light-gray) solid 1pt;
+  border-radius: 50%;
+  padding: 1%;
+}
+
+.feed-post-owner-name,
+.feed-comment-owner-name{
+  margin-right: 2%;
+  font-size: 80%;
+  font-weight: 600;
+}
+
+.feed-post-data,
+.feed-comment-data{
+  color:var(--light-gray);
+  font-size: 80%;
 }
 
 .feed-post-content{
@@ -125,8 +193,16 @@ nav ul{
   text-align: justify;
   text-justify: inter-word;
   line-height: 1.5;
+  word-break: break-all; 
+  color: var(--blue);
 }
 
+.feed-posted-image{
+  max-width: 300px;
+  max-height: 300px;
+  margin-bottom: 3%;
+  margin-left: -2%;
+}
 .feed-post-actions-section{
   display: flex;
 }
@@ -134,6 +210,7 @@ nav ul{
 .feed-post-actions-left-section,
 .feed-post-actions-right-section{
   width: 30%;
+  align-items: center;
 }
 
 .feed-post-actions-left-section{
@@ -148,12 +225,44 @@ nav ul{
   background-image: url('../../images/feed-full-like-icon.png');
 }
 
+.feed-post-amount-of-likes{
+  margin-right: 3%;
+  color: var(--blue);
+  
+}
+
 .comment-btn{
   background-image: url('../../images/feed-comment-icon.png');
+  margin-top: 3%;
+  height: 2.7vh !important;
+  width: 2.7vh !important;
 }
 
 .edit-btn{
   background-image: url('../../images/feed-edit-icon.png');
+}
+
+.feed-edit-text-area{
+  font-family: 'Roboto', sans-serif;
+  width: 80%;
+  display: none;
+  padding: 2%;
+  outline: none;
+  border: --blue solid 1pt;
+  text-align: justify;
+  text-justify: inter-word;
+  border-radius: 10px;
+  color: var(--blue);
+}
+
+.save-edit-btn{
+  background-image: url('../../images/feed-check-edit-icon.png');
+  display: none;
+}
+
+.cancel-edit-btn{
+  background-image: url('../../images/feed-cancel-edit-icon.png');
+  display: none;
 }
 
 .delete-btn{
@@ -161,29 +270,32 @@ nav ul{
 }
 
 .feed-comments-section{
+  width: 100%;
   display: none;
   flex-direction: column;
-  margin: 2% 4%;
+  justify-content: center;
   align-items: center;
 }
 
 .feed-comment-input{
+  margin: 6% 0% 4% 0%;
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 90%;
+  outline: none;
 }
 
 .feed-comment-text-area{
+  font-family: 'Roboto', sans-serif;
   margin: 1% 3% 2% 3%;
   width: 80%;
-  height: 2.5vh;
+  height: 4vh;
   padding: 2% 3%;
   border-radius: 10px;
   border: var(--red) solid 1pt;
   outline: none;
-  text-align: justify;
-  text-justify: inter-word;
+  color: var(--blue);
 }
 
 .feed-comment-btn{
@@ -191,7 +303,93 @@ nav ul{
   background-image: url('../../images/feed-send-comment-icon.png');
 }
 
-
 .feed-printed-comments{
-  background-color: #f4a261;
+  color: --blue;
+  width: 100%;
+}
+
+.feed-printed-comments ul {
+  list-style-type: none;
+}
+
+.feed-comment-start-line{
+  opacity: 15%;
+  width: 80%;
+  margin: 5% auto;
+}
+
+.feed-comment-owner-data{
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+}
+
+.feed-comment-owner-picture{
+  height: 4vh !important;
+  width: 4vh !important;
+}
+
+.feed-comment-content{
+  padding: 3% 4% 2% 4%;
+  text-align: justify;
+  text-justify: inter-word;
+  margin: 0% 0% 4% 0%;
+  color: var(--blue);
+  font-size: 95%;
+}
+
+.feed-comments-actions-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-from-comment{
+  height: 2.5vh;
+  width: 2.5vh;
+  margin-right: 1%;
+}
+
+.full-like-comment-btn{
+  background-image: url('../../images/feed-comment-full-like-icon.png');
+}
+
+.empty-like-comment-btn{
+  background-image: url('../../images/feed-comment-empty-like-icon.png');
+}
+
+.feed-comment-amount-of-likes{
+  margin-right: 70%;
+  margin-top: 2%;
+  color: var(--dark-gray);
+}
+
+.delete-comment-btn{
+  background-image: url('../../images/feed-comment-delete-icon.png');
+}
+
+.feed-post-end-line{
+  opacity: 25%;
+  width: 80%;
+  margin: 5% auto;
+  border-color: var(--yellow);
+}
+.publish-img-btn{
+  border: none;
+  background-color: transparent;
+  margin-left: -2%;
+  background-size: 45px;
+  height: 5vh !important;
+  width: 5vh !important;
+  background-image: url('../../images/publication-upload-image.png');
+}
+
+.feed-hide-url {
+  opacity:0;
+}
+
+.share-area-img-btn{
+  opacity: 0;
+  font-size: 8pt;
 }
