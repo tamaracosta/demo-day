@@ -59,23 +59,23 @@ export const getCurrentCommentLikes = async (postIDForComments, currentUserEmail
 export const publicationAge = (timeInSeconds) => {
   if (timeInSeconds < 60) {
     return 'agora há pouco';
-  } if (timeInSeconds > 60) {
+  } if (timeInSeconds < 3600) {
     const timeInMinutes = Math.round(timeInSeconds / 60);
     return `há  ${timeInMinutes} min.:`;
-  } if (timeInSeconds > 3600) {
-    const timeInMinutes = Math.round(timeInSeconds / 60);
-    return `há  ${timeInMinutes} h.:`;
-  } if (timeInSeconds > 86400) {
-    const timeInMinutes = Math.round(timeInSeconds / 60);
-    return `há  ${timeInMinutes} dias.:`;
-  } if (timeInSeconds > 604800) {
-    const timeInMinutes = Math.round(timeInSeconds / 60);
-    return `há  ${timeInMinutes} sem.:`;
-  } if (timeInSeconds > 2628288) {
-    const timeInMinutes = Math.round(timeInSeconds / 60);
-    return `há  ${timeInMinutes} m.:`;
-  } if (timeInSeconds > 31536000) {
-    const timeInMinutes = Math.round(timeInSeconds / 60);
-    return `há  ${timeInMinutes} a.:`;
+  } if (timeInSeconds < 86400) {
+    const timeInHours = Math.round(timeInSeconds / 3600);
+    return `há  ${timeInHours} h.:`;
+  } if (timeInSeconds < 604800) {
+    const timeInDays = Math.round(timeInSeconds / 86400);
+    return `há  ${timeInDays} dias.:`;
+  } if (timeInSeconds < 2628288) {
+    const timeInWeeks = Math.round(timeInSeconds / 604800);
+    return `há  ${timeInWeeks} sem.:`;
+  } if (timeInSeconds < 31536000) {
+    const timeInMonths = Math.round(timeInSeconds / 2628288);
+    return `há  ${timeInMonths} m.:`;
+  } if (timeInSeconds === 31536000) {
+    const timeInYears = Math.round(timeInSeconds / 31536000);
+    return `há  ${timeInYears} a.:`;
   }
 };

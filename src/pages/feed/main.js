@@ -26,7 +26,7 @@ export const Feed = () => {
   </header>
   <main class='feed-main'>
     <form class='feed-publication-form'>
-      <select name='category' id='post-category'>
+      <select name='category' id='post-category' required>
         <option selected disable>Categoria</option>
         <option value="recipes">Receitas</option>
         <option value="kitchenTips">Dicas de Cozinha</option> 
@@ -72,6 +72,7 @@ export const Feed = () => {
     const currentDate = Date.now();
     const timeInSeconds = ((currentDate - post.data().creationDate) / 1000);
     const postAge = publicationAge(timeInSeconds);
+    console.log(postAge)
     const postTemplate = `
     <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
       <section class='feed-post-owner-data'>
