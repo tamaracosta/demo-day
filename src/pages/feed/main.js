@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import {
-  getPosts, editPost, deletePost,
+  getPosts, editPost, deletePost, sendImageToDatabase,
 } from '../../lib/firebase-services.js';
 
 import {
@@ -28,11 +28,16 @@ export const Feed = () => {
     <form class='feed-publication-form'>
       <textarea class='feed-publication-text-area' id='publication-text-area' placeholder='O que você quer publicar hoje?'></textarea> 
       <section class='feed-publication-buttons-area'>
-        <button class='btn feed-publication-image-btn' id='publication-image-btn'></button>
-        <form method="post">
-          <input class='feed-choose-an-image-btn' id='choose-an-image-btn' type="file" accept=".jpg, .jpeg, .png">
-        </form>
-        <button class='feed-publication-publish-btn' id='publication-of-all-content-btn'> PUBLICAR </button>
+        <input class="feed-hide-url" id="hide-url"> </input>
+        <div class='share-area-buttons'>
+          <button id='publish-img-btn' class='publish-img-btn'></button>
+          <div class='publish-img-form-box'>
+            <form method="post">
+              <input type="file" id="image_uploads" class='share-area-img-btn' accept=".jpg, .jpeg, .png">
+            </form>
+          </div>
+          <button class='feed-publication-publish-btn' id='publication-of-all-content-btn'> PUBLICAR </button>
+        </div>
       </section>
     </form>  
     <section class='feed-search-section'> 
@@ -61,7 +66,12 @@ export const Feed = () => {
       <section class='feed-post-content-section'>
         <p class='feed-post-content'> ${post.data().text} </p>
         <textarea class='feed-edit-text-area' data-editTextArea='${post.id}'>${post.data().text}</textarea>
-        <img class='feed-post-image'>
+        <img class='feed-post-image'> </img>
+      ${((url) => {
+    if (url !== '') {
+      return `<img class="img-po" src="${post.data().url}"> </img>`;
+    } return `<img id="hide-img" src="${post.data().url}"> </img>`;
+  })(post.data().url)}
       </section>
       <section class='feed-post-actions-section'>
         <div class='feed-post-actions-left-section'>
@@ -102,12 +112,29 @@ export const Feed = () => {
     return postTemplate;
   }
 
-  // Show choose an image btn:
-  rootElement.querySelector('#publication-image-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    const chooseAnImageBtn = rootElement.querySelector('#choose-an-image-btn');
-    chooseAnImageBtn.style.visibility = 'visible';
-  });
+  const showUrlOfImagesToPublish = (urlFile) => {
+    rootElement.querySelector('#hide-url').value = `${urlFile}`;
+  };
+
+  const uploadImage = () => {
+    rootElement.querySelector('.publish-img-form-box').style.opacity = 1;
+    rootElement.querySelector('#image_uploads').onchange = (event) => {
+      sendImageToDatabase(event.target.files[0], showUrlOfImagesToPublish);
+      rootElement.querySelector('.publish-img-form-box').style.opacity = 0;
+      rootElement.querySelector('.feed-publication-text-area').placeholder = 'Imagem carregada';
+    };
+  };
+
+  const imageToUpload = rootElement.querySelector('#image_uploads');
+
+  const getUpLoadImgClick = () => {
+    rootElement.querySelector('#publish-img-btn').addEventListener('click', (event) => {
+      event.preventDefault();
+      uploadImage();
+      imageToUpload.style.opacity = 1;
+    });
+  };
+  getUpLoadImgClick();
 
   // Post creation section:
   function createAndPrintAllPosts(post) {
@@ -134,11 +161,11 @@ export const Feed = () => {
     event.preventDefault();
     const textArea = rootElement.querySelector('#publication-text-area');
     const postContent = rootElement.querySelector('#publication-text-area').value;
-    // const postImageUrl = rootElement.querySelector('#hide-url-in-text-area').value;
+    const postImageUrl = rootElement.querySelector('#hide-url').value;
 
     const post = {
       text: postContent,
-      // url: postImageUrl,
+      url: postImageUrl,
       user_id: currentUserEmail,
       data: postData(),
       likes: [],

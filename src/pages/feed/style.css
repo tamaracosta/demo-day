@@ -270,6 +270,7 @@ nav ul{
   flex-direction: row;
   align-items: center;
   width: 90%;
+  outline: none;
 }
 
 .feed-comment-text-area{
@@ -360,4 +361,22 @@ nav ul{
   width: 80%;
   margin: 5% auto;
   border-color: var(--yellow);
+}
+.publish-img-btn{
+  border: none;
+  background-color: transparent;
+  margin-left: -2%;
+  background-size: 45px;
+  height: 5vh !important;
+  width: 5vh !important;
+  background-image: url('../../images/publication-upload-image.png');
+}
+
+.feed-hide-url {
+  opacity:0;
+}
+
+.share-area-img-btn{
+  opacity: 0;
+  font-size: 8pt;
 }
