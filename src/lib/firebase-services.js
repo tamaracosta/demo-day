@@ -61,6 +61,15 @@ export const getMyPosts = (createAndPrintAllPosts) => {
     });
 };
 
+export const sendImageToDatabase = (file, showUrlOfImagesToPubish) => {
+  const ref = firebase.storage().ref('images/');
+  ref.child(file.name).put(file).then(() => {
+    ref.child(file.name).getDownloadURL().then((url) => {
+      showUrlOfImagesToPubish(url);
+    });
+  });
+};
+
 export const likePost = (postID, currentUserEmail) => {
   const likesPostId = firebase.firestore().collection('posts').doc(postID);
   const promiseResult = likesPostId.get().then(((post) => {
