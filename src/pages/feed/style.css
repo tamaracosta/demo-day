@@ -190,6 +190,12 @@ nav ul{
   color: var(--blue);
 }
 
+.feed-posted-image{
+  max-width: 300px;
+  max-height: 300px;
+  margin-bottom: 3%;
+  margin-left: -2%;
+}
 .feed-post-actions-section{
   display: flex;
 }

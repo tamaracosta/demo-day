@@ -15,21 +15,42 @@
   --preto: #000;
 } 
 
+html {
+  scroll-behavior: smooth;
+}
+
+.pagina-personal-feed {
+  height: auto;
+  padding-bottom: 8em;
+}
+
 .container-header {
-  display: flex;
+  
   align-items: center;
   margin: 2em;
+  background: #2a9d8f;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.25);
 }
 
 .foto-personal-feed {
-  width: 80px;
-  height: 70px;
-  background-color: var(--verde-claro);
+  display: flex;
+  align-items: center;
+}
+
+.foto-personal {
   border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin: 1em;
+  border: 5px solid var(--verde-escuro);
 }
 
 .titulo {
   margin-left: 0.5em;
+  color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 .minhas-publicacoes {
@@ -57,9 +78,6 @@
 
 
 /* --------------pop up */
-.popup-wrapper {
-  display: none;
-}
 
 .popup-wrapper {
   background: rgba(0,0,0, .5);
@@ -86,6 +104,7 @@
   top: 5px;
   right: 30px;
   cursor: pointer;
+  font-size: 1.5em;
 }
 
 .btn-delete {
@@ -102,6 +121,57 @@
   
 }
 
+.conteudo-popup {
+  margin-top: 1em;
+}
+
 .msg-deletar {
   color: var(--verde-escuro);
+}
+
+.pagina-personal-feed .feed-a-post {
+  transition: opacity 1s;
+}
+
+.pagina-personal-feed .empty-like-btn, .pagina-personal-feed .full-like-btn {
+  transition: all 2s linear;
+}
+
+.pagina-personal-feed .editar-perfil-btn {
+  background: var(--branco);
+  border-radius: 7px;
+  width: 30vw;
+  padding: 0.5em;
+  border: none;
+  margin-bottom: 1em;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+.pagina-personal-feed .editar-perfil-btn a {
+ color: var(--verde-escuro);
+ font-weight: bold;
+}
+
+.pagina-personal-feed .editar-perfil {
+text-align: center;
+}
+
+.pagina-personal-feed .feed-post-owner-name {
+  color: var(--verde-escuro);
+  font-weight: bold;
+}
+
+.pagina-personal-feed .feed-all-the-post {
+  margin-bottom: 10%;
+}
+
+.feed-post-content[contentEditable='true'] {
+  border: 1px solid gray;
+  background-color: #afe6df;
+  
+}
+
+.fas.fa-arrow-circle-up {
+  color: var(--verde-claro);
 }

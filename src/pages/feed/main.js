@@ -69,7 +69,7 @@ export const Feed = () => {
         <img class='feed-post-image'> </img>
       ${((url) => {
     if (url !== '') {
-      return `<img class="img-po" src="${post.data().url}"> </img>`;
+      return `<img class='feed-posted-image' src="${post.data().url}"> </img>`;
     } return `<img id="hide-img" src="${post.data().url}"> </img>`;
   })(post.data().url)}
       </section>
