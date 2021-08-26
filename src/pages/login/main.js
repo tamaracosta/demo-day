@@ -6,7 +6,7 @@ export const Login = () => {
   const rootElement = document.createElement('div');
   rootElement.className = 'login-container';
   rootElement.innerHTML = `
-  <section class='left-section'>
+  
   <main>
     <div class=img-login>
       <img src="../images/logo-login.png">
@@ -20,6 +20,7 @@ export const Login = () => {
         <input required type="password" class="input-password" id="input-password" placeholder=" " autocomplete="off">
           <img class="eye" id="eye" src="../images/eye-off.png">
           <label for="input-password" class="login-input-label">Senha</label> 
+        </div>
         <div class='checkbox-forgot-password'>
         <input type="checkbox" id="checkbox-keep-logged-in">
         <label for="checkbox-keep-logged-in" class="checkbox-keep-logged-in"> Mantenha-me logada</label>
@@ -45,9 +46,9 @@ export const Login = () => {
         <button id="btn-login-with-insta"> <img src="../images/insta-btn.jpeg"></button>
         <button id='btn-login-with-facebook'><img src="../images/face-btn.jpeg"></button>
     </div>
-    <footer> Not Alone &#169;</footer>
-  </main>
 
+  </main>
+  <footer> Not Alone &#169;</footer>
     `;
 
   const getUserEmail = rootElement.querySelector('#input-email');
@@ -100,9 +101,3 @@ export const Login = () => {
   });
   return rootElement;
 };
-
-/* <div class="login-additionals">
-      <button id="btn-login-with-google"> Ou conecte-se com o gmail</button>
-      <br>
-      <button id="btn-forgot-password"> Esqueceu a senha?</button>
-    </div> */

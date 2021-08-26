@@ -85,7 +85,7 @@ export const Register = () => {
   });
 
   const passwordConfirmContainer = rootElement.querySelector('.div-confirm-password');
-  const eyeIconConfirm = rootElement.querySelector('#icon-eye');
+  const eyeIconConfirm = rootElement.querySelector('#icon-eye-confirm');
   eyeIconConfirm.addEventListener('click', () => {
     passwordConfirmContainer.classList.toggle('visible');
     if (passwordConfirmContainer.classList.contains('visible')) {
@@ -96,5 +96,6 @@ export const Register = () => {
       getUserConfirmPassword.type = 'password';
     }
   });
+
   return rootElement;
 };

@@ -43,6 +43,24 @@ export const deletePost = (postID, loadPosts) => {
     });
 };
 
+export const editPost = (newText, postID) => {
+  firebase.firestore().collection('posts').doc(postID).update({
+    text: newText,
+  });
+};
+
+export const getMyPosts = (createAndPrintAllPosts) => {
+  firebase.firestore().collection('posts')
+    .orderBy('data', 'desc')
+    .where('user_id', "==", firebase.auth().currentUser.email)
+    .get()
+    .then((snap) => {
+      snap.forEach((post) => {
+        createAndPrintAllPosts(post);
+      });
+    });
+};
+
 export const likePost = (postID, currentUserEmail) => {
   const likesPostId = firebase.firestore().collection('posts').doc(postID);
   const promiseResult = likesPostId.get().then(((post) => {
@@ -93,6 +111,17 @@ export const commentPost = (postID, newCommentText, currentUserEmail) => {
   return promiseResult;
 };
 
+export const deletePostComment = (postID, commentID) => {
+  const commentPostId = firebase.firestore().collection('posts').doc(postID);
+  const promiseResult = commentPostId.get().then(((post) => {
+    const comments = (post.data().comments);
+    const commentsToKeep = comments.filter((comment) => comment.id !== commentID);
+    commentPostId.update({ comments: commentsToKeep });
+    return commentsToKeep;
+  }));
+  return promiseResult;
+};
+
 export const showComments = (postID) => {
   const commentPostId = firebase.firestore().collection('posts').doc(postID);
   const promiseResult = commentPostId.get().then(((post) => {
@@ -140,4 +169,34 @@ export const resetPassword = (email) => {
   }).catch((error) => {
     getError(error);
   });
+};
+
+export const likePostComment = (postID, commentID, currentUserEmail) => {
+  const commentPostId = firebase.firestore().collection('posts').doc(postID);
+  const promiseResult = commentPostId.get().then(((post) => {
+    const comments = (post.data().comments);
+    const commentToLikeOrDislike = comments.filter((comment) => comment.id === commentID);
+    const commentsNotChanged = comments.filter((comment) => comment.id !== commentID);
+    let action = '';
+
+    if (commentToLikeOrDislike[0].likes.length >= 1) {
+      if (commentToLikeOrDislike[0].likes.includes(currentUserEmail)) {
+        const index = commentToLikeOrDislike[0].likes.indexOf(currentUserEmail);
+        if (index > -1) {
+          commentToLikeOrDislike[0].likes.splice(index, 1);
+        }
+        action = 'deslike';
+      } else {
+        commentToLikeOrDislike[0].likes.push(currentUserEmail);
+        action = 'like';
+      }
+    } else {
+      commentToLikeOrDislike[0].likes.push(currentUserEmail);
+      action = 'like';
+    }
+    const newContent = commentToLikeOrDislike.concat(commentsNotChanged);
+    commentPostId.update({ comments: newContent });
+    return action;
+  }));
+  return promiseResult;
 };
