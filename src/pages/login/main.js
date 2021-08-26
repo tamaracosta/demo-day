@@ -44,6 +44,14 @@ export const Login = () => {
         <button id="btn-login-with-insta"> <img src="../images/insta-btn.jpeg"></button>
         <button id='btn-login-with-facebook'><img src="../images/face-btn.jpeg"></button>
     </div>
+
+    <div class='alert-reset' id='alert-reset'>
+    <div class='modal-reset' id='modal-reset'>
+    <p class='h1-modal' id='h1-modal'>Um link foi enviado para o seu email.</p>
+    <button class='button-modal' id='confirm-modal'>Entendi</button>
+    </div>
+
+</div>
   </main>
   <footer> Not Alone &#169;</footer>
     `;
@@ -80,10 +88,15 @@ export const Login = () => {
   const btnResetPassword = rootElement.querySelector('#btn-forgot-password');
   btnResetPassword.addEventListener('click', () => {
     const userEmail = getUserEmail.value;
-    resetPassword(userEmail);
-    alert('um email para confirmação foi enviado');
+    const alertReset = rootElement.querySelector('#alert-reset');
+    const btnModal = rootElement.querySelector('#confirm-modal');
+    resetPassword(userEmail)
+    alertReset.style.display = 'block';
+    btnModal.addEventListener('click', () => {
+      alertReset.style.display = 'none';
+    });
   });
-
+  
   const passwordContainer = rootElement.querySelector('#div-password');
   const eyeIcon = rootElement.querySelector('#eye');
   eyeIcon.addEventListener('click', () => {
