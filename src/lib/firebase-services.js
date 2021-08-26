@@ -36,6 +36,19 @@ export const getPosts = (createAndPrintAllPosts) => {
     });
 };
 
+export const getMyPosts = (createAndPrintAllPosts) => {
+  firebase.firestore().collection('posts')
+  .orderBy('data', 'desc')
+  .where("user_id", "==", firebase.auth().currentUser.email)
+  .get()
+    .then((snap) => {
+      snap.forEach((post) => {
+        createAndPrintAllPosts(post);
+      });
+    })
+};
+
+
 export const deletePost = (postID, loadPosts) => {
   firebase.firestore().collection('posts').doc(postID).delete()
     .then(() => {
@@ -101,3 +114,5 @@ export const showComments = (postID) => {
   }));
   return promiseResult;
 };
+
+
