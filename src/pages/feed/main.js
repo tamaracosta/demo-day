@@ -4,7 +4,7 @@ import {
 
 import {
   updateLikes, getComments, getCurrentCommentsToPrint, getCurrentCommentsToDelete,
-  getCurrentCommentLikes,
+  getCurrentCommentLikes, publicationAge,
 } from './index.js';
 
 // Template Feed:
@@ -44,17 +44,20 @@ export const Feed = () => {
 
   // Template Post:
   function createPostTemplate(post) {
+    const currentDate = Date.now();
+    const timeInSeconds = ((currentDate - post.data().creationDate) / 1000);
+    const postAge = publicationAge(timeInSeconds);
     const postTemplate = `
     <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
       <section class='feed-post-owner-data'>
-        <img class='feed-post-owner-picture'>
-        <span class='feed-post-owner-name'> ${post.data().user_id} em: </span>
-        <span class='feed-post-data'> ${post.data().data} </span>
+        <img class='feed-post-owner-picture' src='../images/bunny.jpg'>
+        <span class='feed-post-owner-name'> ${post.data().user_id}</span>
+        <span class='feed-post-data'> ${postAge} </span>
       </section>
       <section class='feed-post-content-section'>
         <p class='feed-post-content'> ${post.data().text} </p>
         <textarea class='feed-edit-text-area' data-editTextArea='${post.id}'>${post.data().text}</textarea>
-        <img class='feed-post-image'> </img>
+        <img class='feed-post-image'>
       </section>
       <section class='feed-post-actions-section'>
         <div class='feed-post-actions-left-section'>
@@ -65,7 +68,7 @@ export const Feed = () => {
       } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
     } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
   })(post.data().likes)}
-          <span data-likeValueToChange='${post.id}'> ${post.data().likes.length} </span>
+          <span class='feed-post-amount-of-likes' data-likeValueToChange='${post.id}'> ${post.data().likes.length} </span>
           <button class='btn comment-btn' data-showCommentPostButton='${post.id}'></button>
         </div>
         <div class='feed-post-actions-right-section'>
@@ -85,11 +88,12 @@ export const Feed = () => {
           <textarea class='feed-comment-text-area' data-commentContent='${post.id}' placeholder='Digite seu comentário aqui:'></textarea> 
           <button class='btn feed-comment-btn' data-commentPostButton='${post.id}'></button>
         </div>
-        <div class='feed-printed-comments'>
+        <div class='feed-printed-comments' data-printedComments='${post.id}'>
           <ul data-ulCommentArea='${post.id}'> </ul>
         </div>
       </section>
     </div>
+    <hr class='feed-post-end-line'>
     `;
     return postTemplate;
   }
@@ -135,6 +139,7 @@ export const Feed = () => {
       data: postData(),
       likes: [],
       comments: [],
+      creationDate: Date.now(),
     };
 
     if (textArea.value === '') {
@@ -152,20 +157,16 @@ export const Feed = () => {
     const commentArea = rootElement.querySelector(`[data-ulCommentArea="${postID}"]`);
     commentArea.innerHTML = '';
     commentsToPrint.forEach((comment) => {
+      const currentDate = Math.round(Date.now() / 1000);
+      const timeInSeconds = (currentDate - comment.creationDate);
+      const commentAge = publicationAge(timeInSeconds);
       const newItem = `
-      <li class="comment-f-20" id="${comment.id}">
+      <li class='feed-comment-all-content' id="${comment.id}">
+      <hr class='feed-comment-start-line'>
         <section class='feed-comment-owner-data'>
-          <img class='feed-post-owner-picture'>
-          <span class='feed-post-owner-name'> ${comment.owner} em: </span>
-          <span class='feed-post-data'> ${comment.date} </span>
-        </section>
-        <section class='feed-comment-delete-section'>
-      ${((user) => {
-    if (user === currentUserEmail) {
-      return `<button class='btn btn-from-comment delete-btn' data-deleteCommentButton='${comment.id}'></button>`;
-    } return `<button class='not-allowed-to-see'></button>
-      `;
-  })(comment.owner)}
+          <img class='feed-comment-owner-picture' src='../images/bunny.jpg'>
+          <span class='feed-comment-owner-name'> ${comment.owner}</span>
+          <span class='feed-comment-data'> ${commentAge} </span>
         </section>
         <section class='feed-comment-content-section'>
           <p class='feed-comment-content'> ${comment.content} </p>
@@ -174,11 +175,19 @@ export const Feed = () => {
       ${((likes) => {
     if (likes.length > 0) {
       if (likes.includes(currentUserEmail)) {
-        return `<button class='btn btn-from-comment full-like-btn' data-likeCommentButton='${comment.id}'></button> `;
-      } return `<button class='btn btn-from-comment empty-like-btn' data-likeCommentButton='${comment.id}'></button> `;
-    } return `<button class='btn btn-from-comment empty-like-btn' data-likeCommentButton='${comment.id}'></button> `;
-  })(comment.likes.length)}
-        <span data-likeValueToChange='${comment.id}'> ${comment.likes.length} </span>
+        return `<button class='btn btn-from-comment full-like-comment-btn' data-likeCommentButton='${comment.id}'></button> `;
+      } return `<button class='btn btn-from-comment empty-like-comment-btn' data-likeCommentButton='${comment.id}'></button> `;
+    } return `<button class='btn btn-from-comment empty-like-comment-btn' data-likeCommentButton='${comment.id}'></button> `;
+  })(comment.likes)}
+        <span class='feed-comment-amount-of-likes' data-likeValueToChange='${comment.id}'> ${comment.likes.length} </span>
+      ${((user) => {
+    if (user === currentUserEmail) {
+      return `<button class='btn btn-from-comment delete-comment-btn' data-deleteCommentButton='${comment.id}'></button>`;
+    } return `<button class='not-allowed-to-see'></button>
+            `;
+  })(comment.owner)}
+      </section>
+       
       </li>
       `;
       commentArea.innerHTML += newItem;
@@ -240,8 +249,12 @@ export const Feed = () => {
     const showCommentPostBtn = target.dataset.showcommentpostbutton;
     if (showCommentPostBtn) {
       const commentsSection = rootElement.querySelector(`[data-commentsSection="${postID}"]`);
-      getComments(postID, printComments);
-      commentsSection.style.display = 'flex';
+      if (commentsSection.style.display !== 'flex') {
+        commentsSection.style.display = 'flex';
+        getComments(postID, printComments);
+      } else {
+        commentsSection.style.display = 'none';
+      }
     }
 
     // Comment Post:
@@ -249,6 +262,7 @@ export const Feed = () => {
     if (commentPostBtn) {
       const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
       getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, printComments);
+      rootElement.querySelector(`[data-commentContent="${postID}"]`).value = '';
     }
 
     // Delete Comment:

@@ -88,7 +88,7 @@ export const commentPost = (postID, newCommentText, currentUserEmail) => {
         postOfOrigin: postID,
         likes: [],
         id: postID + new Date().toLocaleString('pt-BR'),
-        date: new Date().toLocaleString('pt-BR'),
+        creationDate: Math.round(Date.now() / 1000),
       };
       commentPostId.update({ comments: firebase.firestore.FieldValue.arrayUnion(newComment) });
       const currentComments = comments.concat(newComment);
