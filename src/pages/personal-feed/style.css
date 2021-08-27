@@ -175,3 +175,9 @@ text-align: center;
 .fas.fa-arrow-circle-up {
   color: var(--verde-claro);
 }
+
+.foto-post-owner{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

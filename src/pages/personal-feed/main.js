@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
-import { deletePost, getMyPosts } from '../../lib/firebase-services.js';
+import { deletePost, getMyPosts, getTheRoad } from '../../lib/firebase-services.js';
 import {
   updateLikes, getComments, getCurrentCommentsToPrint,
 } from '../feed/index.js';
@@ -30,11 +30,11 @@ export const PersonalFeed = () => {
       <header>
       <nav>
         <ul class='feed-menu'>
-            <li><button class='btn home-btn'></button></li>
-            <li><button class='btn night-btn'></button></li>
-            <li><button class='btn search-btn'></button></li>
-            <li><button class='btn settings-btn'></button></li>
-            <li><button class='btn signout-btn'></button></li>
+        <li><img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null"/></li>
+        <li><button class='btn home-btn' id='home-btn'></button></li>
+        <li><button class='btn search-btn' id='person-btn'></button></li>
+        <li><button class='btn settings-btn' id='settings-btn'></button></li>
+        <li><button class='btn signout-btn' id='signout-btn'></button></li>
         </ul>
       </nav>
     </header>
@@ -58,13 +58,12 @@ export const PersonalFeed = () => {
     const postTemplate = `
         <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
           <section class='feed-post-owner-data'>
-            <img class='feed-post-owner-picture'>
+            <img class='foto-post-owner' src="${firebase.auth().currentUser.photoURL}"/>    
             <span class='feed-post-owner-name'> ${post.data().user_id} em: </span>
             <span class='feed-post-data'> ${post.data().data} </span>
           </section>
           <section class='feed-post-content-section'>
             <p class='feed-post-content' contenteditable="false"> ${post.data().text} </p>
-            <img src="../images/prato.png" class='feed-post-image'/>
           </section>
           <section class='feed-post-actions-section'>
             <div class='feed-post-actions-left-section'>
@@ -202,6 +201,45 @@ export const PersonalFeed = () => {
     paragrafoEditar.contentEditable = true;
     paragrafoEditar.focus();
   }
+
+  const goBackToFeed = () => {
+    getTheRoad('/feed');
+  };
+
+  const goBackToProfileFeed = () => {
+    getTheRoad('/profile');
+  };
+  const goBackToSettings = () => {
+    getTheRoad('/settings');
+  };
+
+  const goBacklogin = () => {
+    getTheRoad('/');
+  };
+
+  const iconHome = rootElement.querySelector('#home-btn');
+  iconHome.addEventListener('click', (event) => {
+    event.preventDefault();
+    goBackToFeed();
+  });
+
+  const iconPerson = rootElement.querySelector('#person-btn');
+  iconPerson.addEventListener('click', (event) => {
+    event.preventDefault();
+    goBackToProfileFeed();
+  });
+
+  const iconSettings = rootElement.querySelector('#settings-btn');
+  iconSettings.addEventListener('click', (event) => {
+    event.preventDefault();
+    goBackToSettings();
+  });
+
+  const iconsignout = rootElement.querySelector('#signout-btn');
+  iconsignout.addEventListener('click', (event) => {
+    event.preventDefault();
+    goBacklogin();
+  });
 
   loadPosts();
   return rootElement;

@@ -1,28 +1,27 @@
 body {
-  margin: 0%;
-  text-align: center;
-  font-family: 'Roboto', sans-serif;
-  background-color: rgb(255, 255, 255);
-position: fixed;
+ margin: 0%;
+ text-align: center;
+ font-family: 'Roboto', sans-serif;
+ background-color: rgb(255, 255, 255);
 }
-
+ 
 :root {
-  --verde-claro: #2A9D8F;
-  --verde-escuro: #264653;
-  --laranja-claro: #F4A261;
-  --laranja-escuro: #E76F51;
-  --amarelo: #E9C46A;
-  --branco: #fff;
-  --preto: #000;
-} 
-
-.img-login{
-  height: 25vh;
+ --verde-claro: #2A9D8F;
+ --verde-escuro: #264653;
+ --laranja-claro: #F4A261;
+ --laranja-escuro: #E76F51;
+ --amarelo: #E9C46A;
+ --branco: #fff;
+ --preto: #000;
 }
-
+ 
+.img-login{
+ height: 25vh;
+}
+ 
 .img-login img{
-  height: 80%;
-  margin:5%;
+ height: 80%;
+ margin:5%;
 }
 .input-email, .input-password {
 font-family: 'Roboto', sans-serif;
@@ -37,7 +36,7 @@ border: solid 1pt #2A9D8F;
 font-size: 110%;
 font-weight: 600;
 }
-
+ 
 .login-input-label{
 position: absolute;
 left: 10%;
@@ -50,41 +49,41 @@ letter-spacing: 2px;
 width: 100%;
 justify-content: center;
 }
-
+ 
 .div-password img {
 width: 18px;
 position: absolute;
 margin-left: -40px;
 margin-top: 25px;
 }
-
+ 
 .input-email:focus ~ .login-input-label,
 .input-email:not(:placeholder-shown).input-email:not(:focus) ~ .login-input-label{
 margin-top: 1.8%;
 font-size: 13px;
 color: grey;
 }
-
+ 
 .input-password:focus ~ .login-input-label,
 .input-password:not(:placeholder-shown).input-password:not(:focus) ~ .login-input-label{
 margin-top: 1.8%;
 font-size: 13px;
 color: grey;
 }
-
+ 
 .checkbox-forgot-password{
 width: 100%;
 margin-top: 4%;
 color:#444B59;
 font-weight: 500;
 }
-
+ 
 .checkbox-forgot-password button {
 background-color: transparent;
 border: none;
 color:#8699DA;
 }
-
+ 
 .btn-login{
 font-family: 'Roboto', sans-serif;
 background-color: #2A9D8F;
@@ -102,24 +101,24 @@ font-size: 110%;
 font-weight: 600;
 letter-spacing: 2px;
 }
-
+ 
 .transparent {
-  color: transparent;
+ color: transparent;
 }
-
+ 
 .login-input-has-an-error {
-  border: #ff6666 solid 1.5pt !important;
-  background-color: #ffe6e6;
+ border: #ff6666 solid 1.5pt !important;
+ background-color: #ffe6e6;
 }
-
+ 
 .login-error-div {
-  margin-top: 1%;
-  margin-bottom: 1.5%;
+ margin-top: 1%;
+ margin-bottom: 1.5%;
 }
-
+ 
 .login-error {
-  color: #ff3333;
-  font-weight: 500;
+ color: #ff3333;
+ font-weight: 500;
 }
 .register-new-user {
 letter-spacing: 2px;
@@ -134,81 +133,85 @@ letter-spacing: 2px;
 font-size: 100%;
 cursor: pointer;
 }
-
+ 
 .connect{
-  margin-bottom:4%;
+ margin-bottom:4%;
+ list-style: none;
 }
-
+ 
 .enter-icons{
 display: flex;
-justify-content: space-between;
+/justify-content: space-between;/
 width: 80%;
 margin-left: 10%;
 margin-right: 10%;
 margin-bottom: 12%;
+ 
 }
+ 
 .enter-icons img{
-  width: 40px;
-  height: 40px;
-  border-radius: 15px;
-  }
-
+ width: 40px;
+ height: 40px;
+ border-radius: 15px;
+ }
+ 
 .enter-icons button{
 border-radius: 10px;
 width: 73px;
 height: 49px;
 border: 1px solid #2A9D8F;
 background-color: transparent;
-justify-content: space-between;
+/justify-content: space-between;/
+margin: auto;
 margin-bottom: 10vh;
-
+ 
 }
 .footer {
 position:absolute;
 bottom:0;
 width:100%;
 }
-
+ 
 .alert-reset {
-  background: rgba(0,0,0, .5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
+ background: rgba(0,0,0, .5);
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ display: none;
 }
 .modal-reset{
-  text-align: center;
-  width: 100%;
-  margin: 10% auto;
-  padding: 20px;
-  background: white;
-  position: relative;
+ text-align: center;
+ width: 100%;
+ margin: 10% auto;
+ padding: 20px;
+ background: white;
+ position: relative;
 }
 .h1-modal{
-  color: var(--verde-escuro);
-  position: absolute;
-  display: block;
-  font-size: 1.5em;
-  margin-block-start: 0.83em;
-  margin-block-end: 0.83em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
+ color: var(--verde-escuro);
+ position: absolute;
+ display: block;
+ font-size: 1.5em;
+ margin-block-start: 0.83em;
+ margin-block-end: 0.83em;
+ margin-inline-start: 0px;
+ margin-inline-end: 0px;
+ font-weight: bold;
 }
-
+ 
 .alert-reset button{
-  width: 200px;
-  height: 40px;
-  margin-top: 25%;
-  border-radius: 20px;
-  background-color: var(--verde-claro);
-  color: var(--branco);
-  font-weight: bold;
-  font-size: 1em;
-  border: none;
+ width: 200px;
+ height: 40px;
+ margin-top: 25%;
+ border-radius: 20px;
+ background-color: var(--verde-claro);
+ color: var(--branco);
+ font-weight: bold;
+ font-size: 1em;
+ border: none;
 }
 .modal-reset{
-  text-align: center;
+ text-align: center;
 }
