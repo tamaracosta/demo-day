@@ -176,7 +176,14 @@ text-align: center;
   color: var(--verde-claro);
 }
 
+
 .updatePost-btn {
   margin-right: 0.3em;
   display: none;
+}
+
+.foto-post-owner{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }

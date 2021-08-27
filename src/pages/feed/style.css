@@ -80,8 +80,23 @@ nav ul{
   border-radius: 20px;
 }
 
+.post-category{
+  margin-top: 5%;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 5%;
+  width: 70%;
+  padding:0.5%;
+  font-size: 95%;
+  border-radius: 4px;
+  background-color: transparent;
+  border: #d0e1e1 dotted 1pt;
+  outline: none;
+  color: var(--blue);
+}
+
 .feed-publication-text-area{
   font-family: 'Roboto', sans-serif;
+  margin-top:4%;
   width: 90%;
   height: 10vh;
   padding: 2%;
@@ -90,7 +105,7 @@ nav ul{
   text-align: justify;
   text-justify: inter-word;
   color: var(--blue);
-  font-size: 100%;
+  font-size: 90%;
   
 }
 
@@ -100,11 +115,12 @@ nav ul{
 
 .feed-publication-buttons-area{
   margin-bottom: 3%;
+  width: 95%;
   align-items: center;
 }
 
 .feed-publication-image-btn{
-  margin-left: 0%;
+  margin-left: 10%;
   height: 5vh !important;
   width: 5vh !important;
   background-image: url('../../images/publication-upload-image.png');
@@ -112,11 +128,11 @@ nav ul{
 
 .feed-choose-an-image-btn{
   visibility: hidden;
-  font-size: 8pt;
+  font-size: 6pt;
 }
 
 .feed-publication-publish-btn{
-  margin-left: -18%;
+  margin-left: -10%;
   background-color: var(--green);
   border: solid 0pt;
   border-radius: 10px;
@@ -148,6 +164,26 @@ nav ul{
   width: 4vh !important;
   height: 4vh !important;
   margin-top: 4%;
+}
+
+.filter-post-category{
+  display: none;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 5%;
+  width: 70%;
+  padding:2%;
+  font-size: 90%;
+  border-radius: 4px;
+  background-color: transparent;
+  border: 0pt;
+  color: var(--blue);
+  border-bottom:var(--yellow) solid 1pt !important;
+  outline: none;
+  color: var(--blue);
+}
+
+.filter-post-category:focus{
+  box-shadow: 2px 1px 1px 1px rgba(219, 172, 61, 0.3);
 }
 
 .feed-posts-section{
@@ -193,7 +229,7 @@ nav ul{
   text-align: justify;
   text-justify: inter-word;
   line-height: 1.5;
-  word-break: break-all; 
+  word-break: break-word; 
   color: var(--blue);
 }
 
@@ -205,16 +241,19 @@ nav ul{
 }
 .feed-post-actions-section{
   display: flex;
+  margin-top: -5%;
+  margin-bottom: -4%;
 }
 
 .feed-post-actions-left-section,
 .feed-post-actions-right-section{
   width: 30%;
   align-items: center;
+  margin-top: 5%;
 }
 
 .feed-post-actions-left-section{
-  margin-right: 40%;
+  margin-right: 14%;
 }
 
 .empty-like-btn{
@@ -378,18 +417,90 @@ nav ul{
 .publish-img-btn{
   border: none;
   background-color: transparent;
-  margin-left: -2%;
-  background-size: 45px;
-  height: 5vh !important;
-  width: 5vh !important;
+  margin-left: 6%;
+  background-size: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 4vh !important;
+  width: 5.5vh !important;
   background-image: url('../../images/publication-upload-image.png');
 }
 
 .feed-hide-url {
   opacity:0;
+  z-index: -1;
+  display: none;
 }
 
 .share-area-img-btn{
   opacity: 0;
-  font-size: 8pt;
+  font-size: 6pt;
+}
+
+.share-area-buttons{
+  display: flex;
+  margin-top: 2%;
+}
+
+.feed-post-actions-middle-section{
+  margin-top: 4%;
+  margin-right: 10%;
+  border:#264653 solid 0pt;
+  outline:none;
+
+}
+
+.category-icon{
+  height: 6vh;
+  width: 6vh;
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  outline:none;
+  border:0;
+  background-color: transparent;
+  border: none;
+  
+}
+
+.category-decoration-icon{
+  background-image: url('../../images/category-decoration-icon.png');
+}
+.category-economics-icon{
+  background-image: url('../../images/category-economics-icon.png');
+}
+.category-kitchenTips-icon{
+  background-image: url('../../images/category-kitchentips-icon.png');
+}
+.category-exercises-icon{
+  background-image: url('../../images/category-exercise-icon.png');
+}
+.category-leisure-icon{
+  background-image: url('../../images/category-leisure-icon.png');
+}
+.category-fixing-icon{
+  background-image: url('../../images/category-fixing-icon.png');
+}
+.category-recipes-icon{
+  background-image: url('../../images/category-cooking-icon.png');
+}
+.category-security-icon{
+  background-image: url('../../images/category-security-icon.png');
+}
+.category-sellings-icon{
+  background-image: url('../../images/category-selling-icon.png');
+}
+.category-others-icon{
+  background-image: url('../../images/category-others-icon.png');
+}
+
+.search-btn{
+  background-image: url('../../images/menu-person-icon.png');
+}
+
+.foto-personal-feed-feed {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
