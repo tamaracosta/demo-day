@@ -41,14 +41,18 @@ import {
     <div class="enter-icons">
         <button id="btn-login-with-google"><img src="../images/google-btn.png"></button>
     </div>
-  
     <div class='alert-reset' id='alert-reset'>
     <div class='modal-reset' id='modal-reset'>
     <p class='h1-modal' id='h1-modal'>Um link foi enviado para o seu email.</p>
     <button class='button-modal' id='confirm-modal'>Entendi</button>
     </div>
+
   
  </div>
+
+
+</div>
+
   </main>
   <footer> Not Alone &#169;</footer>
     `;
