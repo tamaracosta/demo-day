@@ -86,7 +86,7 @@ import {
     })
     .catch(error => {
 console.log(error)
-    })
+    });
   }
   const btnLoginTwitter = rootElement.querySelector('#btn-login-with-insta')
   btnLoginTwitter.addEventListener('click', loginWithTwitter)
