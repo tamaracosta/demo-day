@@ -393,3 +393,36 @@ nav ul{
   opacity: 0;
   font-size: 8pt;
 }
+
+.confirm-delete {
+  background: rgba(0,0,0, .5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+ }
+
+ .modal-delete{
+  text-align: center;
+  width: 100%;
+  margin: 10% auto;
+  padding: 20px;
+  background: white;
+  position: relative;
+  
+ }
+
+ .modal-delete button{
+  width: 100px;
+  height: 40px;
+  margin-top: 28%;
+  border-radius: 20px;
+  background-color: var(--verde-claro);
+  color: var(--branco);
+  font-weight: bold;
+  font-size: 1em;
+  border: none;
+  margin-left: 10px;
+ }

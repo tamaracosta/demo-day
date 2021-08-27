@@ -72,7 +72,6 @@ export const Feed = () => {
     const currentDate = Date.now();
     const timeInSeconds = ((currentDate - post.data().creationDate) / 1000);
     const postAge = publicationAge(timeInSeconds);
-    console.log(postAge)
     const postTemplate = `
     <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
       <section class='feed-post-owner-data'>
@@ -108,7 +107,7 @@ export const Feed = () => {
       return `<button class='btn edit-btn' data-editPostButton='${post.id}'></button>
               <button class='btn save-edit-btn' data-saveEohditPostButton='${post.id}'></button>
               <button class='btn cancel-edit-btn' data-cancelEditPostButton='${post.id}'></button>
-              <button class='btn delete-btn' data-deletePostButton='${post.id}'></button>`;
+              <button class='btn delete-btn' data-item='deletepost' data-deletePostButton='${post.id}'></button>`;
     } return `<button class='not-allowed-to-see'></button>
               <button class='not-allowed-to-see'></button>`;
   })(post.data().user_id)}
@@ -122,7 +121,16 @@ export const Feed = () => {
         <div class='feed-printed-comments' data-printedComments='${post.id}'>
           <ul data-ulCommentArea='${post.id}'> </ul>
         </div>
+
       </section>
+
+      <div class="confirm-delete">
+        <div class="modal-delete">
+        <div class="h1-modal">Você tem certeza que quer excluir esse post?</div>
+        <button class="delete-buttons-modal" id="confirm-delete-modal">Confirmar</button>
+        <button class="delete-butons-modal" id="cancel-delete-modal"> Cancelar </button>
+        </div>
+        </div>
     </div>
     <hr class='feed-post-end-line'>
     `;
@@ -253,12 +261,28 @@ export const Feed = () => {
     const postIDForComments = target.parentNode.parentNode.parentNode.parentNode.parentNode
       .parentNode.parentNode.id;
 
-    // Delete Post:
+   /* // Delete Post:
     const deletePostBtn = target.dataset.deletepostbutton;
     if (deletePostBtn) {
       deletePost(postID, loadPosts);
     }
+ */
 
+    
+    if (target.dataset.item === 'deletepost') {
+
+  const divConfirmDelete = target.parentNode.parentNode.parentNode.children[4];
+  const divConfirmDeleteModal = target.parentNode.parentNode.parentNode.children[4].children[0].children[1];
+  const divCancelDeleteModal = target.parentNode.parentNode.parentNode.children[4].children[0].children[2];
+  divConfirmDelete.style.display = 'block';
+  divConfirmDeleteModal.addEventListener('click', () => {
+    deletePost(postID, loadPosts);
+    divConfirmDelete.style.display = 'none';
+  });
+  divCancelDeleteModal.addEventListener('click', () => {
+    divConfirmDelete.style.display = 'none';
+  });
+}
     // Like Post:
     const likePostBtn = target.dataset.likepostbutton;
     if (likePostBtn) {
