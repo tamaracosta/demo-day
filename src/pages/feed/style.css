@@ -10,6 +10,7 @@
 
 body{
   margin: 0;
+  scroll-behavior: initial;
 }
 
 nav ul{
@@ -50,7 +51,7 @@ nav ul{
 }
 
 .search-btn{
-  background-image: url('../../images/menu-search-icon.png');
+  background-image: url('../../images/menu-person-icon.png');
 }
 
 .settings-btn{
@@ -392,4 +393,12 @@ nav ul{
 .share-area-img-btn{
   opacity: 0;
   font-size: 8pt;
+}
+
+.foto-personal-feed-feed {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+
+
 }
