@@ -63,6 +63,7 @@ export const PersonalFeed = () => {
     const postTemplate = `
         <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
           <section class='feed-post-owner-data'>
+
             <img class='foto-post-owner' src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null" />
             <span class='feed-post-owner-name'> ${firebase.auth().currentUser.displayName || post.data().user_id} em: </span>
             <span class='feed-post-data'> ${postAge} </span>
@@ -105,6 +106,7 @@ export const PersonalFeed = () => {
               <textarea class='feed-comment-text-area' data-commentContent='${post.id}' placeholder='Digite seu comentário aqui:'></textarea> 
               <button class='btn feed-comment-btn' data-commentPostButton='${post.id}'></button>
             </div>
+
             <div class='feed-printed-comments'>
               <ul data-ulCommentArea='${post.id}'> </ul>
             </div>
@@ -333,4 +335,4 @@ export const PersonalFeed = () => {
 
   loadPosts();
   return rootElement;
-};
+ };

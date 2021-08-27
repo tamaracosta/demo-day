@@ -320,6 +320,7 @@ export const Feed = () => {
     const postIDForComments = target.parentNode.parentNode.parentNode.parentNode.parentNode
       .parentNode.parentNode.id;
 
+
       if (target.dataset.item === 'deletepost') {
 
         const divConfirmDelete = target.parentNode.parentNode.parentNode.children[4];
@@ -334,6 +335,7 @@ export const Feed = () => {
           divConfirmDelete.style.display = 'none';
         });
       }
+    
     // Like Post:
     const likePostBtn = target.dataset.likepostbutton;
     if (likePostBtn) {
@@ -410,6 +412,13 @@ export const Feed = () => {
         amountOfLikes, likeStatus);
     }
   });
+
+  function removePostPage(postID) {
+    const target = document.getElementById(postID);
+    target.addEventListener('transitionend', () => target.remove());
+    target.style.opacity = '0';
+  }
+
 
   // Filter Post Category:
   const postCategorySelector = rootElement.querySelector('#filter-post-category');
