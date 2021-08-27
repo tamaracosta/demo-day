@@ -1,149 +1,153 @@
 *{
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 640px){
+
+  .logo img {
+      width: 120px;
+      height:120px;
+      margin-top: 8%;
   }
-  @media (max-width: 640px){
-  
-    .logo {
+
+  #name-id, #name-user{
+      padding: 0% 4%;
+      font-family: 'Roboto', sans-serif;
+      border-radius: 30px ;
+      border: #2A9D8F solid 1pt;
+      width: 323px;
+      height: 52.83px;
+      margin-top: 1rem;
+      cursor: pointer;
+      outline: none;
+      color: #2A9D8F;
+      font-weight: 800;
+      font-size: 100%;
+  }
+
+
+  #name-user{
+      display: none;
+  }
+  #name-id::placeholder, #name-user::placeholder {
+      color: #444B59;
+
+  }
+  #btn-save{
+      font-family: 'Roboto', sans-serif;
+      background: #2A9D8F;
+      border-radius: 30px ;
+      width: 323px;
+      height: 52.83px;
+      margin-top: 2rem;
+      color: white;
+      font-size: 5vw;
+      border: none;
+      cursor: pointer;
+  }
+
+  .inputs-class{
+      text-align: center;
+  }
+
+  .btn-foto-class {
+      background:no-repeat;
+      background-color: transparent;
+      background-size: 100%;
+      height: 4.5vh;
+      width: 4.5vh;
+      outline: none;
+      border: solid 0pt;
+      cursor: pointer;
+      background-image: url('../../images/camera.png');
+  }
+
+  .icon-img {
+      text-align: center;
+  }
+
+ 
+  #image {
+      width: 172px;
+      height: 160px;
+      border-radius: 100%;
+  }
+
+    .name-input-label, .user-input-label{
+        position: absolute;
+        left: 10%;
+        margin-top: 10%;
+        color:#444B59;
+        font-weight: 400;
+        letter-spacing: 2px;
+    }
+
+    .input-name:focus ~ .name-input-label,
+        .input-name:not(:placeholder-shown).input-name:not(:focus) ~ .name-input-label{
+        margin-top: 5%;
+        font-size: 13px;
+        color: grey;
+    }
+
+    .input-user:focus ~ .user-input-label,
+        .input-user:not(:placeholder-shown).input-user:not(:focus) ~ .user-input-label{
+        margin-top: 5%;
+        font-size: 13px;
+        color: grey;
+    }
+
+    /* --------------pop up */
+    .popup-wrapper {
+        display: none;
+    }
+    
+    .popup-wrapper {
+        background: rgba(0,0,0, .5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+    }
+    
+    .popup {
         text-align: center;
-        width: 116px;
-        height: 80px;
+        width: 100%;
+        margin: 10% auto;
+        padding: 20px;
+        background: white;
+        position: relative;
     }
-  
-    #name-id, #name-user{
-        padding: 0% 4%;
-        font-family: 'Roboto', sans-serif;
-        border-radius: 30px ;
-        border: #2A9D8F solid 1pt;
-        width: 323px;
-        height: 52.83px;
-        margin-top: 1rem;
+    
+    .fechar-popup {
+        color: var(--verde-escuro);
+        position: absolute;
+        top: 5px;
+        right: 30px;
         cursor: pointer;
-        outline: none;
-        color: #2A9D8F;
-        font-weight: 800;
-        font-size: 100%;
     }
-  
-    #name-id::placeholder, #name-user::placeholder {
-        color: #444B59;
-  
-    }
-    #btn-save{
-        font-family: 'Roboto', sans-serif;
-        background: #2A9D8F;
-        border-radius: 30px ;
-        width: 323px;
-        height: 52.83px;
-        margin-top: 2rem;
-        color: white;
-        font-size: 5vw;
+    
+ #feed-id, #profile-id {
+        padding: 0.5em;
+        width: 200px;
+        height: 40px;
+        margin-top: 0.5em;
+        border-radius: 20px;
+        background-color: var(--verde-claro);
+        color: var(--branco);
+        font-weight: bold;
+        font-size: 1em;
         border: none;
-        cursor: pointer;
+        
     }
-  
-    .inputs-class{
-        text-align: center;
-    }
-  
-    .btn-foto-class {
-        background:no-repeat;
-        background-color: transparent;
-        background-size: 100%;
-        height: 4.5vh;
-        width: 4.5vh;
-        outline: none;
-        border: solid 0pt;
-        cursor: pointer;
-        background-image: url('../../images/camera.png');
-    }
-  
-    .icon-img {
-        text-align: center;
-    }
-  
-   
-    #image {
-        width: 172px;
-        height: 160px;
-        border-radius: 100%;
-    }
-  
-      .name-input-label, .user-input-label{
-          position: absolute;
-          left: 10%;
-          margin-top: 10%;
-          color:#444B59;
-          font-weight: 400;
-          letter-spacing: 2px;
-      }
-  
-      .input-name:focus ~ .name-input-label,
-          .input-name:not(:placeholder-shown).input-name:not(:focus) ~ .name-input-label{
-          margin-top: 5%;
-          font-size: 13px;
-          color: grey;
-      }
-  
-      .input-user:focus ~ .user-input-label,
-          .input-user:not(:placeholder-shown).input-user:not(:focus) ~ .user-input-label{
-          margin-top: 5%;
-          font-size: 13px;
-          color: grey;
-      }
-  
-      /* --------------pop up */
-      .popup-wrapper {
-          display: none;
-      }
-      
-      .popup-wrapper {
-          background: rgba(0,0,0, .5);
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          display: none;
-      }
-      
-      .popup {
-          text-align: center;
-          width: 100%;
-          margin: 10% auto;
-          padding: 20px;
-          background: white;
-          position: relative;
-      }
-      
-      .fechar-popup {
-          color: var(--verde-escuro);
-          position: absolute;
-          top: 5px;
-          right: 30px;
-          cursor: pointer;
-      }
-      
-   #feed-id, #profile-id {
-          padding: 0.5em;
-          width: 200px;
-          height: 40px;
-          margin-top: 0.5em;
-          border-radius: 20px;
-          background-color: var(--verde-claro);
-          color: var(--branco);
-          font-weight: bold;
-          font-size: 1em;
-          border: none;
-          
-      }
-  
-      #photo {
-         opacity: 0 ;
-   
-  
-  
-      }
+
+    #photo {
+       opacity: 0 ;
+ 
 
 
-  }
+    }
+
+
+}

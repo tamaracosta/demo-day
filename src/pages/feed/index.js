@@ -27,9 +27,9 @@ export const getComments = async (postID, printComments) => {
 };
 
 export const getCurrentCommentsToPrint = async (postID, newCommentText, currentUserEmail,
-  printComments, username) => {
-  commentPost(postID, newCommentText, currentUserEmail, username);
-  const currentComments = await commentPost(postID, newCommentText, currentUserEmail, username);
+  printComments, username, userImageUrl) => {
+  commentPost(postID, newCommentText, currentUserEmail, username, userImageUrl);
+  const currentComments = await commentPost(postID, newCommentText, currentUserEmail, username, userImageUrl);
   printComments(currentComments, postID);
 };
 

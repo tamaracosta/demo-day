@@ -40,6 +40,7 @@ export const Login = () => {
     <p class="connect"> Ou conecte-se com </p>
     <div class="enter-icons">
         <button id="btn-login-with-google"><img src="../images/google-btn.png"></button>
+        <button id='btn-login-with-insta' > <img src="../images/twitter-image.png"></button>
     </div>
   
     <div class='alert-reset' id='alert-reset'>
@@ -75,6 +76,17 @@ export const Login = () => {
   btnLoginWithGoogle.addEventListener('click', () => {
     loginWithGoogle(checkboxKeepLoggedIn);
   });
+
+  const loginWithTwitter = () => {
+    const twitterProvider = new firebase.auth.TwitterAuthProvider();
+    firebase.auth().signInWithPopup(twitterProvider).then(() => {
+      getTheRoad('/feed');
+    }).catch(error => {
+      console.log(error);
+    });
+  };
+  const btnLoginTwitter = rootElement.querySelector('#btn-login-with-insta');
+  btnLoginTwitter.addEventListener('click', loginWithTwitter);
 
   const btnLogin = rootElement.querySelector('#btn-login');
   btnLogin.addEventListener('click', () => {

@@ -109,7 +109,7 @@ export const editPost = (newText, postID) => {
   });
 };
 
-export const commentPost = (postID, newCommentText, currentUserEmail, username) => {
+export const commentPost = (postID, newCommentText, currentUserEmail, username, userImageUrl) => {
   const commentPostId = firebase.firestore().collection('posts').doc(postID);
   const promiseResult = commentPostId.get().then((post) => {
     const comments = post.data().comments;
@@ -122,6 +122,7 @@ export const commentPost = (postID, newCommentText, currentUserEmail, username) 
         id: postID + new Date().toLocaleString('pt-BR'),
         creationDate: Math.round(Date.now() / 1000),
         userName: username,
+        userImg: userImageUrl,
       };
       commentPostId.update({ comments: firebase.firestore.FieldValue.arrayUnion(newComment) });
       const currentComments = comments.concat(newComment);
