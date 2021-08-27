@@ -203,10 +203,11 @@ export const Feed = () => {
     const postElement = document.createElement('div');
     postElement.id = post.id;
     postElement.classList.add('feed-a-post');
-    // rootElement.querySelector('#hide-url-in-text-area').value = '';
+    rootElement.querySelector('#hide-url').value = '';
     const postTemplate = createPostTemplate(post);
     postElement.innerHTML = postTemplate;
     rootElement.querySelector('#posts-section').appendChild(postElement);
+    rootElement.querySelector('.feed-publication-text-area').placeholder = 'O que você quer publicar hoje?';
   }
 
   function loadPosts() {
@@ -226,26 +227,31 @@ export const Feed = () => {
     const postImageUrl = rootElement.querySelector('#hide-url').value;
     const postCategory = rootElement.querySelector('#post-category').value;
 
-    const post = {
-      text: postContent,
-      url: postImageUrl,
-      user_id: currentUserEmail,
-      category: postCategory,
-      data: postData(),
-      likes: [],
-      comments: [],
-      creationDate: Date.now(),
-      userName: username,
-    };
-
-    if (textArea.value === '') {
-      return;
+    if (postCategory === 'Categoria') {
+      rootElement.querySelector('#post-category').classList.add('choose-post-category');
+    } else {
+      rootElement.querySelector('#post-category').classList.remove('choose-post-category');
+      const post = {
+        text: postContent,
+        url: postImageUrl,
+        user_id: currentUserEmail,
+        category: postCategory,
+        data: postData(),
+        likes: [],
+        comments: [],
+        creationDate: Date.now(),
+        userName: username,
+      };
+      if (textArea.value === '') {
+        return;
+      }
+      postsCollection.add(post).then(() => {
+        rootElement.querySelector('#publication-text-area').value = '';
+        rootElement.querySelector('#posts-section').innerHTML = '';
+        loadPosts();
+      });
     }
-    postsCollection.add(post).then(() => {
-      rootElement.querySelector('#publication-text-area').value = '';
-      rootElement.querySelector('#posts-section').innerHTML = '';
-      loadPosts();
-    });
+    rootElement.querySelector('#post-category').value = 'Categoria';
   });
 
   // Comment creation section:
@@ -292,7 +298,6 @@ export const Feed = () => {
       </li>
       `;
       commentArea.innerHTML += newItem;
-      rootElement.querySelector('#hide-url').innerHTML = '';
     });
   };
 

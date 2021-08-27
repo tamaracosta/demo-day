@@ -94,6 +94,10 @@ nav ul{
   color: var(--blue);
 }
 
+.choose-post-category{
+  border: var(--red) solid 2pt;
+}
+
 .feed-publication-text-area{
   font-family: 'Roboto', sans-serif;
   margin-top:4%;
