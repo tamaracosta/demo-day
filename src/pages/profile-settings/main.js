@@ -8,7 +8,7 @@ export const SettingsProfile = () => {
           <div class="upload">
                 <input type="file" id="photo"></input>
                 <div class="msg-carregando"></div>  
-                <img src="" id="image"/>             
+                <img src="${firebase.auth().currentUser.photoURL}" id="image"/>    
             </div>
             <div class="icon-img" id="photos">   
             <button class="btn-foto-class"><i class="fas fa-camera"></i></i></button>  

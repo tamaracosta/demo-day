@@ -7,7 +7,8 @@ import {
 
 import {
   updateLikes, getComments, getCurrentCommentsToPrint, getCurrentCommentsToDelete,
-  getCurrentCommentLikes, publicationAge,
+  getCurrentCommentLikes, publicationAge, goBackToFeed, goBackToProfileFeed,
+  goBackToSettings, goBacklogin,
 } from './index.js';
 
 // Template Feed:
@@ -18,11 +19,11 @@ export const Feed = () => {
   <header>
     <nav>
       <ul class='feed-menu'>
-          <li><button class='btn home-btn'></button></li>
-          <li><button class='btn night-btn'></button></li>
-          <li><button class='btn search-btn'></button></li>
-          <li><button class='btn settings-btn'></button></li>
-          <li><button class='btn signout-btn'></button></li>
+        <li><img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null"/></li>
+        <li><button class='btn home-btn' id='home-btn'></button></li>
+        <li><button class='btn search-btn' id='person-btn'></button></li>
+        <li><button class='btn settings-btn' id='settings-btn'></button></li>
+        <li><button class='btn signout-btn' id='signout-btn'></button></li>
       </ul>
     </nav>
   </header>
@@ -83,7 +84,6 @@ export const Feed = () => {
 
   // Template Post:
   function createPostTemplate(post) {
-
     const currentDate = Date.now();
     const timeInSeconds = ((currentDate - post.data().creationDate) / 1000);
     const postAge = publicationAge(timeInSeconds);
@@ -422,6 +422,30 @@ export const Feed = () => {
       }
     }
   }
+
+  const iconHome = rootElement.querySelector('#home-btn');
+  iconHome.addEventListener('click', (event) => {
+    event.preventDefault();
+    goBackToFeed();
+  });
+
+  const iconPerson = rootElement.querySelector('#person-btn');
+  iconPerson.addEventListener('click', (event) => {
+    event.preventDefault();
+    goBackToProfileFeed();
+  });
+
+  const iconSettings = rootElement.querySelector('#settings-btn');
+  iconSettings.addEventListener('click', (event) => {
+    event.preventDefault();
+    goBackToSettings();
+  });
+
+  const iconsignout = rootElement.querySelector('#signout-btn');
+  iconsignout.addEventListener('click', (event) => {
+    event.preventDefault();
+    goBacklogin();
+  });
 
   const searchInput = rootElement.querySelector('#feed-post-search');
   searchInput.addEventListener('keyup', filterWord);

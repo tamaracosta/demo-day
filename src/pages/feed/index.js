@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 import {
-  likePost, commentPost, showComments, deletePostComment, likePostComment,
+  likePost, commentPost, showComments, deletePostComment, likePostComment, getTheRoad,
 } from '../../lib/firebase-services.js';
 
 export const updateLikes = async (postID, currentUserEmail, valueToBeChanged, amountOfLikes,
@@ -78,4 +78,19 @@ export const publicationAge = (timeInSeconds) => {
     const timeInYears = Math.round(timeInSeconds / 31536000);
     return `há  ${timeInYears} a.:`;
   }
+};
+
+export const goBackToFeed = () => {
+  getTheRoad('/feed');
+};
+
+export const goBackToProfileFeed = () => {
+  getTheRoad('/profile');
+};
+export const goBackToSettings = () => {
+  getTheRoad('/settings');
+};
+
+export const goBacklogin = () => {
+  getTheRoad('/');
 };

@@ -494,3 +494,13 @@ nav ul{
 .category-others-icon{
   background-image: url('../../images/category-others-icon.png');
 }
+
+.search-btn{
+  background-image: url('../../images/menu-person-icon.png');
+}
+
+.foto-personal-feed-feed {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
