@@ -307,7 +307,10 @@ export const Feed = () => {
     // Delete Post:
     const deletePostBtn = target.dataset.deletepostbutton;
     if (deletePostBtn) {
-      deletePost(postID, loadPosts);
+      //deletePost(postID, loadPosts);
+      deletePost(postID, () => {
+        removePostPage(postID);
+      });
     }
 
     // Like Post:
@@ -386,6 +389,13 @@ export const Feed = () => {
         amountOfLikes, likeStatus);
     }
   });
+
+  function removePostPage(postID) {
+    const target = document.getElementById(postID);
+    target.addEventListener('transitionend', () => target.remove());
+    target.style.opacity = '0';
+  }
+
 
   // Filter Post Category:
   const postCategorySelector = rootElement.querySelector('#filter-post-category');
