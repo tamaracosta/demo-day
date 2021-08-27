@@ -71,6 +71,7 @@ export const Feed = () => {
         <option value='security'>Segurança</option>
         <option value='sellings'>Vendas</option>   
         <option value='others'>Outros</option>
+        <option value='all'>Todas as Categorias</option>
       </select>
     </section>
     <section class='feed-posts-section' id='posts-section'></section>

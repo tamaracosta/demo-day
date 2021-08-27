@@ -40,13 +40,19 @@ export const filterPosts = (value, createAndPrintAllPosts) => {
   const posts = [];
   firebase.firestore().collection('posts').get()
     .then((snap) => {
-      snap.forEach((post) => {
-        posts.push(post);
-      });
-      const filteredPosts = posts.filter((post) => post.data().category === value);
-      filteredPosts.forEach((element) => {
-        createAndPrintAllPosts(element);
-      });
+      if (value === 'all') {
+        snap.forEach((post) => {
+          createAndPrintAllPosts(post);
+        });
+      } else {
+        snap.forEach((post) => {
+          posts.push(post);
+        });
+        const filteredPosts = posts.filter((post) => post.data().category === value);
+        filteredPosts.forEach((element) => {
+          createAndPrintAllPosts(element);
+        });
+      }
     });
 };
 
