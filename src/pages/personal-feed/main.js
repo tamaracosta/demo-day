@@ -64,7 +64,6 @@ export const PersonalFeed = () => {
           </section>
           <section class='feed-post-content-section'>
             <p class='feed-post-content' contenteditable="false"> ${post.data().text} </p>
-            <img src="../images/prato.png" class='feed-post-image'/>
           </section>
           <section class='feed-post-actions-section'>
             <div class='feed-post-actions-left-section'>
