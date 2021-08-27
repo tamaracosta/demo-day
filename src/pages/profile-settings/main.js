@@ -2,13 +2,12 @@ export const SettingsProfile = () => {
   const container = document.createElement('div');
   container.innerHTML = ` 
         <header>
-          <div class="logo-class"><img src="../images/logo-login.png"/></div>
         </header>   
         <main>
           <div class="upload">
                 <input type="file" id="photo"></input>
                 <div class="msg-carregando"></div>  
-                <img src="${firebase.auth().currentUser.photoURL}" id="image"/>             
+                <img src="${firebase.auth().currentUser.photoURL}" id="image"/>    
             </div>
             <div class="icon-img" id="photos">   
             <button class="btn-foto-class"><i class="fas fa-camera"></i></i></button>  
@@ -107,19 +106,6 @@ export const SettingsProfile = () => {
     container.style.display = 'block';
   });
 
-  /*    btnGoBackToFeed.addEventListener('click', (event) => {
-                  event.preventDefault();
-                  const showUserImage = (currentProfileImage) => {
-                    firebase.auth().onAuthStateChanged((user) => {
-                      if (user != null) {
-                        currentProfileImage.src = user.photoURL;
-                      } else {
-                        currentProfileImage.src = '../../images/eye.png';
-                      }
-                    });
-                  };
-                  goBackToFeed();
-                }); */
 
   container.querySelector('.icon-img').addEventListener('click', (event) => {
     event.preventDefault();

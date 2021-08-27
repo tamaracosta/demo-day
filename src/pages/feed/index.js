@@ -27,9 +27,9 @@ export const getComments = async (postID, printComments) => {
 };
 
 export const getCurrentCommentsToPrint = async (postID, newCommentText, currentUserEmail,
-  printComments) => {
-  commentPost(postID, newCommentText, currentUserEmail);
-  const currentComments = await commentPost(postID, newCommentText, currentUserEmail);
+  printComments, username) => {
+  commentPost(postID, newCommentText, currentUserEmail, username);
+  const currentComments = await commentPost(postID, newCommentText, currentUserEmail, username);
   printComments(currentComments, postID);
 };
 
@@ -84,14 +84,13 @@ export const goBackToFeed = () => {
   getTheRoad('/feed');
 };
 
-  export const goBackToProfileFeed = () => {
-    getTheRoad('/profile');
-  };
-  export const goBackToSettings = () => {
-    getTheRoad('/settings');
-  };
+export const goBackToProfileFeed = () => {
+  getTheRoad('/profile');
+};
+export const goBackToSettings = () => {
+  getTheRoad('/settings');
+};
 
-  export const goBacklogin = () => {
-    getTheRoad('/');
-  };
-
+export const goBacklogin = () => {
+  getTheRoad('/');
+};

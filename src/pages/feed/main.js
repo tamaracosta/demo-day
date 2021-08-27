@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable quotes */
 /* eslint-disable no-plusplus */
 import {
   getPosts, editPost, deletePost, sendImageToDatabase, filterPosts,
@@ -17,24 +19,30 @@ export const Feed = () => {
   <header>
     <nav>
       <ul class='feed-menu'>
-      <li><img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null"/></li>
-          <li><button class='btn home-btn' id='home-btn'></button></li>
-          <li><button class='btn search-btn' id='person-btn'></button></li>
-          <li><button class='btn settings-btn' id='settings-btn'></button></li>
-          <li><button class='btn signout-btn' id='signout-btn'></button></li>
+        <li><img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null"/></li>
+        <li><button class='btn home-btn' id='home-btn'></button></li>
+        <li><button class='btn search-btn' id='person-btn'></button></li>
+        <li><button class='btn settings-btn' id='settings-btn'></button></li>
+        <li><button class='btn signout-btn' id='signout-btn'></button></li>
       </ul>
     </nav>
   </header>
   <main class='feed-main'>
     <form class='feed-publication-form'>
-      <select name='category' id='post-category' required>
-        <option selected disable>Categoria</option>
-        <option value="recipes">Receitas</option>
-        <option value="kitchenTips">Dicas de Cozinha</option> 
-        <option value="fixing">Manutenção</option>  
-        <option value="decoration">Decoração</option>      
-      </select>
       <textarea class='feed-publication-text-area' id='publication-text-area' placeholder='O que você quer publicar hoje?'></textarea> 
+      <select name='category' class='post-category' id='post-category' required>
+        <option selected disable>Categoria</option>
+        <option value='decoration'>Decoração</option>   
+        <option value='kitchenTips'>Dicas de Cozinha</option> 
+        <option value='domesticeconomy'>Economia Doméstica</option>
+        <option value='physicexercises'>Exercícios Físicos</option> 
+        <option value='leisure'>Lazer</option>      
+        <option value='fixing'>Manutenção</option>  
+        <option value='recipes'>Receitas</option>
+        <option value='security'>Segurança</option>
+        <option value='sellings'>Vendas</option>
+        <option value='others'>Outros</option>
+      </select>
       <section class='feed-publication-buttons-area'>
         <input class="feed-hide-url" id="hide-url"> </input>
         <div class='share-area-buttons'>
@@ -51,13 +59,18 @@ export const Feed = () => {
     <section class='feed-search-section'> 
       <input class='feed-search-input' id='feed-post-search' placeholder='Pesquise aqui'> </input>
       <button class='btn filter-btn' id='show-filters'></button>
-      <select name='category' id='filter-post-category'>
-        <option selected disable>Categoria</option>
-        <option value="all">Todas</option>
-        <option value="recipes">Receitas</option>
-        <option value="kitchenTips">Dicas de Cozinha</option> 
-        <option value="fixing">Manutenção</option>  
-        <option value="decoration">Decoração</option>      
+      <select name='category' class='filter-post-category' id='filter-post-category'>
+        <option selected disable>Escolha uma categoria</option>
+        <option value='decoration'>Decoração</option>   
+        <option value='kitchenTips'>Dicas de Cozinha</option> 
+        <option value='domesticeconomy'>Economia Doméstica</option>
+        <option value='physicexercises'>Exercícios Físicos</option> 
+        <option value='leisure'>Lazer</option>      
+        <option value='fixing'>Manutenção</option>  
+        <option value='recipes'>Receitas</option>
+        <option value='security'>Segurança</option>
+        <option value='sellings'>Vendas</option>   
+        <option value='others'>Outros</option>
       </select>
     </section>
     <section class='feed-posts-section' id='posts-section'></section>
@@ -67,18 +80,24 @@ export const Feed = () => {
 
   const postsCollection = firebase.firestore().collection('posts');
   const currentUserEmail = firebase.auth().currentUser.email;
+  const username = firebase.auth().currentUser.displayName;
+  const userImageUrl = firebase.auth().currentUser.photoURL;
 
   // Template Post:
   function createPostTemplate(post) {
     const currentDate = Date.now();
     const timeInSeconds = ((currentDate - post.data().creationDate) / 1000);
     const postAge = publicationAge(timeInSeconds);
-    console.log(postAge)
     const postTemplate = `
+    
     <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
       <section class='feed-post-owner-data'>
-        <img class='feed-post-owner-picture' src='../images/bunny.jpg'>
-        <span class='feed-post-owner-name'> ${post.data().user_id}</span>
+        <img class='feed-post-owner-picture' src='${post.data().userImg}'>
+      ${((user) => {
+    if (user === '') {
+      return `<span class='feed-post-owner-name'> ${post.data().userName}</span>`;
+    } return `<span class='feed-post-owner-name'> ${post.data().user_id}</span>`;
+  })(post.data().userName)}
         <span class='feed-post-data'> ${postAge} </span>
       </section>
       <section class='feed-post-content-section'>
@@ -103,11 +122,36 @@ export const Feed = () => {
           <span class='feed-post-amount-of-likes' data-likeValueToChange='${post.id}'> ${post.data().likes.length} </span>
           <button class='btn comment-btn' data-showCommentPostButton='${post.id}'></button>
         </div>
+        <div class='feed-post-actions-middle-section'>
+          ${((category) => {
+    if (category === 'decoration') {
+      return `<button class='category-icon category-decoration-icon'></button> `;
+    } if (category === 'kitchenTips') {
+      return `<button class='category-icon category-kitchenTips-icon'></button> `;
+    } if (category === 'domesticeconomy') {
+      return `<button class='category-icon category-economics-icon'></button> `;
+    } if (category === 'physicexercises') {
+      return `<button class='category-icon category-exercises-icon'></button> `;
+    } if (category === 'leisure') {
+      return `<button class='category-icon category-leisure-icon'></button> `;
+    } if (category === 'fixing') {
+      return `<button class='category-icon category-fixing-icon'></button> `;
+    } if (category === 'recipes') {
+      return `<button class='category-icon category-recipes-icon'></button> `;
+    } if (category === 'security') {
+      return `<button class='category-icon category-security-icon'></button> `;
+    } if (category === 'sellings') {
+      return `<button class='category-icon category-sellings-icon'></button> `;
+    } if (category === 'others') {
+      return `<button class='category-icon category-others-icon'></button> `;
+    }
+  })(post.data().category)}
+        </div>
         <div class='feed-post-actions-right-section'>
       ${((user) => {
     if (user === currentUserEmail) {
       return `<button class='btn edit-btn' data-editPostButton='${post.id}'></button>
-              <button class='btn save-edit-btn' data-saveEohditPostButton='${post.id}'></button>
+              <button class='btn save-edit-btn' data-saveEditPostButton='${post.id}'></button>
               <button class='btn cancel-edit-btn' data-cancelEditPostButton='${post.id}'></button>
               <button class='btn delete-btn' data-deletePostButton='${post.id}'></button>`;
     } return `<button class='not-allowed-to-see'></button>
@@ -191,6 +235,8 @@ export const Feed = () => {
       likes: [],
       comments: [],
       creationDate: Date.now(),
+      userName: username,
+      userImg: userImageUrl,
     };
 
     if (textArea.value === '') {
@@ -217,7 +263,11 @@ export const Feed = () => {
       <hr class='feed-comment-start-line'>
         <section class='feed-comment-owner-data'>
           <img class='feed-comment-owner-picture' src='../images/bunny.jpg'>
-          <span class='feed-comment-owner-name'> ${comment.owner}</span>
+          ${((user) => {
+    if (user === '') {
+      return `<span class='feed-post-owner-name'> ${comment.userName}</span>`;
+    } return `<span class='feed-post-owner-name'> ${comment.owner}</span>`;
+  })(comment.userName)}
           <span class='feed-comment-data'> ${commentAge} </span>
         </section>
         <section class='feed-comment-content-section'>
@@ -243,6 +293,7 @@ export const Feed = () => {
       </li>
       `;
       commentArea.innerHTML += newItem;
+      rootElement.querySelector('#hide-url').innerHTML = '';
     });
   };
 
@@ -257,7 +308,10 @@ export const Feed = () => {
     // Delete Post:
     const deletePostBtn = target.dataset.deletepostbutton;
     if (deletePostBtn) {
-      deletePost(postID, loadPosts);
+      //deletePost(postID, loadPosts);
+      deletePost(postID, () => {
+        removePostPage(postID);
+      });
     }
 
     // Like Post:
@@ -313,7 +367,8 @@ export const Feed = () => {
     const commentPostBtn = target.dataset.commentpostbutton;
     if (commentPostBtn) {
       const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
-      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, printComments);
+      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, 
+        printComments, username);
       rootElement.querySelector(`[data-commentContent="${postID}"]`).value = '';
     }
 
@@ -336,8 +391,25 @@ export const Feed = () => {
     }
   });
 
+  function removePostPage(postID) {
+    const target = document.getElementById(postID);
+    target.addEventListener('transitionend', () => target.remove());
+    target.style.opacity = '0';
+  }
+
+
   // Filter Post Category:
   const postCategorySelector = rootElement.querySelector('#filter-post-category');
+
+  const showFilterSection = rootElement.querySelector('#show-filters');
+  showFilterSection.addEventListener('click', () => {
+    if (postCategorySelector.style.display !== 'inline') {
+      postCategorySelector.style.display = 'inline';
+    } else {
+      postCategorySelector.style.display = 'none';
+    }
+  });
+
   postCategorySelector.addEventListener('change', () => {
     const postCategoryValue = postCategorySelector.value;
     rootElement.querySelector('#posts-section').innerHTML = '';
@@ -386,11 +458,9 @@ export const Feed = () => {
     goBacklogin();
   });
 
-
   const searchInput = rootElement.querySelector('#feed-post-search');
   searchInput.addEventListener('keyup', filterWord);
 
   loadPosts();
   return rootElement;
 };
-

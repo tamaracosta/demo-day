@@ -129,7 +129,7 @@ html {
   color: var(--verde-escuro);
 }
 
-.pagina-personal-feed .feed-a-post {
+.feed-a-post {
   transition: opacity 1s;
 }
 
@@ -174,4 +174,16 @@ text-align: center;
 
 .fas.fa-arrow-circle-up {
   color: var(--verde-claro);
+}
+
+
+.updatePost-btn {
+  margin-right: 0.3em;
+  display: none;
+}
+
+.foto-post-owner{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
