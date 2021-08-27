@@ -369,7 +369,7 @@ export const Feed = () => {
     const commentPostBtn = target.dataset.commentpostbutton;
     if (commentPostBtn) {
       const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
-      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, 
+      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail,
         printComments, username);
       rootElement.querySelector(`[data-commentContent="${postID}"]`).value = '';
     }

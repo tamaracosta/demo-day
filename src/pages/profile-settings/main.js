@@ -11,7 +11,7 @@ export const SettingsProfile = () => {
                 <img src="${firebase.auth().currentUser.photoURL}" id="image"/>    
             </div>
             <div class="icon-img" id="photos">   
-            <button class="btn-foto-class"><i class="fas fa-camera"></i></i></button>  
+            <button class="btn-foto-class"></button>  
   
             </div>
             <div class="inputs-class">
