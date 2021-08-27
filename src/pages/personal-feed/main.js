@@ -293,12 +293,7 @@ export const PersonalFeed = () => {
     target.style.opacity = '0';
   }
 
-  function editPost(postID) {
-    const paragrafoEditar = document.getElementById(postID).querySelector('p');
-    paragrafoEditar.contentEditable = true;
-    paragrafoEditar.focus();
-  }
-
+  
   const goBackToFeed = () => {
     getTheRoad('/feed');
   };
