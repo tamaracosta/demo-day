@@ -71,6 +71,7 @@ export const Feed = () => {
         <option value='security'>Segurança</option>
         <option value='sellings'>Vendas</option>   
         <option value='others'>Outros</option>
+        <option value='all'>Todas as Categorias</option>
       </select>
     </section>
     <section class='feed-posts-section' id='posts-section'></section>
@@ -81,6 +82,7 @@ export const Feed = () => {
   const postsCollection = firebase.firestore().collection('posts');
   const currentUserEmail = firebase.auth().currentUser.email;
   const username = firebase.auth().currentUser.displayName;
+  const userImageUrl = firebase.auth().currentUser.photoURL;
 
   // Template Post:
   function createPostTemplate(post) {
@@ -92,7 +94,7 @@ export const Feed = () => {
     
     <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
       <section class='feed-post-owner-data'>
-        <img class='feed-post-owner-picture' src='../images/bunny.jpg'>
+      <img class='feed-post-owner-picture' src='${post.data().userImg}'>
       ${((user) => {
     if (user === '') {
       return `<span class='feed-post-owner-name'> ${post.data().userName}</span>`;
@@ -153,7 +155,7 @@ export const Feed = () => {
       return `<button class='btn edit-btn' data-editPostButton='${post.id}'></button>
               <button class='btn save-edit-btn' data-saveEditPostButton='${post.id}'></button>
               <button class='btn cancel-edit-btn' data-cancelEditPostButton='${post.id}'></button>
-              <button class='btn delete-btn' data-deletePostButton='${post.id}'></button>`;
+              <button class='btn delete-btn' data-item='deletepost' data-deletePostButton='${post.id}'></button>`;
     } return `<button class='not-allowed-to-see'></button>
               <button class='not-allowed-to-see'></button>`;
   })(post.data().user_id)}
@@ -168,6 +170,14 @@ export const Feed = () => {
           <ul data-ulCommentArea='${post.id}'> </ul>
         </div>
       </section>
+      <div class="confirm-delete">
+      <div class="modal-delete">
+      <div class="h1-modal">Você tem certeza que quer excluir esse post?</div>
+      <button class="delete-buttons-modal" id="confirm-delete-modal">Confirmar</button>
+      <button class="delete-butons-modal" id="cancel-delete-modal"> Cancelar </button>
+      </div>
+      </div>
+  </div>
     </div>
     <hr class='feed-post-end-line'>
     `;
@@ -203,10 +213,11 @@ export const Feed = () => {
     const postElement = document.createElement('div');
     postElement.id = post.id;
     postElement.classList.add('feed-a-post');
-    // rootElement.querySelector('#hide-url-in-text-area').value = '';
+    rootElement.querySelector('#hide-url').value = '';
     const postTemplate = createPostTemplate(post);
     postElement.innerHTML = postTemplate;
     rootElement.querySelector('#posts-section').appendChild(postElement);
+    rootElement.querySelector('.feed-publication-text-area').placeholder = 'O que você quer publicar hoje?';
   }
 
   function loadPosts() {
@@ -226,26 +237,32 @@ export const Feed = () => {
     const postImageUrl = rootElement.querySelector('#hide-url').value;
     const postCategory = rootElement.querySelector('#post-category').value;
 
-    const post = {
-      text: postContent,
-      url: postImageUrl,
-      user_id: currentUserEmail,
-      category: postCategory,
-      data: postData(),
-      likes: [],
-      comments: [],
-      creationDate: Date.now(),
-      userName: username,
-    };
-
-    if (textArea.value === '') {
-      return;
+    if (postCategory === 'Categoria') {
+      rootElement.querySelector('#post-category').classList.add('choose-post-category');
+    } else {
+      rootElement.querySelector('#post-category').classList.remove('choose-post-category');
+      const post = {
+        text: postContent,
+        url: postImageUrl,
+        user_id: currentUserEmail,
+        category: postCategory,
+        data: postData(),
+        likes: [],
+        comments: [],
+        creationDate: Date.now(),
+        userName: username,
+        userImg: userImageUrl,
+      };
+      if (textArea.value === '') {
+        return;
+      }
+      postsCollection.add(post).then(() => {
+        rootElement.querySelector('#publication-text-area').value = '';
+        rootElement.querySelector('#posts-section').innerHTML = '';
+        loadPosts();
+      });
     }
-    postsCollection.add(post).then(() => {
-      rootElement.querySelector('#publication-text-area').value = '';
-      rootElement.querySelector('#posts-section').innerHTML = '';
-      loadPosts();
-    });
+    rootElement.querySelector('#post-category').value = 'Categoria';
   });
 
   // Comment creation section:
@@ -261,7 +278,7 @@ export const Feed = () => {
       <li class='feed-comment-all-content' id="${comment.id}">
       <hr class='feed-comment-start-line'>
         <section class='feed-comment-owner-data'>
-          <img class='feed-comment-owner-picture' src='../images/bunny.jpg'>
+        <img class='feed-post-owner-picture' src='${comment.userImg}'>
           ${((user) => {
     if (user === '') {
       return `<span class='feed-post-owner-name'> ${comment.userName}</span>`;
@@ -292,7 +309,6 @@ export const Feed = () => {
       </li>
       `;
       commentArea.innerHTML += newItem;
-      rootElement.querySelector('#hide-url').innerHTML = '';
     });
   };
 
@@ -304,15 +320,22 @@ export const Feed = () => {
     const postIDForComments = target.parentNode.parentNode.parentNode.parentNode.parentNode
       .parentNode.parentNode.id;
 
-    // Delete Post:
-    const deletePostBtn = target.dataset.deletepostbutton;
-    if (deletePostBtn) {
-      //deletePost(postID, loadPosts);
-      deletePost(postID, () => {
-        removePostPage(postID);
-      });
-    }
 
+      if (target.dataset.item === 'deletepost') {
+
+        const divConfirmDelete = target.parentNode.parentNode.parentNode.children[4];
+        const divConfirmDeleteModal = target.parentNode.parentNode.parentNode.children[4].children[0].children[1];
+        const divCancelDeleteModal = target.parentNode.parentNode.parentNode.children[4].children[0].children[2];
+        divConfirmDelete.style.display = 'block';
+        divConfirmDeleteModal.addEventListener('click', () => {
+          deletePost(postID, loadPosts);
+          divConfirmDelete.style.display = 'none';
+        });
+        divCancelDeleteModal.addEventListener('click', () => {
+          divConfirmDelete.style.display = 'none';
+        });
+      }
+    
     // Like Post:
     const likePostBtn = target.dataset.likepostbutton;
     if (likePostBtn) {
@@ -366,8 +389,8 @@ export const Feed = () => {
     const commentPostBtn = target.dataset.commentpostbutton;
     if (commentPostBtn) {
       const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
-      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, 
-        printComments, username);
+      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail,
+        printComments, username, userImageUrl);
       rootElement.querySelector(`[data-commentContent="${postID}"]`).value = '';
     }
 

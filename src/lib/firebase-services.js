@@ -40,13 +40,19 @@ export const filterPosts = (value, createAndPrintAllPosts) => {
   const posts = [];
   firebase.firestore().collection('posts').get()
     .then((snap) => {
-      snap.forEach((post) => {
-        posts.push(post);
-      });
-      const filteredPosts = posts.filter((post) => post.data().category === value);
-      filteredPosts.forEach((element) => {
-        createAndPrintAllPosts(element);
-      });
+      if (value === 'all') {
+        snap.forEach((post) => {
+          createAndPrintAllPosts(post);
+        });
+      } else {
+        snap.forEach((post) => {
+          posts.push(post);
+        });
+        const filteredPosts = posts.filter((post) => post.data().category === value);
+        filteredPosts.forEach((element) => {
+          createAndPrintAllPosts(element);
+        });
+      }
     });
 };
 
@@ -103,7 +109,7 @@ export const editPost = (newText, postID) => {
   });
 };
 
-export const commentPost = (postID, newCommentText, currentUserEmail, username) => {
+export const commentPost = (postID, newCommentText, currentUserEmail, username, userImageUrl) => {
   const commentPostId = firebase.firestore().collection('posts').doc(postID);
   const promiseResult = commentPostId.get().then((post) => {
     const comments = post.data().comments;
@@ -116,6 +122,7 @@ export const commentPost = (postID, newCommentText, currentUserEmail, username) 
         id: postID + new Date().toLocaleString('pt-BR'),
         creationDate: Math.round(Date.now() / 1000),
         userName: username,
+        userImg: userImageUrl,
       };
       commentPostId.update({ comments: firebase.firestore.FieldValue.arrayUnion(newComment) });
       const currentComments = comments.concat(newComment);

@@ -1,8 +1,8 @@
 import {
   loginWithGoogle, loginWithEmailAndPassword, getTheRoad, resetPassword,
- } from '../../lib/firebase-services.js';
-  
- export const Login = () => {
+} from '../../lib/firebase-services.js';
+
+export const Login = () => {
   const rootElement = document.createElement('div');
   rootElement.className = 'login-container';
   rootElement.innerHTML = `
@@ -40,6 +40,7 @@ import {
     <p class="connect"> Ou conecte-se com </p>
     <div class="enter-icons">
         <button id="btn-login-with-google"><img src="../images/google-btn.png"></button>
+        <button id='btn-login-with-insta' > <img src="../images/twitter-image.png"></button>
     </div>
     <div class='alert-reset' id='alert-reset'>
     <div class='modal-reset' id='modal-reset'>
@@ -56,18 +57,17 @@ import {
   </main>
   <footer> Not Alone &#169;</footer>
     `;
-  
-    // <button id='btn-login-with-insta' hidden> <img src="../images/insta-btn.jpeg"></button>
-    // <button id='btn-login-with-facebook' hidden ><img src="../images/face-btn.jpeg"></button>
+
+  // <button id='btn-login-with-insta' hidden> <img src="../images/insta-btn.jpeg"></button>
+  // <button id='btn-login-with-facebook' hidden ><img src="../images/face-btn.jpeg"></button>
   const getUserEmail = rootElement.querySelector('#input-email');
   const getUserPassword = rootElement.querySelector('#input-password');
   const checkboxKeepLoggedIn = rootElement.querySelector('#checkbox-keep-logged-in');
-  
   const btnSignIn = rootElement.querySelector('#btn-sign-in');
   btnSignIn.addEventListener('click', () => {
     getTheRoad('/register');
   });
-  
+
   getUserEmail.addEventListener('keyup', (event) => {
     const labelEmail = rootElement.querySelector('#label-input-email');
     const inputEmailValue = event.target.value;
@@ -75,31 +75,42 @@ import {
       labelEmail.classList.add('login-input-label-up');
     }
   });
-  
+
   const btnLoginWithGoogle = rootElement.querySelector('#btn-login-with-google');
   btnLoginWithGoogle.addEventListener('click', () => {
     loginWithGoogle(checkboxKeepLoggedIn);
   });
-  
+
+  const loginWithTwitter = () => {
+    const twitterProvider = new firebase.auth.TwitterAuthProvider();
+    firebase.auth().signInWithPopup(twitterProvider).then(() => {
+      getTheRoad('/feed');
+    }).catch(error => {
+      console.log(error);
+    });
+  };
+  const btnLoginTwitter = rootElement.querySelector('#btn-login-with-insta');
+  btnLoginTwitter.addEventListener('click', loginWithTwitter);
+
   const btnLogin = rootElement.querySelector('#btn-login');
   btnLogin.addEventListener('click', () => {
     const userEmail = getUserEmail.value;
     const userPassword = getUserPassword.value;
     loginWithEmailAndPassword(userEmail, userPassword, checkboxKeepLoggedIn);
   });
-  
+
   const btnResetPassword = rootElement.querySelector('#btn-forgot-password');
   btnResetPassword.addEventListener('click', () => {
     const userEmail = getUserEmail.value;
     const alertReset = rootElement.querySelector('#alert-reset');
     const btnModal = rootElement.querySelector('#confirm-modal');
-    resetPassword(userEmail)
+    resetPassword(userEmail);
     alertReset.style.display = 'block';
     btnModal.addEventListener('click', () => {
       alertReset.style.display = 'none';
     });
   });
-  
+
   const passwordContainer = rootElement.querySelector('#div-password');
   const eyeIcon = rootElement.querySelector('#eye');
   eyeIcon.addEventListener('click', () => {
@@ -113,5 +124,4 @@ import {
     }
   });
   return rootElement;
- };
- 
+};
