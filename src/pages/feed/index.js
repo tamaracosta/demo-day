@@ -1,7 +1,9 @@
 /* eslint-disable consistent-return */
+
 /* eslint-disable no-param-reassign */
 import {
-  likePost, commentPost, showComments, deletePostComment, likePostComment, getTheRoad,
+  likePost, commentPost, showComments, deletePostComment,
+   likePostComment, getTheRoad,
 } from '../../lib/firebase-services.js';
 
 export const updateLikes = async (postID, currentUserEmail, valueToBeChanged, amountOfLikes,
