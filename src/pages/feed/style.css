@@ -1,18 +1,4 @@
 
-  :root {
-    --green: #2A9D8F;
-    --orange: #f4a261;
-    --red: #e76f51;
-    --yellow: #e9c46a;
-    --blue: #264653;
-    --light-gray:#808080;
-    --dark-gray:#404040;
-  }
-  
-  body{
-    margin: 0;
-  }
-  
   nav ul{
     padding: 0;
     margin: 0 -2% 0 0%;
@@ -24,7 +10,7 @@
     justify-content: space-evenly;
     align-items: center;
     list-style-type: none;
-    background-color: var(--green);
+    background-color: var(--verde-claro);
   }
   
   .btn{
@@ -77,7 +63,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border: var(--green) solid 3pt;
+    border: var(--verde-claro) solid 3pt;
     border-radius: 20px;
   }
   
@@ -92,11 +78,11 @@
     background-color: transparent;
     border: #d0e1e1 dotted 1pt;
     outline: none;
-    color: var(--blue);
+    color: var(--verde-escuro);
   }
   
   .choose-post-category{
-    border: var(--red) solid 2pt;
+    border: var(--laranja-escuro) solid 2pt;
   }
   
   .feed-publication-text-area{
@@ -109,7 +95,7 @@
     border: solid 0pt;
     text-align: justify;
     text-justify: inter-word;
-    color: var(--blue);
+    color: var(--verde-escuro);
     font-size: 90%;
     
   }
@@ -138,7 +124,7 @@
   
   .feed-publication-publish-btn{
     margin-left: -10%;
-    background-color: var(--green);
+    background-color: var(--verde-claro);
     border: solid 0pt;
     border-radius: 10px;
     color: #ffffff;
@@ -156,8 +142,8 @@
     padding:2%;
     outline: none;
     border: 0pt;
-    color: var(--blue);
-    border-bottom:var(--yellow) solid 1pt !important;
+    color: var(--verde-escuro);
+    border-bottom:var(--amarelo) solid 1pt !important;
   }
   
   .feed-search-input:focus{
@@ -181,10 +167,10 @@
     border-radius: 4px;
     background-color: transparent;
     border: 0pt;
-    color: var(--blue);
-    border-bottom:var(--yellow) solid 1pt !important;
+    color: var(--verde-escuro);
+    border-bottom:var(--amarelo) solid 1pt !important;
     outline: none;
-    color: var(--blue);
+    color: var(--verde-escuro);
   }
   
   .filter-post-category:focus{
@@ -211,7 +197,7 @@
     width: 5vh;
     height: 5vh;
     margin-right: 3%;
-    border: var(--light-gray) solid 1pt;
+    border: var(--cinza-claro) solid 1pt;
     border-radius: 50%;
     padding: 1%;
   }
@@ -225,7 +211,7 @@
   
   .feed-post-data,
   .feed-comment-data{
-    color:var(--light-gray);
+    color:var(--cinza-claro);
     font-size: 80%;
   }
   
@@ -235,7 +221,7 @@
     text-justify: inter-word;
     line-height: 1.5;
     word-break: break-word; 
-    color: var(--blue);
+    color: var(--verde-escuro);
   }
   
   .feed-posted-image{
@@ -271,7 +257,7 @@
   
   .feed-post-amount-of-likes{
     margin-right: 3%;
-    color: var(--blue);
+    color: var(--verde-escuro);
     
   }
   
@@ -292,11 +278,11 @@
     display: none;
     padding: 2%;
     outline: none;
-    border: --blue solid 1pt;
+    border: --verde-escuro solid 1pt;
     text-align: justify;
     text-justify: inter-word;
     border-radius: 10px;
-    color: var(--blue);
+    color: var(--verde-escuro);
   }
   
   .save-edit-btn{
@@ -337,9 +323,9 @@
     height: 4vh;
     padding: 2% 3%;
     border-radius: 10px;
-    border: var(--red) solid 1pt;
+    border: var(--laranja-escuro) solid 1pt;
     outline: none;
-    color: var(--blue);
+    color: var(--verde-escuro);
   }
   
   .feed-comment-btn{
@@ -348,7 +334,7 @@
   }
   
   .feed-printed-comments{
-    color: --blue;
+    color: --verde-escuro;
     width: 100%;
   }
   
@@ -379,7 +365,7 @@
     text-align: justify;
     text-justify: inter-word;
     margin: 0% 0% 4% 0%;
-    color: var(--blue);
+    color: var(--verde-escuro);
     font-size: 95%;
   }
   
@@ -406,7 +392,7 @@
   .feed-comment-amount-of-likes{
     margin-right: 70%;
     margin-top: 2%;
-    color: var(--dark-gray);
+    color: var(--cinza-escuro);
   }
   
   .delete-comment-btn{
@@ -417,7 +403,7 @@
     opacity: 25%;
     width: 80%;
     margin: 5% auto;
-    border-color: var(--yellow);
+    border-color: var(--amarelo);
   }
   .publish-img-btn{
     border: none;
@@ -603,13 +589,13 @@
 
 @media (max-width: 500px){
 :root {
-  --green: #2A9D8F;
-  --orange: #f4a261;
-  --red: #e76f51;
-  --yellow: #e9c46a;
-  --blue: #264653;
-  --light-gray:#808080;
-  --dark-gray:#404040;
+  --verde-claro: #2A9D8F;
+  --laranja-claro: #f4a261;
+  --laranja-escuro: #e76f51;
+  --amarelo: #e9c46a;
+  --verde-escuro: #264653;
+  --cinza-claro:#808080;
+  --cinza-escuro:#404040;
 }
 
 body{
@@ -627,7 +613,7 @@ nav ul{
   justify-content: space-evenly;
   align-items: center;
   list-style-type: none;
-  background-color: var(--green);
+  background-color: var(--verde-claro);
 }
 
 .btn{
@@ -680,7 +666,7 @@ nav ul{
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border: var(--green) solid 3pt;
+  border: var(--verde-claro) solid 3pt;
   border-radius: 20px;
 }
 
@@ -695,11 +681,11 @@ nav ul{
   background-color: transparent;
   border: #d0e1e1 dotted 1pt;
   outline: none;
-  color: var(--blue);
+  color: var(--verde-escuro);
 }
 
 .choose-post-category{
-  border: var(--red) solid 2pt;
+  border: var(--laranja-escuro) solid 2pt;
 }
 
 .feed-publication-text-area{
@@ -712,7 +698,7 @@ nav ul{
   border: solid 0pt;
   text-align: justify;
   text-justify: inter-word;
-  color: var(--blue);
+  color: var(--verde-escuro);
   font-size: 90%;
   
 }
@@ -741,7 +727,7 @@ nav ul{
 
 .feed-publication-publish-btn{
   margin-left: -10%;
-  background-color: var(--green);
+  background-color: var(--verde-claro);
   border: solid 0pt;
   border-radius: 10px;
   color: #ffffff;
@@ -759,8 +745,8 @@ nav ul{
   padding:2%;
   outline: none;
   border: 0pt;
-  color: var(--blue);
-  border-bottom:var(--yellow) solid 1pt !important;
+  color: var(--verde-escuro);
+  border-bottom:var(--amarelo) solid 1pt !important;
 }
 
 .feed-search-input:focus{
@@ -784,10 +770,10 @@ nav ul{
   border-radius: 4px;
   background-color: transparent;
   border: 0pt;
-  color: var(--blue);
-  border-bottom:var(--yellow) solid 1pt !important;
+  color: var(--verde-escuro);
+  border-bottom:var(--amarelo) solid 1pt !important;
   outline: none;
-  color: var(--blue);
+  color: var(--verde-escuro);
 }
 
 .filter-post-category:focus{
@@ -814,7 +800,7 @@ nav ul{
   width: 5vh;
   height: 5vh;
   margin-right: 3%;
-  border: var(--light-gray) solid 1pt;
+  border: var(--cinza-claro) solid 1pt;
   border-radius: 50%;
   padding: 1%;
 }
@@ -828,7 +814,7 @@ nav ul{
 
 .feed-post-data,
 .feed-comment-data{
-  color:var(--light-gray);
+  color:var(--cinza-claro);
   font-size: 80%;
 }
 
@@ -838,7 +824,7 @@ nav ul{
   text-justify: inter-word;
   line-height: 1.5;
   word-break: break-word; 
-  color: var(--blue);
+  color: var(--verde-escuro);
 }
 
 .feed-posted-image{
@@ -874,7 +860,7 @@ nav ul{
 
 .feed-post-amount-of-likes{
   margin-right: 3%;
-  color: var(--blue);
+  color: var(--verde-escuro);
   
 }
 
@@ -895,11 +881,11 @@ nav ul{
   display: none;
   padding: 2%;
   outline: none;
-  border: --blue solid 1pt;
+  border: --verde-escuro solid 1pt;
   text-align: justify;
   text-justify: inter-word;
   border-radius: 10px;
-  color: var(--blue);
+  color: var(--verde-escuro);
 }
 
 .save-edit-btn{
@@ -940,9 +926,9 @@ nav ul{
   height: 4vh;
   padding: 2% 3%;
   border-radius: 10px;
-  border: var(--red) solid 1pt;
+  border: var(--laranja-escuro) solid 1pt;
   outline: none;
-  color: var(--blue);
+  color: var(--verde-escuro);
 }
 
 .feed-comment-btn{
@@ -951,7 +937,7 @@ nav ul{
 }
 
 .feed-printed-comments{
-  color: --blue;
+  color: --verde-escuro;
   width: 100%;
 }
 
@@ -982,7 +968,7 @@ nav ul{
   text-align: justify;
   text-justify: inter-word;
   margin: 0% 0% 4% 0%;
-  color: var(--blue);
+  color: var(--verde-escuro);
   font-size: 95%;
 }
 
@@ -1009,7 +995,7 @@ nav ul{
 .feed-comment-amount-of-likes{
   margin-right: 70%;
   margin-top: 2%;
-  color: var(--dark-gray);
+  color: var(--cinza-escuro);
 }
 
 .delete-comment-btn{
@@ -1020,7 +1006,7 @@ nav ul{
   opacity: 25%;
   width: 80%;
   margin: 5% auto;
-  border-color: var(--yellow);
+  border-color: var(--amarelo);
 }
 .publish-img-btn{
   border: none;

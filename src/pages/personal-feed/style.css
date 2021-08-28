@@ -1,19 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; 
-  text-decoration: none;
-}
 
-:root {
-  --verde-claro: #2A9D8F;
-  --verde-escuro: #264653;
-  --laranja-claro: #F4A261;
-  --laranja-escuro: #E76F51;
-  --amarelo: #E9C46A;
-  --branco: #fff;
-  --preto: #000;
-} 
 
 html {
   scroll-behavior: smooth;
