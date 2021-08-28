@@ -14,21 +14,21 @@ export const Register = () => {
           <section class="content">
         <div class="div-name">
           <input required type="text" class='input-name'id="input-name" placeholder=" " autocomplete="off">
-          <label for="input-name"class="login-input-label">Nome</label>
+          <label for="input-name"class="login-input-label register-input-label">Nome</label>
         </div>
         <div class="div-email">
           <input required type="email" class="input-email" id="input-email" placeholder=" " autocomplete="off">
-          <label for="input-email" class="login-input-label" id="label-input-email">Email</label>
+          <label for="input-email" class="login-input-label register-input-label" id="label-input-email">Email</label>
         </div>
         <div class="div-password">
           <input required type="password" class='input-password'id="input-password" placeholder=" " autocomplete="off">
           <img class="icon-eye" id="icon-eye" src="../images/eye-off.png"/>
-          <label class="login-input-label">Senha</label> 
+          <label class="login-input-label register-input-label">Senha</label> 
         </div>
         <div class="div-confirm-password">
             <input required type="password" class='input-confirm-password' id="input-confirm-password" placeholder=" " autocomplete="off">
             <img class="icon-eye" id="icon-eye-confirm" src="../images/eye-off.png"/>
-            <label class="login-input-label">Confirme a senha</label> 
+            <label class="login-input-label register-input-label">Confirme a senha</label> 
           </div>
           </section>
           <div class="checkbox-div">

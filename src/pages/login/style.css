@@ -24,6 +24,7 @@ body {
   height: 80%;
   margin:5%;
  }
+
  .input-email, .input-password {
 padding:3% 5% 1% 5%;
  font-family: 'Roboto', sans-serif;
@@ -38,7 +39,7 @@ padding:3% 5% 1% 5%;
  font-size: 110%;
  font-weight: 600;
  }
-  
+
  .login-input-label{
  position: absolute;
  left: 10%;
@@ -47,12 +48,13 @@ padding:3% 5% 1% 5%;
  font-weight: 400;
  letter-spacing: 2px;
  }
+
  .div-email, .div-password{
  width: 100%;
  justify-content: center;
 
  }
-  
+
  .div-password img {
  width: 18px;
  position: absolute;
@@ -127,11 +129,13 @@ padding:3% 5% 1% 5%;
   color: #ff3333;
   font-weight: 500;
  }
+
  .register-new-user {
  letter-spacing: 2px;
  width: 100%;
  margin-bottom: 4%;
  }
+
  .register-new-user button{
  color:#2A9D8F;
  border: none;
@@ -173,6 +177,7 @@ padding:3% 5% 1% 5%;
  margin-bottom: 10vh;
   
  }
+
  .footer {
  position:absolute;
  bottom:0;
@@ -188,6 +193,7 @@ padding:3% 5% 1% 5%;
   height: 100%;
   display: none;
  }
+
  .modal-reset{
   text-align: center;
   width: 100%;
@@ -196,6 +202,7 @@ padding:3% 5% 1% 5%;
   background: white;
   position: relative;
  }
+
  .h1-modal{
   color: var(--verde-escuro);
   position: absolute;
@@ -219,6 +226,365 @@ padding:3% 5% 1% 5%;
   font-size: 1em;
   border: none;
  }
+
  .modal-reset{
   text-align: center;
  }
+
+  
+
+  @media (max-width: 300px) {
+    body{
+      font-size: 90% !important;
+    }
+    .div-password img, .div-confirm-password img {
+      width: 20px !important;
+      margin-left: -40px !important;
+      margin-top: 5% !important;
+    }
+
+    .login-input-label{
+      margin-left: 6%;
+     }
+
+    .checkbox-forgot-password{
+      width: 80%;
+      margin: auto;
+    }
+
+    .img-login{
+      height: 30% !important;
+      margin-top: 8%;
+     }
+    
+    .register-btn-register{
+      width: 80% !important;
+      margin: auto;
+    }
+
+    .register-new-user{
+      width: 80% !important;
+      margin:auto;
+      margin-bottom: 3% !important;
+    }
+  }
+
+  @media (min-width: 500px) {
+    .input-email, .input-password {
+      padding:2% 4% 2% 4%;
+      width: 85%;
+      height: 6vh;
+      font-size: 130%;
+    }
+
+    .img-login{
+      height: 40vh !important;
+      margin-top: 10%;
+     }
+
+     .login-input-label{
+      margin-top: 4%;
+     }
+
+    .connect{
+      margin-top: 6%;
+      margin-bottom: 4%;
+    }
+
+    .div-password img, .div-confirm-password img {
+      width: 30px !important;
+      margin-left: -55px !important;
+      margin-top: 20px !important;
+    }
+    
+    .register-btn-register, .btn-login{
+      width: 70% !important;
+      margin: auto;
+    }
+
+    .btn-login{
+      margin-bottom: 5%;
+    }
+  }
+
+  @media (min-width: 749px) {
+    .content input{
+      font-size: 120% !important;
+    }
+    .div-password img, .div-confirm-password img {
+      width: 30px !important;
+      margin-left: -65px !important;
+      margin-top: 30px !important;
+    }
+
+    .checkbox-forgot-password button,
+    .checkbox-forgot-password label,
+    .checkbox-forgot-password button input,
+    .checkbox-div label,
+    .register-new-user,
+    .btn-register-account,
+    .connect,
+    .btn-login,
+    .input-email,
+    .input-password  {
+      font-size: 120% !important;
+    }
+
+
+  .input-email:focus ~ .login-input-label, 
+  .input-email:not(:placeholder-shown).input-email:not(:focus) ~ .login-input-label {
+      font-size: 80% !important;
+  }
+
+  .input-password:focus ~ .login-input-label,
+  .input-password:not(:placeholder-shown).input-password:not(:focus) ~ .login-input-label {
+    font-size: 80% !important;
+  }
+
+  .input-name:focus ~ .login-input-label,
+.input-name:not(:placeholder-shown).input-name:not(:focus) ~ .login-input-label{
+  font-size: 80% !important;
+}
+
+.input-confirm-password:focus ~ .login-input-label,
+.input-confirm-password:not(:placeholder-shown).input-confirm-password:not(:focus) ~ .login-input-label{
+  font-size: 80% !important;
+  
+}
+
+  }
+
+  @media (min-width: 1020px) {
+    body{
+      font-size: 150%;
+    }
+
+    .content input{
+      font-size: 150% !important;
+    }
+    .div-password img, .div-confirm-password img {
+      width: 40px !important;
+      margin-left: -75px !important;
+      margin-top: 40px !important;
+    }
+
+    .enter-icons button{
+      height: 8vh !important;
+      width: 8vh !important;
+    }
+
+    .enter-icons img{
+      height: 7vh !important;
+      width: 7vh !important;
+    }
+
+    .checkbox-forgot-password button,
+    .checkbox-forgot-password label,
+    .checkbox-forgot-password button input,
+    .checkbox-div label,
+    .register-new-user,
+    .btn-register-account,
+    .connect,
+    .btn-login,
+    .input-email,
+    .input-password  {
+      font-size: 130% !important;
+    }
+
+
+  .input-email:focus ~ .login-input-label, 
+  .input-email:not(:placeholder-shown).input-email:not(:focus) ~ .login-input-label {
+      font-size: 80% !important;
+  }
+
+  .input-password:focus ~ .login-input-label,
+  .input-password:not(:placeholder-shown).input-password:not(:focus) ~ .login-input-label {
+    font-size: 80% !important;
+  }
+
+  .input-name:focus ~ .login-input-label,
+.input-name:not(:placeholder-shown).input-name:not(:focus) ~ .login-input-label{
+  font-size: 80% !important;
+}
+
+.input-confirm-password:focus ~ .login-input-label,
+.input-confirm-password:not(:placeholder-shown).input-confirm-password:not(:focus) ~ .login-input-label{
+  font-size: 80% !important;
+  
+}
+
+footer{
+  margin-top: 18%;
+}
+
+input[type=checkbox] {
+  height: 2vh !important;
+  width: 2vh !important;
+}
+
+
+.login-error{
+  font-size: 120% !important;
+  margin-top: 2% !important ;
+  margin-bottom: -1% !important;
+}
+
+}
+
+@media (min-width: 1220px) {
+  body{
+    font-size: 180%  !important;
+    margin: 0 !important;
+    height: 100% !important;
+  }
+
+ 
+
+  .login-container, .register-container{
+    margin-top: 2%;
+    width: 40%;
+    margin-left: 55%;
+    border: var(--amarelo) solid 1.5pt;
+    border-radius: 7% !important;
+  }
+
+  .img-login {
+    margin-top: -6% !important;
+    margin-bottom: -5% !important;
+  }
+
+  .content input{
+    font-size: 180% !important;
+  }
+  .div-password img, .div-confirm-password img {
+    width: 80px !important;
+    margin-left: -4% !important;
+    margin-top: 1.4% !important;
+  }
+
+  .enter-icons button{
+    height: 10vh !important;
+    width: 10vh !important;
+    border:rgb(255, 255, 255) solid 1pt;
+    cursor: pointer;
+  }
+
+  .enter-icons button:hover{
+    height: 12vh !important;
+    width: 12vh !important;
+  }
+
+  .enter-icons{
+    margin: auto;
+    justify-content: center;
+    width: 30% !important;
+
+  }
+
+  .enter-icons img{
+    height: 9vh !important;
+    width: 9vh !important;
+  }
+
+  .div-email, .div-password, .div-name, .div-confirm-password{
+    width: 80% !important;
+    justify-content: center;
+    margin: auto;
+   
+    }
+
+    .register-btn-register button{
+      margin-top: 5% !important;
+    }
+
+  .checkbox-forgot-password button,
+  .checkbox-forgot-password label,
+  .checkbox-forgot-password button input,
+  .checkbox-div label,
+  .register-new-user,
+  .btn-register-account,
+  .register-btn-register button,
+  .connect,
+  .btn-login,
+  .input-email,
+  .input-password  {
+    font-size: 210% !important;
+  }
+
+  .checkbox-forgot-password, .checkbox-div{
+    margin-top: -0.5% !important;
+  }
+
+  .checkbox-div{
+    margin-left: 35% !important;
+  }
+
+  .checkbox-forgot-password button{
+    margin-left: 5%;
+  }
+
+ .login-error{
+   font-size: 200% !important;
+   margin-top: 2% !important ;
+   margin-bottom: -1% !important;
+ }
+
+  .btn-login, .register-btn-register button{
+    width: 40% !important;
+    height: 6vh !important;
+  }
+  input[type=checkbox] {
+    height: 2vh;
+    width: 2vh;
+}
+  .connect{
+    margin-top: -4% !important;
+  }
+  .register-new-user{
+    margin-top: -3% !important;
+  }
+.input-email:focus ~ .login-input-label, 
+.input-email:not(:placeholder-shown).input-email:not(:focus) ~ .login-input-label {
+    font-size: 120% !important;
+    margin-top: 0.3% !important;
+    margin-left: 1% !important;
+}
+
+.input-password:focus ~ .login-input-label,
+.input-password:not(:placeholder-shown).input-password:not(:focus) ~ .login-input-label {
+  font-size: 120% !important;
+  margin-top: 0.3% !important;
+  margin-left: 1% !important;
+}
+
+.input-name:focus ~ .login-input-label,
+.input-name:not(:placeholder-shown).input-name:not(:focus) ~ .login-input-label{
+  font-size: 120% !important;
+  margin-top: 0.3% !important;
+  margin-left: 1% !important;
+}
+
+.input-confirm-password:focus ~ .login-input-label,
+.input-confirm-password:not(:placeholder-shown).input-confirm-password:not(:focus) ~ .login-input-label{
+ font-size: 120% !important;
+    margin-top: 0.3% !important;
+    margin-left: 1% !important;
+
+}
+
+.login-input-label{
+  left: 63% !important;
+  font-size: 200% !important;
+  margin-top: 1.5%;
+}
+
+footer{
+margin-top: -9% !important;
+font-size: 180%;
+}
+
+
+.content label {
+  margin-top: 1.7% !important;
+}
+}
