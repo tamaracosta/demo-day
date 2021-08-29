@@ -122,7 +122,7 @@ export const Feed = () => {
     } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
   })(post.data().likes)}
           <span class='feed-post-amount-of-likes' data-likeValueToChange='${post.id}'> ${post.data().likes.length} </span>
-          <button class='btn comment-btn' data-showCommentPostButton='${post.id}'></button>
+          <button class='btn comment-btn' data-showCommentPostButton='${post.id}'></button><span class='feed-post-amount-of-comments'>${post.data().comments.length}</span>
         </div>
         <div class='feed-post-actions-middle-section'>
           ${((category) => {
