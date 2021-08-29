@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import { getTheRoad } from '../../lib/firebase-services.js';
 
 export const SettingsProfile = () => {
@@ -9,12 +10,12 @@ export const SettingsProfile = () => {
           <ul class='feed-menu'>
           <li>
     ${((picture) => {
-      if (picture.includes('localhost')) {
-        return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
-      } if (picture !== null) {
-        return `<img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}">`;
-      } return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
-    })(firebase.auth().currentUser.photoURL)}
+    if (picture.includes('localhost')) {
+      return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+    } if (picture !== null) {
+      return `<img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}">`;
+    } return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+  })(firebase.auth().currentUser.photoURL)}
          </li>
           <li><button class='btn home-btn' id='home-btn'></button></li>
           <li><button class='btn search-btn' id='person-btn'></button></li>
@@ -36,7 +37,7 @@ export const SettingsProfile = () => {
             <div class="inputs-class">
                 <div class="input-label">
                     <input required type="text" class="input-name" id="name-id" placeholder=" " autocomplete="off">
-                    <label for="input-name" class="name-input-label" id="label-input-id">Nome</label>
+                    <label for="input-name" class="name-input-label" id="label-input-id">Nome ou Nome de Usuárie</label>
                     <input required type="text" class="input-user" id="name-user" placeholder=" " autocomplete="off">
                 
                 </div>
@@ -114,7 +115,7 @@ export const SettingsProfile = () => {
           popup.style.display = 'none';
         });
       }).catch((error) => {
-        getError(error);
+        console.log(error);
       });
     };
     updateUserProfile(inputName.value, currentProfileImage.src);

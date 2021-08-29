@@ -1,10 +1,15 @@
+/* eslint-disable consistent-return */
+/* eslint-disable quotes */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
 
-import { deletePost, getMyPosts, editPost, getTheRoad } from '../../lib/firebase-services.js';
 import {
-  updateLikes, getComments, getCurrentCommentsToPrint, publicationAge
+  deletePost, getMyPosts, editPost, getTheRoad,
+} from '../../lib/firebase-services.js';
+import {
+  updateLikes, getComments, getCurrentCommentsToDelete, getCurrentCommentLikes,
+  getCurrentCommentsToPrint, publicationAge,
 } from '../feed/index.js';
 
 export const PersonalFeed = () => {
@@ -20,9 +25,14 @@ export const PersonalFeed = () => {
       return `<img class="foto-personal" src="${firebase.auth().currentUser.photoURL}">`;
     } return `<img class="foto-personal" src='./images/profile-default.png'>`;
   })(firebase.auth().currentUser.photoURL)}
-            <h3 class="titulo">Olá, <span class="nome">${firebase.auth().currentUser.displayName}<span></h3>
+            <h3 class="titulo">Olá, 
+  ${((name) => {
+    if (name !== null) {
+      return `<span class="nome">${firebase.auth().currentUser.displayName} &#128512<span>`;
+    } return `<span class="nome">Convidade &#128512<span>`;
+  })(firebase.auth().currentUser.displayName)}
+            </h3>
           </div>
-          
           <div class="editar-perfil">
             <button class="editar-perfil-btn" type"button">
                 <a href="/settings">Editar Perfil</a>
@@ -37,13 +47,13 @@ export const PersonalFeed = () => {
       <nav>
       <ul class='feed-menu'>
       <li>
-${((picture) => {
-  if (picture.includes('localhost')) {
-    return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
-  } if (picture !== null) {
-    return `<img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}">`;
-  } return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
-})(firebase.auth().currentUser.photoURL)}
+  ${((picture) => {
+    if (picture.includes('localhost')) {
+      return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+    } if (picture !== null) {
+      return `<img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}">`;
+    } return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+  })(firebase.auth().currentUser.photoURL)}
      </li>
       <li><button class='btn home-btn' id='home-btn'></button></li>
       <li><button class='btn search-btn' id='person-btn'></button></li>
@@ -52,9 +62,7 @@ ${((picture) => {
     </ul>
       </nav>
     </header>
-      
-  </main>
-  
+  </main>   
   <div class="popup-wrapper">
       <div class="popup">
           <div class="fechar-popup"><i class="far fa-times-circle"></i></div>
@@ -67,6 +75,8 @@ ${((picture) => {
       
       `;
   const currentUserEmail = firebase.auth().currentUser.email;
+  const username = firebase.auth().currentUser.displayName;
+  const userImageUrl = firebase.auth().currentUser.photoURL;
 
   function createPostTemplate(post) {
     const currentDate = Date.now();
@@ -74,63 +84,100 @@ ${((picture) => {
     const postAge = publicationAge(timeInSeconds);
 
     const postTemplate = `
-        <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
-          <section class='feed-post-owner-data'>
-          ${((picture) => {
-    if (picture.includes('localhost')) {
-      return `<img class='feed-post-owner-picture' src='./images/profile-default.png'>`;
-    } if (picture !== null) {
-      return `<img class='feed-post-owner-picture' src='${firebase.auth().currentUser.photoURL}'>`;
+      
+    <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
+    <section class='feed-post-owner-data'>
+  ${((picture) => {
+    if (picture !== null) {
+      return `<img class='feed-post-owner-picture' src='${post.data().userImg}'>`;
     } return `<img class='feed-post-owner-picture' src='./images/profile-default.png'>`;
-  })(firebase.auth().currentUser.photoURL)}
-  <span class='feed-post-owner-name'> ${firebase.auth().currentUser.displayName || post.data().user_id} em: </span>
-            <span class='feed-post-data'> ${postAge} </span>
-          </section>
-          <section class='feed-post-content-section'>
-            <p class='feed-post-content' data-feedPostContent='${post.id}'> ${post.data().text} </p>
-            <textarea class='feed-edit-text-area' data-editTextArea='${post.id}'>${post.data().text}</textarea>          
-            <img class='feed-post-image'> </img>
-            ${((url) => {
-              if (url !== '') {
-                return `<img class='feed-posted-image' src="${post.data().url}"> </img>`;
-              } return `<img id="hide-img" src="${post.data().url}"> </img>`;
-            })(post.data().url)}
-          </section>
-          <section class='feed-post-actions-section'>
-            <div class='feed-post-actions-left-section'>
-          ${((likes) => {
-        if (likes.length > 0) {
-          if (likes.includes(currentUserEmail)) {
-            return `<button class='btn full-like-btn' data-likePostButton='${post.id}'></button> `;
-          } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
-        } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
-      })(post.data().likes)}
-              <span data-likeValueToChange='${post.id}'> ${post.data().likes.length} </span>
-              <button class='btn comment-btn' data-showCommentPostButton='${post.id}'></button>
-            </div>
-            <div class='feed-post-actions-right-section'>
+  })(post.data().userImg)}
+    ${((user) => {
+    if (user !== null) {
+      return `<span class='feed-post-owner-name'> ${post.data().userName}</span>`;
+    } return `<span class='feed-post-owner-name'> Convidade</span>`;
+  })(post.data().userName)}
+      <span class='feed-post-data'> ${postAge} </span>
+    </section>
+    <section class='feed-post-content-section'>
+      <p class='feed-post-content'> ${post.data().text} </p>
+      <textarea class='feed-edit-text-area' data-editTextArea='${post.id}'>${post.data().text}</textarea>
+      <img class='feed-post-image'> </img>
+    ${((url) => {
+    if (url !== '') {
+      return `<img class='feed-posted-image' src="${post.data().url}"> </img>`;
+    } return `<img id="hide-img" src="${post.data().url}"> </img>`;
+  })(post.data().url)}
+    </section>
+    <section class='feed-post-actions-section'>
+      <div class='feed-post-actions-left-section'>
+    ${((likes) => {
+    if (likes.length > 0) {
+      if (likes.includes(currentUserEmail)) {
+        return `<button class='btn full-like-btn' data-likePostButton='${post.id}'></button> `;
+      } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
+    } return `<button class='btn empty-like-btn' data-likePostButton='${post.id}'></button> `;
+  })(post.data().likes)}
+        <span class='feed-post-amount-of-likes' data-likeValueToChange='${post.id}'> ${post.data().likes.length} </span>
+        <button class='btn comment-btn' data-showCommentPostButton='${post.id}'></button><span class='feed-post-amount-of-comments'>${post.data().comments.length}</span>
+      </div>
+      <div class='feed-post-actions-middle-section'>
+        ${((category) => {
+    if (category === 'decoration') {
+      return `<button class='category-icon category-decoration-icon'></button> `;
+    } if (category === 'kitchenTips') {
+      return `<button class='category-icon category-kitchenTips-icon'></button> `;
+    } if (category === 'domesticeconomy') {
+      return `<button class='category-icon category-economics-icon'></button> `;
+    } if (category === 'physicexercises') {
+      return `<button class='category-icon category-exercises-icon'></button> `;
+    } if (category === 'leisure') {
+      return `<button class='category-icon category-leisure-icon'></button> `;
+    } if (category === 'fixing') {
+      return `<button class='category-icon category-fixing-icon'></button> `;
+    } if (category === 'recipes') {
+      return `<button class='category-icon category-recipes-icon'></button> `;
+    } if (category === 'security') {
+      return `<button class='category-icon category-security-icon'></button> `;
+    } if (category === 'sellings') {
+      return `<button class='category-icon category-sellings-icon'></button> `;
+    } if (category === 'others') {
+      return `<button class='category-icon category-others-icon'></button> `;
+    }
+  })(post.data().category)}
+      </div>
+      <div class='feed-post-actions-right-section'>
+    ${((user) => {
+    if (user === currentUserEmail) {
+      return `<button class='btn edit-btn' data-editPostButton='${post.id}'></button>
             <button class='btn save-edit-btn' data-saveEditPostButton='${post.id}'></button>
-          ${((user) => {
-        if (user === currentUserEmail) {
-          return `<button class='btn edit-btn' data-editPostButton='${post.id}'></button>
-                  <button class='btn delete-btn' data-deletePostButton='${post.id}'></button>`;
-        } return `<button class='not-allowed-to-see'></button>
-                  <button class='not-allowed-to-see'></button>`;
-      })(post.data().user_id)}
-            </div>
-          </section>
-          <section class='feed-comments-section' data-commentsSection='${post.id}'>
-            <div class='feed-comment-input'>
-              <textarea class='feed-comment-text-area' data-commentContent='${post.id}' placeholder='Digite seu comentário aqui:'></textarea> 
-              <button class='btn feed-comment-btn' data-commentPostButton='${post.id}'></button>
-            </div>
-            <div class='feed-printed-comments'>
-              <ul data-ulCommentArea='${post.id}'> </ul>
-            </div>
-          </section>
-        </div>
-        <hr class='feed-post-end-line'>
-        `;
+            <button class='btn cancel-edit-btn' data-cancelEditPostButton='${post.id}'></button>
+            <button class='btn delete-btn' data-item='deletepost' data-deletePostButton='${post.id}'></button>`;
+    } return `<button class='not-allowed-to-see'></button>
+            <button class='not-allowed-to-see'></button>`;
+  })(post.data().user_id)}
+      </div>
+    </section>
+    <section class='feed-comments-section' data-commentsSection='${post.id}'>
+      <div class='feed-comment-input'>
+        <textarea class='feed-comment-text-area' data-commentContent='${post.id}' placeholder='Digite seu comentário aqui:'></textarea> 
+        <button class='btn feed-comment-btn' data-commentPostButton='${post.id}'></button>
+      </div>
+      <div class='feed-printed-comments' data-printedComments='${post.id}'>
+        <ul data-ulCommentArea='${post.id}'> </ul>
+      </div>
+    </section>
+    <div class="confirm-delete">
+    <div class="modal-delete">
+    <div class="h1-modal">Você tem certeza que quer excluir esse post?</div>
+    <button class="delete-buttons-modal" id="confirm-delete-modal">Confirmar</button>
+    <button class="delete-butons-modal" id="cancel-delete-modal"> Cancelar </button>
+    </div>
+    </div>
+</div>
+  </div>
+  <hr class='feed-post-end-line'>
+  `;
     return postTemplate;
   }
 
@@ -148,8 +195,9 @@ ${((picture) => {
   postsSection.addEventListener('click', (e) => {
     const { target } = e;
     const postID = target.parentNode.parentNode.parentNode.parentNode.id;
+    const postIDForComments = target.parentNode.parentNode.parentNode.parentNode.parentNode
+      .parentNode.parentNode.id;
 
- 
     // Delete Post:
     const deletePostBtn = target.dataset.deletepostbutton;
     if (deletePostBtn) {
@@ -173,14 +221,11 @@ ${((picture) => {
       const saveEditBtn = rootElement.querySelector(`[data-saveEditPostButton='${postID}']`);
       saveEditBtn.style.display = 'inline';
       const contentTextPost = rootElement.querySelector(`[data-feedPostContent='${postID}']`);
-      contentTextPost.style.display = "none";
-
+      contentTextPost.style.display = 'none';
     }
-    
 
     const saveEditBtn = target.dataset.saveeditpostbutton;
     if (saveEditBtn) {
-     
       const newText = rootElement.querySelector(`[data-editTextArea='${postID}']`).value;
       editPost(newText, postID);
       loadPosts();
@@ -212,7 +257,8 @@ ${((picture) => {
     const commentPostBtn = target.dataset.commentpostbutton;
     if (commentPostBtn) {
       const newCommentContent = rootElement.querySelector(`[data-commentContent="${postID}"]`).value;
-      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail, printComments);
+      getCurrentCommentsToPrint(postID, newCommentContent, currentUserEmail,
+        printComments, username, userImageUrl);
       rootElement.querySelector(`[data-commentContent="${postID}"]`).value = '';
     }
 
@@ -233,8 +279,6 @@ ${((picture) => {
       getCurrentCommentLikes(postIDForComments, currentUserEmail, commentID, valueToBeChanged,
         amountOfLikes, likeStatus);
     }
-
-
   });
 
   const printComments = (commentsToPrint, postID) => {
@@ -248,8 +292,12 @@ ${((picture) => {
       <li class='feed-comment-all-content' id="${comment.id}">
       <hr class='feed-comment-start-line'>
         <section class='feed-comment-owner-data'>
-          <img class='feed-comment-owner-picture' src='../images/bunny.jpg'>
-          <span class='feed-comment-owner-name'> ${comment.owner}</span>
+        <img class='feed-post-owner-picture' src='${comment.userImg}'>
+        ${((user) => {
+    if (user !== null) {
+      return `<span class='feed-post-owner-name'> ${comment.userName}</span>`;
+    } return `<span class='feed-post-owner-name'> Convidade </span>`;
+  })(comment.userName)}
           <span class='feed-comment-data'> ${commentAge} </span>
         </section>
         <section class='feed-comment-content-section'>
@@ -310,7 +358,6 @@ ${((picture) => {
     target.style.opacity = '0';
   }
 
-  
   const goBackToFeed = () => {
     getTheRoad('/feed');
   };

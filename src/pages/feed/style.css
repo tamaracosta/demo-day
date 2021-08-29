@@ -191,6 +191,8 @@
     width: 90%;
     display: flex;
     align-items: center;
+    justify-content: start;
+    margin-left: 5%;
   }
   
   .feed-post-owner-picture,
@@ -356,6 +358,8 @@
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: start;
+    margin-left: 5%;
   
   }
   
@@ -599,10 +603,7 @@
   .publish-img-btn {
     margin-left: 3%;
   }
-
-  .feed-post-data{
-    width: 80%;
-  }
+  
 }
 
 @media (min-width: 500px) {
@@ -620,9 +621,7 @@
     width: 6vh;
     height: 6vh;
   }
-    .feed-post-owner-data, .feed-comment-owner-data{
-      justify-content: start;
-    }
+
 
     .feed-comment-content{
       margin-left: 6%;

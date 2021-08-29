@@ -33,7 +33,7 @@ export const Register = () => {
           </section>
           <div class="checkbox-div">
         <input type="checkbox" class="checkbox-keep-logged-in" id="checkbox-keep-logged-in">
-        <label for="checkbox-keep-logged-in" class="checkbox-keep"> Mantenha-me logada </label>
+        <label for="checkbox-keep-logged-in" class="checkbox-keep"> Mantenha-me logade </label>
           </div>
       </form>
       <div id="print-error-here"> 

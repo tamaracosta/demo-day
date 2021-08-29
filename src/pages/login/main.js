@@ -22,7 +22,7 @@ export const Login = () => {
         </div>
         <div class='checkbox-forgot-password'>
         <input type="checkbox" id="checkbox-keep-logged-in">
-        <label for="checkbox-keep-logged-in" class="checkbox-keep-logged-in"> Mantenha-me logada</label>
+        <label for="checkbox-keep-logged-in" class="checkbox-keep-logged-in"> Mantenha-me logade</label>
       <button id="btn-forgot-password"> Esqueceu a senha?</button>
     </div>
       </div>
@@ -81,7 +81,7 @@ export const Login = () => {
     const twitterProvider = new firebase.auth.TwitterAuthProvider();
     firebase.auth().signInWithPopup(twitterProvider).then(() => {
       getTheRoad('/feed');
-    }).catch(error => {
+    }).catch((error) => {
       console.log(error);
     });
   };
