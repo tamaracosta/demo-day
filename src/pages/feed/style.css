@@ -23,7 +23,8 @@
     border: solid 0pt;
     cursor: pointer;
   }
-  
+
+
   .not-allowed-to-see{
     display: none;
   }
@@ -49,7 +50,7 @@
   }
   
   .feed-main{
-    padding: 1.5%;
+    padding: 1.5% 1.5% 6% 1.5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -199,7 +200,7 @@
     margin-right: 3%;
     border: var(--cinza-claro) solid 1pt;
     border-radius: 50%;
-    padding: 1%;
+    padding: 0.5%;
   }
   
   .feed-post-owner-name,
@@ -454,6 +455,7 @@
     border:0;
     background-color: transparent;
     border: none;
+    cursor:default;
     
   }
   
@@ -496,6 +498,8 @@
     border-radius: 50%;
     width: 40px;
     height: 40px;
+    border:gray solid 1pt;
+    margin-top: 7%;
   }
   
   .home-btn{
@@ -610,6 +614,12 @@
     .feed-comments-section{
       margin-top: -8%;
     }
+
+    .feed-post-owner-picture,
+  .feed-comment-owner-picture{
+    width: 6vh;
+    height: 6vh;
+  }
     .feed-post-owner-data, .feed-comment-owner-data{
       justify-content: start;
     }
@@ -642,16 +652,35 @@
    .feed-publication-publish-btn{
     margin-left: 35%;
    }
+
+   .feed-main{
+     padding-bottom: 6%;
+   }
+   .feed-post-owner-name, .feed-comment-owner-name{
+    font-size: 90%;
+  }
 }
 
 @media (min-width: 749px) {
-  .publish-img-btn{
-    margin-left: -4%;
-  }
+ 
  
   .feed-publication-publish-btn{
-   margin-left: 43%;
+    margin-left: 46%;
   }
+  .feed-post-owner-name, .feed-comment-owner-name{
+    font-size: 100%;
+  }
+  .feed-post-owner-picture,
+  .feed-comment-owner-picture{
+    width: 7vh;
+    height: 7vh;
+  }
+
+  .foto-personal-feed-feed {
+    width: 60px;
+    height: 60px;
+  }
+}
 
   @media (min-width: 1100px) {
    .feed-publication-form{
@@ -680,9 +709,16 @@
 
    .feed-container .feed-post-owner-picture{
      margin-left: 5%;
+     width: 12vh;
+     height: 12vh;
+     padding:0.2%;
    }
 
 
+   .feed-post-owner-name, .feed-comment-owner-name{
+    font-size: 100%;
+  }
+  
 
    .feed-container .feed-comments-section{
      margin-top: 5%;
@@ -694,9 +730,22 @@
    .feed-container .feed-printed-comments{
     margin-left:-30%;
     margin-bottom: -10%;
-    width:100%
-  }
+    width:100%  
+   }
+   .feed-container .feed-post-content{
+     margin-left:0%;
+   }
+    .feed-post-owner-name, .feed-comment-owner-name{
+      font-size: 100%;
+    }
 
+    .feed-container .category-icon{
+      height: 12vh;
+      width: 12vh;
+      background-size: 40px;
+    }
+
+    
   .feed-container .feed-comment-content{
     margin-left: 10%;
   }
@@ -705,8 +754,9 @@
     margin-left: -30%
   }
    .feed-search-input, .filter-post-category{
-     width: 65%;;
+     width: 65%;
      justify-content: start;
+     background-size: 30px;
      font-size: 105%;
      margin-top: 0%;
      margin-left: -15%;
@@ -715,5 +765,7 @@
    .feed-comment-btn{
      margin-top: -5%;
    }
+
+   
 
 }

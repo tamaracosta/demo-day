@@ -19,7 +19,15 @@ export const Feed = () => {
   <header>
     <nav>
       <ul class='feed-menu'>
-        <li><img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null"/></li>
+        <li>
+  ${((picture) => {
+    if (picture.includes('localhost')) {
+      return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+    } if (picture !== null) {
+      return `<img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}">`;
+    } return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+  })(firebase.auth().currentUser.photoURL)}
+       </li>
         <li><button class='btn home-btn' id='home-btn'></button></li>
         <li><button class='btn search-btn' id='person-btn'></button></li>
         <li><button class='btn settings-btn' id='settings-btn'></button></li>
@@ -94,7 +102,11 @@ export const Feed = () => {
     
     <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
       <section class='feed-post-owner-data'>
-      <img class='feed-post-owner-picture' src='${post.data().userImg}'>
+    ${((picture) => {
+    if (picture !== null) {
+      return `<img class='feed-post-owner-picture' src='${post.data().userImg}'>`;
+    } return `<img class='feed-post-owner-picture' src='./images/profile-default.png'>`;
+  })(post.data().userImg)}
       ${((user) => {
     if (user === '') {
       return `<span class='feed-post-owner-name'> ${post.data().userName}</span>`;
@@ -320,20 +332,22 @@ export const Feed = () => {
     const postIDForComments = target.parentNode.parentNode.parentNode.parentNode.parentNode
       .parentNode.parentNode.id;
 
-      if (target.dataset.item === 'deletepost') {
+    if (target.dataset.item === 'deletepost') {
+      const divConfirmDelete = target.parentNode.parentNode.parentNode.children[4];
+      const divConfirmDeleteModal = target.parentNode.parentNode.parentNode.children[4]
+        .children[0].children[1];
+      const divCancelDeleteModal = target.parentNode.parentNode.parentNode.children[4]
+        .children[0].children[2];
+      divConfirmDelete.style.display = 'block';
+      divConfirmDeleteModal.addEventListener('click', () => {
+        deletePost(postID, loadPosts);
+        divConfirmDelete.style.display = 'none';
+      });
+      divCancelDeleteModal.addEventListener('click', () => {
+        divConfirmDelete.style.display = 'none';
+      });
+    }
 
-        const divConfirmDelete = target.parentNode.parentNode.parentNode.children[4];
-        const divConfirmDeleteModal = target.parentNode.parentNode.parentNode.children[4].children[0].children[1];
-        const divCancelDeleteModal = target.parentNode.parentNode.parentNode.children[4].children[0].children[2];
-        divConfirmDelete.style.display = 'block';
-        divConfirmDeleteModal.addEventListener('click', () => {
-          deletePost(postID, loadPosts);
-          divConfirmDelete.style.display = 'none';
-        });
-        divCancelDeleteModal.addEventListener('click', () => {
-          divConfirmDelete.style.display = 'none';
-        });
-      }
     // Like Post:
     const likePostBtn = target.dataset.likepostbutton;
     if (likePostBtn) {

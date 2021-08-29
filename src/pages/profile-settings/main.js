@@ -6,12 +6,20 @@ export const SettingsProfile = () => {
         <header>
           <div class="logo-class logo"><img src="../images/logo-login.png"/></div>
           <nav>
-        <ul class='feed-menu'>
-        <li><img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null"/></li>
-        <li><button class='btn home-btn' id='home-btn'></button></li>
-        <li><button class='btn search-btn' id='person-btn'></button></li>
-        <li><button class='btn settings-btn' id='settings-btn'></button></li>
-        <li><button class='btn signout-btn' id='signout-btn'></button></li>
+          <ul class='feed-menu'>
+          <li>
+    ${((picture) => {
+      if (picture.includes('localhost')) {
+        return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+      } if (picture !== null) {
+        return `<img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}">`;
+      } return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+    })(firebase.auth().currentUser.photoURL)}
+         </li>
+          <li><button class='btn home-btn' id='home-btn'></button></li>
+          <li><button class='btn search-btn' id='person-btn'></button></li>
+          <li><button class='btn settings-btn' id='settings-btn'></button></li>
+          <li><button class='btn signout-btn' id='signout-btn'></button></li>
         </ul>
       </nav>
         </header>   

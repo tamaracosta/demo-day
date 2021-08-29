@@ -67,7 +67,7 @@ export const publicationAge = (timeInSeconds) => {
     return `há  ${timeInHours} h.:`;
   } if (timeInSeconds < 604800) {
     const timeInDays = Math.round(timeInSeconds / 86400);
-    return `há  ${timeInDays} dias.:`;
+    return `há  ${timeInDays} d.:`;
   } if (timeInSeconds < 2628288) {
     const timeInWeeks = Math.round(timeInSeconds / 604800);
     return `há  ${timeInWeeks} sem.:`;

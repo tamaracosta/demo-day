@@ -12,9 +12,14 @@ export const PersonalFeed = () => {
   rootElement.innerHTML = ` 
   <main class="pagina-personal-feed" id="topo">
       <header class="container-header">
-          <div class="foto-personal-feed">
-            
-            <img class="foto-personal" src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null"/>
+          <div class="foto-personal-feed"> 
+          ${((picture) => {
+    if (picture.includes('localhost')) {
+      return `<img class="foto-personal" src='./images/profile-default.png'>`;
+    } if (picture !== null) {
+      return `<img class="foto-personal" src="${firebase.auth().currentUser.photoURL}">`;
+    } return `<img class="foto-personal" src='./images/profile-default.png'>`;
+  })(firebase.auth().currentUser.photoURL)}
             <h3 class="titulo">Olá, <span class="nome">${firebase.auth().currentUser.displayName}<span></h3>
           </div>
           
@@ -30,13 +35,21 @@ export const PersonalFeed = () => {
       
       <header>
       <nav>
-        <ul class='feed-menu'>
-        <li><img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null"/></li>
-        <li><button class='btn home-btn' id='home-btn'></button></li>
-        <li><button class='btn search-btn' id='person-btn'></button></li>
-        <li><button class='btn settings-btn' id='settings-btn'></button></li>
-        <li><button class='btn signout-btn' id='signout-btn'></button></li>
-        </ul>
+      <ul class='feed-menu'>
+      <li>
+${((picture) => {
+  if (picture.includes('localhost')) {
+    return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+  } if (picture !== null) {
+    return `<img class="foto-personal-feed-feed" src="${firebase.auth().currentUser.photoURL}">`;
+  } return `<img class="foto-personal-feed-feed" src='./images/profile-default.png'>`;
+})(firebase.auth().currentUser.photoURL)}
+     </li>
+      <li><button class='btn home-btn' id='home-btn'></button></li>
+      <li><button class='btn search-btn' id='person-btn'></button></li>
+      <li><button class='btn settings-btn' id='settings-btn'></button></li>
+      <li><button class='btn signout-btn' id='signout-btn'></button></li>
+    </ul>
       </nav>
     </header>
       
@@ -63,8 +76,14 @@ export const PersonalFeed = () => {
     const postTemplate = `
         <div class="feed-all-the-post" data-postId="${post.id}" data-postOwner="${post.data().user_id}">
           <section class='feed-post-owner-data'>
-            <img class='foto-post-owner' src="${firebase.auth().currentUser.photoURL}" onerror="this.src='../images/avatar2.png'; this.onerror=null" />
-            <span class='feed-post-owner-name'> ${firebase.auth().currentUser.displayName || post.data().user_id} em: </span>
+          ${((picture) => {
+    if (picture.includes('localhost')) {
+      return `<img class='feed-post-owner-picture' src='./images/profile-default.png'>`;
+    } if (picture !== null) {
+      return `<img class='feed-post-owner-picture' src='${firebase.auth().currentUser.photoURL}'>`;
+    } return `<img class='feed-post-owner-picture' src='./images/profile-default.png'>`;
+  })(firebase.auth().currentUser.photoURL)}
+  <span class='feed-post-owner-name'> ${firebase.auth().currentUser.displayName || post.data().user_id} em: </span>
             <span class='feed-post-data'> ${postAge} </span>
           </section>
           <section class='feed-post-content-section'>
