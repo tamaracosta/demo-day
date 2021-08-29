@@ -1,19 +1,7 @@
-
-
-html {
-  scroll-behavior: smooth;
-}
-
-.pagina-personal-feed {
-  height: auto;
-  padding-bottom: 8em;
-}
-
 .container-header {
-  
   align-items: center;
-  margin: 2em;
-  background: #2a9d8f;
+  margin: 6%;
+  background: var(--verde-claro);
   border-radius: 10px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.25);
 }
@@ -25,9 +13,9 @@ html {
 
 .foto-personal {
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  margin: 1em;
+  width: 12vh;
+  height: 12vh;
+  margin: 4% 4% 4% -7%;
   border: 5px solid var(--verde-escuro);
 }
 
@@ -39,7 +27,6 @@ html {
 }
 
 .minhas-publicacoes {
-  
   text-align: center;
   margin: auto;
 }
@@ -61,57 +48,20 @@ html {
   margin: 0.5em;
 }
 
-
-/* --------------pop up */
-
-.popup-wrapper {
-  background: rgba(0,0,0, .5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-}
-
-.popup {
-  text-align: center;
-  width: 100%;
-  margin: 10% auto;
-  padding: 20px;
-  background: white;
-  position: relative;
-}
-
-.fechar-popup {
-  color: var(--verde-escuro);
-  position: absolute;
-  top: 5px;
-  right: 30px;
-  cursor: pointer;
-  font-size: 1.5em;
-}
-
 .btn-delete {
-  padding: 0.5em;
-  width: 200px;
-  height: 40px;
-  margin-top: 0.5em;
+  min-width: 55%;
+  height: 6vh;
   border-radius: 20px;
   background-color: var(--verde-claro);
   color: var(--branco);
   font-weight: bold;
-  font-size: 1em;
-  border: none;
-  
-}
-
-.conteudo-popup {
-  margin-top: 1em;
+  font-size: 120%;
+  margin-top: 2%;    
 }
 
 .msg-deletar {
   color: var(--verde-escuro);
+  padding: 3%;
 }
 
 .feed-a-post {
@@ -131,7 +81,6 @@ html {
   margin-bottom: 1em;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
-
 
 .pagina-personal-feed .editar-perfil-btn a {
  color: var(--verde-escuro);
@@ -168,9 +117,116 @@ text-align: center;
 }
 
 .foto-post-owner{
-  width: 40px;
-  height: 40px;
+  width: 6vh;
+  height: 6vh;
   border-radius: 50%;
   margin-left: 3%;
   margin-right: 5%;
+}
+
+
+@media (min-width: 1100px) {
+  .container-header {
+    margin: 3% 2% 3% 20%;
+    background: var(--laranja-escuro);
+    width: 40%;
+  }
+
+  .foto-post-owner{
+    margin-left: 6%;
+    margin-right: 2%;
+    height: 7vh;
+    width: 7vh;
+  }
+
+  .feed-post-content{
+    font-size: 110%;
+  }
+    .foto-personal {
+    width: 14vh;
+    height: 14vh;
+  }
+
+  .feed-posts-section{
+    width: 90%;
+    margin-left: -5%;
+    align-items: center;
+  }
+
+  .feed-post-owner-data{
+    margin-left: -20%;
+    font-size: 120%;
+  }
+
+  .feed-a-post{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .feed-post-actions-section{
+    margin-bottom: -8%;
+  }
+
+  .feed-post-actions-section span{
+    color: var(--verde-escuro);
+    font-size: 140%;
+  }
+
+  .btn{
+    height: 4vh !important;
+    width: 4vh !important;
+  }
+
+  .pagina-personal-feed a{
+    font-size: 140%;
+    margin-left: -15%;
+  }
+
+  .feed-comments-section{
+    margin-top: 10%;
+    margin-left: 10%;
+    width: 70%;
+  }
+
+  .feed-comment-text-area{
+    height: 2vh;
+    margin-bottom: 6%;
+    width: 80%;
+    margin-left: 20%;
+  }
+
+  .feed-printed-comments{
+    margin-top: -10%;
+  }
+
+  .feed-comment-start-line{
+    display: none;
+  }
+
+  .feed-comment-owner-data{
+    position: relative;
+    width: 100%;
+    justify-content: flex-start;
+
+   }
+
+  .feed-comment-content{
+    margin-left:5%;
+    margin-top: -1%;
+    margin-bottom: 1%;
+  }
+
+  .feed-comment-all-content{
+    border-bottom:  var(--verde-claro) solid 1pt;
+    margin-top: 4%;
+    margin-left: 15%;
+  }
+
+  .feed-comments-actions-section{
+    margin-bottom: 2%;
+  }
+
+  .pagina-personal-feed .feed-all-the-post {
+    margin-bottom: 1%;
+  }
+
 }

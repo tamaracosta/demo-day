@@ -225,10 +225,9 @@
   }
   
   .feed-posted-image{
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 60%;
     margin-bottom: 3%;
-    margin-left: -2%;
+    margin-left: 0%;
   }
   .feed-post-actions-section{
     display: flex;
@@ -827,12 +826,6 @@ nav ul{
   color: var(--verde-escuro);
 }
 
-.feed-posted-image{
-  max-width: 300px;
-  max-height: 300px;
-  margin-bottom: 3%;
-  margin-left: -2%;
-}
 .feed-post-actions-section{
   display: flex;
   margin-top: -5%;
