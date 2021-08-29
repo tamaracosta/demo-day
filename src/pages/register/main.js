@@ -23,12 +23,12 @@ export const Register = () => {
         <div class="div-password">
           <input required type="password" class='input-password'id="input-password" placeholder=" " autocomplete="off">
           <img class="icon-eye" id="icon-eye" src="../images/eye-off.png"/>
-          <label class="login-input-label register-input-label">Senha</label> 
+          <label class="login-input-label">Senha</label> 
         </div>
         <div class="div-confirm-password">
             <input required type="password" class='input-confirm-password' id="input-confirm-password" placeholder=" " autocomplete="off">
             <img class="icon-eye" id="icon-eye-confirm" src="../images/eye-off.png"/>
-            <label class="login-input-label register-input-label">Confirme a senha</label> 
+            <label class="login-input-label">Confirme a senha</label> 
           </div>
           </section>
           <div class="checkbox-div">

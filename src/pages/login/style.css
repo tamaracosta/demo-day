@@ -3,10 +3,17 @@
   color: var(--verde-escuro);
   text-align: center;
   justify-content: center;
+  text-decoration: none;
   padding: 0;
   font-size: 100%;
   border: none;
+  outline: none;
   background-color:transparent;
+  background:no-repeat;
+}
+
+button {
+  cursor: pointer;
 }
 
 body {
@@ -43,7 +50,6 @@ footer {
   margin:2%;
   color: #2A9D8F;
   font-weight: 600;
-  outline: none;
   cursor: pointer;
   border: solid 1pt #2A9D8F;
   border-radius: 25px;
@@ -101,9 +107,6 @@ footer {
 
   background-color: #2A9D8F;
   border-radius: 25px;
-  border: solid 0pt white;
-  outline: none;
-  cursor: pointer;
  }
   
 .transparent {
@@ -133,9 +136,7 @@ footer {
 
 .register-new-user button{
   color:#2A9D8F;
-
   letter-spacing: 1px;
-  cursor: pointer;
  }
   
 .connect{

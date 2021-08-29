@@ -33,13 +33,12 @@ export const SettingsProfile = () => {
                 
                 </div>
                 <div class="btn-profile-save">
-                    <button class="btn-class" id="btn-save">Salvar</button>
+                    <button class="btn-class" id="btn-save">SALVAR</button>
                 </div>
                 <p class="p-save-changes" id="p-save-changes" hidden>Alterações salvas com sucesso!</p>
             </div>
             
         </main> 
-        <footer> Not Alone &#169;</footer>
         <div class="popup-wrapper">
             <div class="popup">
             <div class="fechar-popup"><i class="far fa-times-circle"></i></div>
@@ -64,9 +63,6 @@ export const SettingsProfile = () => {
   const inputName = container.querySelector('#name-id');
   const confirmMessage = container.querySelector('#p-save-changes');
   const btnSaveProfile = container.querySelector('#btn-save');
-  //        const btnGoBackToFeed = container.querySelector('#btn-back-to-feed');
-
-  //         showUserImage(currentProfileImage);
 
   inputPhoto.addEventListener('change', (event) => {
     const changeProfileImage = (photo, callback) => {
@@ -117,20 +113,6 @@ export const SettingsProfile = () => {
     confirmMessage.hidden = false;
     container.style.display = 'block';
   });
-
-  /*    btnGoBackToFeed.addEventListener('click', (event) => {
-                  event.preventDefault();
-                  const showUserImage = (currentProfileImage) => {
-                    firebase.auth().onAuthStateChanged((user) => {
-                      if (user != null) {
-                        currentProfileImage.src = user.photoURL;
-                      } else {
-                        currentProfileImage.src = '../../images/eye.png';
-                      }
-                    });
-                  };
-                  goBackToFeed();
-                }); */
 
   container.querySelector('.icon-img').addEventListener('click', (event) => {
     event.preventDefault();
