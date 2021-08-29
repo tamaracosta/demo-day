@@ -168,6 +168,7 @@ footer {
   width: 25%;
   border: 1px solid #2A9D8F;
   margin: auto;
+  background: transparent;
 }
 
  .alert-reset {

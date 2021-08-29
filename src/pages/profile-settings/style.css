@@ -108,7 +108,7 @@
     height: 6vh;
     border-radius: 20px;
     background-color: var(--verde-claro);
-    color: var(--branco);
+    color: white !important;
     font-weight: bold;
     font-size: 120%;
     margin-top: 2%;    
